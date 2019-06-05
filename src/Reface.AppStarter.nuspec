@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Reface.AppStarter</id>
+    <version>0.8.1</version>
+    <title>Reface.AppStarter</title>
+    <authors>ShimizuShiori</authors>
+    <owners>ShimizuShiori</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      <![CDATA[
+        用于启动多模块化的应用程序，并同时在各个模块中配置自己的依赖组件
+      ]]>
+    </description>
+    <copyright>Copyright 2019</copyright>
+    <tags>IOC Autofac Reface Framework</tags>
+  </metadata>
+</package>
