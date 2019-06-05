@@ -2,20 +2,15 @@
 
 namespace Reface.AppStarter
 {
-    /// <summary>
-    /// 组件特征，标记了该特征的类型会被注入到 autofac 容器中
-    /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public class ComponentAttribute : Attribute
+    public class ComponentAttribute
+        : ScannableAttribute
     {
-        /// <summary>
-        /// 组件注册模式
-        /// </summary>
-        public ComponentRegisterMode RegisterMode { get; }
+        public RegistionMode RegistionMode { get; private set; }
 
-        public ComponentAttribute(ComponentRegisterMode registerMode = ComponentRegisterMode.AsInterfaces)
+        public ComponentAttribute(RegistionMode registionMode = RegistionMode.AsInterfaces)
         {
-            RegisterMode = registerMode;
+            RegistionMode = registionMode;
         }
     }
 }

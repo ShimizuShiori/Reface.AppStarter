@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reface.AppStarter", "Reface.AppStarter.csproj", "{4A9A9ABC-C3E0-40BC-AF74-3940460BE294}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reface.AppStarter.Tests", "..\Reface.AppStarter.Tests\Reface.AppStarter.Tests.csproj", "{71420613-2736-4AC8-A10C-45784653012F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4A9A9ABC-C3E0-40BC-AF74-3940460BE294}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A9A9ABC-C3E0-40BC-AF74-3940460BE294}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A9A9ABC-C3E0-40BC-AF74-3940460BE294}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71420613-2736-4AC8-A10C-45784653012F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71420613-2736-4AC8-A10C-45784653012F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71420613-2736-4AC8-A10C-45784653012F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71420613-2736-4AC8-A10C-45784653012F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -47,40 +47,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application.cs" />
-    <Compile Include="ApplicationEnvironment.cs" />
-    <Compile Include="ApplicationEnvironmentBuiltEventArgs.cs" />
-    <Compile Include="ApplicationEnvironmentSetup.cs" />
-    <Compile Include="AutofacComponentRegistion.cs" />
-    <Compile Include="ComponentContextComponentFactory.cs" />
-    <Compile Include="ComponentRegisterMode.cs" />
-    <Compile Include="ConfigAttribute.cs" />
-    <Compile Include="ContainerComponentFactory.cs" />
-    <Compile Include="DefaultConfigRegistion.cs" />
-    <Compile Include="Ext.cs" />
-    <Compile Include="IComponentFactory.cs" />
-    <Compile Include="IComponentRegistion.cs" />
-    <Compile Include="IConfigRegistion.cs" />
-    <Compile Include="LifetimeScopeComponentFactory.cs" />
-    <Compile Include="AppModule.cs" />
-    <Compile Include="ModuleComponentCreatingEventArgs.cs" />
+    <Compile Include="AppModuleScanResult.cs" />
+    <Compile Include="AppSetup.cs" />
+    <Compile Include="AttributeAndTypeInfo.cs" />
+    <Compile Include="AutofacContainerBuilder.cs" />
     <Compile Include="ComponentAttribute.cs" />
-    <Compile Include="IApplication.cs" />
-    <Compile Include="IModule.cs" />
+    <Compile Include="ComponentScanAppModule.cs" />
+    <Compile Include="Ext.cs" />
+    <Compile Include="IAppContainer.cs" />
+    <Compile Include="IAppContainerBuilder.cs" />
+    <Compile Include="IAppModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StarterAppModel.cs" />
-    <Compile Include="TriggerComponentCreatingEventAutofacSource.cs" />
-    <Compile Include="TypeAndComponentInfo.cs" />
-    <Compile Include="TypeAndComponentInfos.cs" />
-    <Compile Include="Utils\IJsonParser.cs" />
-    <Compile Include="Utils\NewtonsoftJsonParser.cs" />
+    <Compile Include="RegistionMode.cs" />
+    <Compile Include="ScannableAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Reface.AppStarter.nuspec" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Reface.AppStarter.ReleaseNotes.md" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
