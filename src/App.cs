@@ -6,6 +6,8 @@ namespace Reface.AppStarter
     {
         private readonly IEnumerable<IAppContainer> appContainers;
 
+        public Dictionary<string, object> Context { get; private set; } = new Dictionary<string, object>();
+
         public App(IEnumerable<IAppContainer> appContainers)
         {
             this.appContainers = appContainers;
