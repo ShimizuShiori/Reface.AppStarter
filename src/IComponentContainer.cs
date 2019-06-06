@@ -7,5 +7,6 @@ namespace Reface.AppStarter
         T CreateComponent<T>();
         object CreateComponent(Type type);
         IComponentContainer BeginScope(string scopeName);
+        void InjectProperties(object value);
     }
 }

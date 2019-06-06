@@ -18,33 +18,37 @@ namespace Reface.AppStarter
 
         public AutofacContainerBuilder()
         {
-            this.AutofacContainerBuilderInstance
-                .RegisterType<DefaultEventBus>()
-                .AsImplementedInterfaces()
-                .InstancePerLifetimeScope();
+            this.Register(typeof(DefaultEventBus));
         }
 
-        public void Register(Type componentType, RegistionMode registionMode)
+        public void Register(Type componentType, RegistionMode registionMode = RegistionMode.AsInterfaces)
         {
+            if (componentType.GetInterfaces().Length == 0)
+            {
+                // 若组件没有实现任何接口，则移除注册为接口的方式
+                // 除移除后没有注册方式，则注册到自身上
+                registionMode = EnumHelper.RemoveFlag(registionMode, RegistionMode.AsInterfaces);
+                if (registionMode == RegistionMode.No) registionMode = RegistionMode.AsSelf;
+            }
             if (componentType.IsGenericType)
             {
                 var r = this.AutofacContainerBuilderInstance
                     .RegisterGeneric(componentType)
                     .InstancePerLifetimeScope();
-                if (EnumHelper.HasFlag(registionMode, RegistionMode.AsInterfaces))
-                    r.AsImplementedInterfaces();
                 if (EnumHelper.HasFlag(registionMode, RegistionMode.AsSelf))
                     r.AsSelf();
+                if (EnumHelper.HasFlag(registionMode, RegistionMode.AsInterfaces))
+                    r.AsImplementedInterfaces();
             }
             else
             {
                 var r = this.AutofacContainerBuilderInstance
                     .RegisterType(componentType)
                     .InstancePerLifetimeScope();
-                if (EnumHelper.HasFlag(registionMode, RegistionMode.AsInterfaces))
-                    r.AsImplementedInterfaces();
                 if (EnumHelper.HasFlag(registionMode, RegistionMode.AsSelf))
                     r.AsSelf();
+                if (EnumHelper.HasFlag(registionMode, RegistionMode.AsInterfaces))
+                    r.AsImplementedInterfaces();
             }
         }
 

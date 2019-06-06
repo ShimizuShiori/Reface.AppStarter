@@ -41,5 +41,10 @@ namespace Reface.AppStarter
         public void OnAppStarted(App app)
         {
         }
+
+        public void InjectProperties(object value)
+        {
+            this.LifetimeScope.InjectProperties(value);
+        }
     }
 }

@@ -1,7 +1,8 @@
 ﻿namespace Reface.AppStarter.Tests
 {
-    [Component(RegistionMode.AsSelf)]
+    [Component]
     public class Class2
     {
+        public Class1 Class1 { get; set; }
     }
 }

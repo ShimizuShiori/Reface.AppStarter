@@ -2,7 +2,8 @@
 {
     public enum RegistionMode
     {
-        AsInterfaces,
-        AsSelf
+        No = 0,
+        AsInterfaces = 1,
+        AsSelf = 2
     }
 }

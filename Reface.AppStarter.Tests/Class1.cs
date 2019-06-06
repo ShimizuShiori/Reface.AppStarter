@@ -1,6 +1,6 @@
 ﻿namespace Reface.AppStarter.Tests
 {
-    [Scannable]
+    [Component]
     public class Class1
     {
     }

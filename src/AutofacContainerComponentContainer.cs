@@ -42,5 +42,10 @@ namespace Reface.AppStarter
                 eventBus.Publish(new AppStartedEvent(this, app));
             }
         }
+
+        public void InjectProperties(object value)
+        {
+            this.Container.InjectProperties(value);
+        }
     }
 }
