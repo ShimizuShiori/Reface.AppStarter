@@ -2,6 +2,6 @@
 {
     public interface IAppContainerBuilder
     {
-        IAppContainer Build();
+        IAppContainer Build(AppSetup setup);
     }
 }

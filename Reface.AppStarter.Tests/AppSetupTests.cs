@@ -16,7 +16,7 @@ namespace Reface.AppStarter.Tests
             AppModuleScanResult appModuleScanResult = setup.GetScanResult(appModule);
 
             Assert.AreEqual(appModule, appModuleScanResult.AppModule);
-            Assert.AreEqual(2, appModuleScanResult.ScannableAttributeAndTypeInfos.Count());
+            Assert.AreEqual(3, appModuleScanResult.ScannableAttributeAndTypeInfos.Count());
         }
 
         [TestMethod]
@@ -30,6 +30,17 @@ namespace Reface.AppStarter.Tests
             TestContainerBuilder testContainerBuilder2
                 = setup.GetAppContainerBuilder<TestContainerBuilder>();
             Assert.AreEqual(testContainerBuilder1, testContainerBuilder2);
+        }
+
+        [TestMethod]
+        public void TestStart()
+        {
+            IAppModule appModule = new TestAppModule();
+            AppSetup setup = new AppSetup();
+            var app = setup.Start(appModule);
+            IComponentContainer componentContainer = app.GetAppContainer<IComponentContainer>();
+            Assert.IsNotNull(componentContainer);
+            Assert.IsNotNull(componentContainer.CreateComponent<Class2>());
         }
     }
 }

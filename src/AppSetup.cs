@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Reface.AppStarter
 {
@@ -48,6 +49,19 @@ namespace Reface.AppStarter
             {
                 this.Use(subAppModule);
             }
+        }
+
+        public App Start(IAppModule appModule)
+        {
+            CoreAppModule coreAppModule = new CoreAppModule();
+            this.Use(coreAppModule);
+            this.Use(new ComponentScanAppModule(coreAppModule));
+            this.Use(appModule);
+            IEnumerable<IAppContainer> appContainers
+                = this.existsAppContainerBuilders.Values
+                   .Select(x => x.Build(this))
+                   .ToList();
+            return new App(appContainers);
         }
     }
 }

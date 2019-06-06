@@ -37,6 +37,9 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Reface.EventBus, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Reface.EventBus.3.0.6\lib\net40\Reface.EventBus.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,16 +50,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.cs" />
     <Compile Include="AppModuleScanResult.cs" />
     <Compile Include="AppSetup.cs" />
     <Compile Include="AttributeAndTypeInfo.cs" />
+    <Compile Include="AutofacContainerComponentContainer.cs" />
     <Compile Include="AutofacContainerBuilder.cs" />
     <Compile Include="ComponentAttribute.cs" />
     <Compile Include="ComponentScanAppModule.cs" />
+    <Compile Include="CoreAppModule.cs" />
+    <Compile Include="EventListenerFinder.cs" />
+    <Compile Include="Events\AppStartedEvent.cs" />
     <Compile Include="Ext.cs" />
+    <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="IAppContainer.cs" />
     <Compile Include="IAppContainerBuilder.cs" />
     <Compile Include="IAppModule.cs" />
+    <Compile Include="IComponentContainer.cs" />
+    <Compile Include="LifetimescopeComponentContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistionMode.cs" />
     <Compile Include="ScannableAttribute.cs" />
