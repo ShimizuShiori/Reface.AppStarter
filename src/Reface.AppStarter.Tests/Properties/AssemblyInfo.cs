@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Reface.AppStarterTests")]
+[assembly: AssemblyTitle("Reface.AppStarter.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Reface.AppStarterTests")]
+[assembly: AssemblyProduct("Reface.AppStarter.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("7c03465b-4324-4587-8995-5b74a04e6cd4")]
+[assembly: Guid("c4504cff-62a3-4dbd-bdcc-276b611841ad")]
 
 // 程序集的版本信息由下列四个值组成: 
 //
