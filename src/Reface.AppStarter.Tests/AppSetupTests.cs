@@ -43,6 +43,8 @@ namespace Reface.AppStarter.Tests
             Assert.IsNotNull(componentContainer.CreateComponent<Class2>());
             Class2 cls2 = componentContainer.CreateComponent<Class2>();
             componentContainer.InjectProperties(cls2);
+            int i = app.Context.GetOrCreate<int>("Index", key => 0);
+            Assert.AreEqual(2, i);
             Assert.IsNotNull(cls2.Class1);
         }
     }

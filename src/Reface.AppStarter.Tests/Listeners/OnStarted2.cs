@@ -9,6 +9,9 @@ namespace Reface.AppStarter.Tests.Listeners
     {
         public void Handle(AppStartedEvent @event)
         {
+            int i = @event.App.Context.GetOrCreate<int>("Index", key => 0);
+            i++;
+            @event.App.Context["Index"] = i;
             Console.WriteLine("app started2");
         }
     }
