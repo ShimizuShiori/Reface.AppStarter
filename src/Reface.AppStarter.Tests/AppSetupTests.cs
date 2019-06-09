@@ -20,7 +20,7 @@ namespace Reface.AppStarter.Tests
         }
 
         [TestMethod]
-        public void TestGetContainerBuilder()
+        public void TestGetContainerBuilderTwiceAndResultAreSame()
         {
             IAppModule appModule = new TestAppModule();
             AppSetup setup = new AppSetup();

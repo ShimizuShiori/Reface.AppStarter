@@ -6,8 +6,10 @@ namespace Reface.AppStarter
 {
     public class AppSetup
     {
-        private readonly Dictionary<Type, IAppContainerBuilder> existsAppContainerBuilders
-            = new Dictionary<Type, IAppContainerBuilder>();
+        private readonly IList<IAppContainerBuilder> appContainerBuilders
+            = new List<IAppContainerBuilder>();
+        //private readonly Dictionary<Type, IAppContainerBuilder> existsAppContainerBuilders
+        //    = new Dictionary<Type, IAppContainerBuilder>();
         private readonly Dictionary<IAppModule, AppModuleScanResult> appModuleToScannableAttributeAndTypeInfoMap
             = new Dictionary<IAppModule, AppModuleScanResult>();
 
@@ -15,11 +17,15 @@ namespace Reface.AppStarter
             where T : IAppContainerBuilder, new()
         {
             Type type = typeof(T);
-            IAppContainerBuilder builder;
-            if (existsAppContainerBuilders.TryGetValue(type, out builder))
-                return (T)builder;
-            builder = new T();
-            existsAppContainerBuilders[type] = builder;
+            IAppContainerBuilder builder
+                =
+                this.appContainerBuilders.Where(x => type.IsAssignableFrom(x.GetType()))
+                .FirstOrDefault();
+            if (builder == null)
+            {
+                builder = new T();
+                this.appContainerBuilders.Add(builder);
+            }
             return (T)builder;
         }
 
@@ -58,7 +64,7 @@ namespace Reface.AppStarter
             this.Use(new ComponentScanAppModule(coreAppModule));
             this.Use(appModule);
             IEnumerable<IAppContainer> appContainers
-                = this.existsAppContainerBuilders.Values
+                = this.appContainerBuilders
                    .Select(x => x.Build(this))
                    .ToList();
             return new App(appContainers);
