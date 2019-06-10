@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Reface.AppStarter
+namespace Reface.AppStarter.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class ComponentAttribute

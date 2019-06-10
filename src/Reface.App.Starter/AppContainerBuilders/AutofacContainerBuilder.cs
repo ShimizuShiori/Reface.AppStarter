@@ -1,11 +1,12 @@
 ﻿using Autofac;
 using System;
 using Reface.EventBus;
+using Reface.AppStarter.AppContainers;
 
-namespace Reface.AppStarter
+namespace Reface.AppStarter.AppContainerBuilders
 {
     public class AutofacContainerBuilder
-        : IAppContainerBuilder
+        : NotifyBuildEventAppContainerBuilder
     {
         /// <summary>
         /// autofac原本的容器构建器实例
@@ -52,7 +53,15 @@ namespace Reface.AppStarter
             }
         }
 
-        public IAppContainer Build(AppSetup setup)
+        public void RegisterInstance(Object value)
+        {
+            this.AutofacContainerBuilderInstance
+                .RegisterInstance(value)
+                .AsSelf()
+                .SingleInstance();
+        }
+
+        public override IAppContainer BuildAppContainer(AppSetup appSetup)
         {
             return new AutofacContainerComponentContainer(this.AutofacContainerBuilderInstance);
         }

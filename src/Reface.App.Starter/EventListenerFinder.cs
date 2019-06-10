@@ -1,4 +1,5 @@
-﻿using Reface.EventBus;
+﻿using Reface.AppStarter.Attributes;
+using Reface.EventBus;
 using System;
 using System.Collections.Generic;
 

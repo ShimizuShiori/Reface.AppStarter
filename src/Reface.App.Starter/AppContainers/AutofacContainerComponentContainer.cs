@@ -3,7 +3,7 @@ using Reface.AppStarter.Events;
 using Reface.EventBus;
 using System;
 
-namespace Reface.AppStarter
+namespace Reface.AppStarter.AppContainers
 {
     public class AutofacContainerComponentContainer : IComponentContainer
     {

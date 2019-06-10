@@ -7,10 +7,11 @@ namespace Reface.AppStarter
     {
         #region IEnumerable
 
-        public static void ForEach<T>(this IEnumerable<T> list, Action<T> handler)
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> list, Action<T> handler)
         {
             foreach (var item in list)
                 handler(item);
+            return list;
         }
 
         #endregion

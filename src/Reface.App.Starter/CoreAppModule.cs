@@ -2,7 +2,7 @@
 
 namespace Reface.AppStarter
 {
-    public class CoreAppModule : IAppModule
+    class CoreAppModule : IAppModule
     {
         public IEnumerable<IAppModule> DependentModules => null;
 

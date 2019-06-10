@@ -7,6 +7,7 @@ namespace Reface.AppStarter.Tests
 
         public IEnumerable<IAppModule> DependentModules => new IAppModule[]
         {
+            new AutoConfigAppModule(this),
             new ComponentScanAppModule(this)
         };
 

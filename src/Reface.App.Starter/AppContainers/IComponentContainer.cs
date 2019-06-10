@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Reface.AppStarter
+namespace Reface.AppStarter.AppContainers
 {
     public interface IComponentContainer : IAppContainer
     {

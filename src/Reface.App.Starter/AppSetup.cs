@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Reface.AppStarter.AppContainerBuilders;
+using Reface.AppStarter.AppContainers;
+using Reface.AppStarter.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,10 +11,14 @@ namespace Reface.AppStarter
     {
         private readonly IList<IAppContainerBuilder> appContainerBuilders
             = new List<IAppContainerBuilder>();
-        //private readonly Dictionary<Type, IAppContainerBuilder> existsAppContainerBuilders
-        //    = new Dictionary<Type, IAppContainerBuilder>();
         private readonly Dictionary<IAppModule, AppModuleScanResult> appModuleToScannableAttributeAndTypeInfoMap
             = new Dictionary<IAppModule, AppModuleScanResult>();
+        public string ConfigFilePath { get; private set; }
+
+        public AppSetup(string configFilePath = "./app.json")
+        {
+            this.ConfigFilePath = configFilePath;
+        }
 
         public T GetAppContainerBuilder<T>()
             where T : IAppContainerBuilder, new()
@@ -43,8 +50,10 @@ namespace Reface.AppStarter
             {
                 object[] objects = type.GetCustomAttributes(typeof(ScannableAttribute), true);
                 if (objects.Length == 0) continue;
+                AttributeAndTypeInfo attributeAndTypeInfo
+                    = new AttributeAndTypeInfo(objects[0] as ScannableAttribute, type);
                 scannableAttributeAndTypeInfos.Add(
-                    new AttributeAndTypeInfo(objects[0] as ScannableAttribute, type)
+                    attributeAndTypeInfo
                 );
             }
             this.appModuleToScannableAttributeAndTypeInfoMap[appModule] =
@@ -65,6 +74,7 @@ namespace Reface.AppStarter
             this.Use(appModule);
             IEnumerable<IAppContainer> appContainers
                 = this.appContainerBuilders
+                   .ForEach(x => x.Prepare(this))
                    .Select(x => x.Build(this))
                    .ToList();
             return new App(appContainers);

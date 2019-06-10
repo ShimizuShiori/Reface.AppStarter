@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Reface.AppStarter.AppContainerBuilders;
+using Reface.AppStarter.AppContainers;
+using System;
 
 namespace Reface.AppStarter.Tests
 {
@@ -7,6 +9,10 @@ namespace Reface.AppStarter.Tests
         public IAppContainer Build(AppSetup setup)
         {
             throw new NotImplementedException();
+        }
+
+        public void Prepare(AppSetup setup)
+        {
         }
     }
 }

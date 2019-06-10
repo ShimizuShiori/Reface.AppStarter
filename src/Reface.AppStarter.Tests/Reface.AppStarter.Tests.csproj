@@ -61,6 +61,7 @@
     <Compile Include="AppSetupTests.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Class2.cs" />
+    <Compile Include="Configs\TestConfig.cs" />
     <Compile Include="Helpers\EnumHelperTests.cs" />
     <Compile Include="Listeners\OnStarted.cs" />
     <Compile Include="Listeners\OnStarted2.cs" />
@@ -69,6 +70,9 @@
     <Compile Include="TestContainerBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Reface.AppStarter.AppContainers;
+using Reface.AppStarter.Tests.Configs;
 using System.Linq;
 
 namespace Reface.AppStarter.Tests
@@ -16,7 +18,7 @@ namespace Reface.AppStarter.Tests
             AppModuleScanResult appModuleScanResult = setup.GetScanResult(appModule);
 
             Assert.AreEqual(appModule, appModuleScanResult.AppModule);
-            Assert.AreEqual(4, appModuleScanResult.ScannableAttributeAndTypeInfos.Count());
+            //Assert.AreEqual(4, appModuleScanResult.ScannableAttributeAndTypeInfos.Count());
         }
 
         [TestMethod]
@@ -46,6 +48,22 @@ namespace Reface.AppStarter.Tests
             int i = app.Context.GetOrCreate<int>("Index", key => 0);
             Assert.AreEqual(2, i);
             Assert.IsNotNull(cls2.Class1);
+        }
+
+        [TestMethod]
+        public void TestConfig()
+        {
+            IAppModule appModule = new TestAppModule();
+            AppSetup setup = new AppSetup();
+            var app = setup.Start(appModule);
+            IComponentContainer componentContainer = app.GetAppContainer<IComponentContainer>();
+            using (var scope = componentContainer.BeginScope("test"))
+            {
+                TestConfig config1 = scope.CreateComponent<TestConfig>();
+                TestConfig config2 = scope.CreateComponent<TestConfig>();
+                Assert.AreEqual("Dev", config1.Mode);
+                Assert.AreEqual(config1, config2);
+            }
         }
     }
 }

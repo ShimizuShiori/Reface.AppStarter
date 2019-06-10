@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Reface.AppStarter
+namespace Reface.AppStarter.Attributes
 {
     /// <summary>
     /// class with this attribute will be scanned

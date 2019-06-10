@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reface.AppStarter.Attributes;
+using System;
 
 namespace Reface.AppStarter
 {
