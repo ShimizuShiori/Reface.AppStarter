@@ -44,21 +44,8 @@ namespace Reface.AppStarter
 
         public void Use(IAppModule appModule)
         {
-            Type[] types = appModule.GetType().Assembly.GetExportedTypes();
-            List<AttributeAndTypeInfo> scannableAttributeAndTypeInfos
-                = new List<AttributeAndTypeInfo>();
-            foreach (Type type in types)
-            {
-                object[] objects = type.GetCustomAttributes(typeof(ScannableAttribute), true);
-                if (objects.Length == 0) continue;
-                AttributeAndTypeInfo attributeAndTypeInfo
-                    = new AttributeAndTypeInfo(objects[0] as ScannableAttribute, type);
-                scannableAttributeAndTypeInfos.Add(
-                    attributeAndTypeInfo
-                );
-            }
-            this.appModuleToScannableAttributeAndTypeInfoMap[appModule] =
-                new AppModuleScanResult(appModule, scannableAttributeAndTypeInfos);
+            IEnumerable<AttributeAndTypeInfo> attributeAndTypeInfos = this.GetAttributeAndTypeInfosFromAppModule(appModule);
+            this.appModuleToScannableAttributeAndTypeInfoMap[appModule] = new AppModuleScanResult(appModule, attributeAndTypeInfos);
             appModule.OnUsing(this);
             if (appModule.DependentModules == null) return;
             foreach (IAppModule subAppModule in appModule.DependentModules)
@@ -79,6 +66,24 @@ namespace Reface.AppStarter
                    .Select(x => x.Build(this))
                    .ToList();
             return new App(appContainers);
+        }
+
+        private IEnumerable<AttributeAndTypeInfo> GetAttributeAndTypeInfosFromAppModule(IAppModule appModule)
+        {
+            Type[] types = appModule.GetType().Assembly.GetExportedTypes();
+            List<AttributeAndTypeInfo> scannableAttributeAndTypeInfos
+                 = new List<AttributeAndTypeInfo>();
+            foreach (Type type in types)
+            {
+                object[] objects = type.GetCustomAttributes(typeof(ScannableAttribute), true);
+                if (objects.Length == 0) continue;
+                AttributeAndTypeInfo attributeAndTypeInfo
+                    = new AttributeAndTypeInfo(objects[0] as ScannableAttribute, type);
+                scannableAttributeAndTypeInfos.Add(
+                    attributeAndTypeInfo
+                );
+            }
+            return scannableAttributeAndTypeInfos;
         }
     }
 }
