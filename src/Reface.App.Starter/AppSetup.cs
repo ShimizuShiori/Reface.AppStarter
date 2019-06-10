@@ -1,5 +1,6 @@
 ﻿using Reface.AppStarter.AppContainerBuilders;
 using Reface.AppStarter.AppContainers;
+using Reface.AppStarter.AppModules;
 using Reface.AppStarter.Attributes;
 using System;
 using System.Collections.Generic;

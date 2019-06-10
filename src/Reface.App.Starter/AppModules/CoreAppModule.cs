@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Reface.AppStarter
+namespace Reface.AppStarter.AppModules
 {
     class CoreAppModule : IAppModule
     {

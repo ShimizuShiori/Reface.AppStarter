@@ -1,4 +1,4 @@
-﻿namespace Reface.AppStarter
+﻿namespace Reface.AppStarter.Attributes
 {
     public enum RegistionMode
     {

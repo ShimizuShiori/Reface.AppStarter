@@ -49,14 +49,14 @@
     <Compile Include="AppModuleScanResult.cs" />
     <Compile Include="AppSetup.cs" />
     <Compile Include="AttributeAndTypeInfo.cs" />
-    <Compile Include="AutoConfigAppModule.cs" />
+    <Compile Include="AppModules\AutoConfigAppModule.cs" />
     <Compile Include="AppContainers\AutofacContainerComponentContainer.cs" />
     <Compile Include="AppContainerBuilders\AutofacContainerBuilder.cs" />
     <Compile Include="Attributes\ComponentAttribute.cs" />
-    <Compile Include="ComponentScanAppModule.cs" />
+    <Compile Include="AppModules\ComponentScanAppModule.cs" />
     <Compile Include="AppContainerBuilders\ConfigAppContainerBuilder.cs" />
     <Compile Include="Attributes\ConfigAttribute.cs" />
-    <Compile Include="CoreAppModule.cs" />
+    <Compile Include="AppModules\CoreAppModule.cs" />
     <Compile Include="AppContainers\EmptyAppContainer.cs" />
     <Compile Include="EventListenerFinder.cs" />
     <Compile Include="Events\AppStartedEvent.cs" />
@@ -64,11 +64,11 @@
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="AppContainers\IAppContainer.cs" />
     <Compile Include="AppContainerBuilders\IAppContainerBuilder.cs" />
-    <Compile Include="IAppModule.cs" />
+    <Compile Include="AppModules\IAppModule.cs" />
     <Compile Include="AppContainers\IComponentContainer.cs" />
     <Compile Include="AppContainers\LifetimescopeComponentContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistionMode.cs" />
+    <Compile Include="Attributes\RegistionMode.cs" />
     <Compile Include="Attributes\ScannableAttribute.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 using System;
 using Reface.EventBus;
 using Reface.AppStarter.AppContainers;
+using Reface.AppStarter.Attributes;
 
 namespace Reface.AppStarter.AppContainerBuilders
 {

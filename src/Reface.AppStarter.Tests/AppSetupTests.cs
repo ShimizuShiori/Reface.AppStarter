@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Reface.AppStarter.AppContainers;
+using Reface.AppStarter.AppModules;
 using Reface.AppStarter.Tests.Configs;
 using System.Linq;
 

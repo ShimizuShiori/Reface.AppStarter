@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Reface.AppStarter
+namespace Reface.AppStarter.AppModules
 {
     public class AutoConfigAppModule : IAppModule
     {
