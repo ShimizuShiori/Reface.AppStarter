@@ -61,6 +61,7 @@
     <Compile Include="AppSetupTests.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Class2.cs" />
+    <Compile Include="Configs\Test2Config.cs" />
     <Compile Include="Configs\TestConfig.cs" />
     <Compile Include="Helpers\EnumHelperTests.cs" />
     <Compile Include="Listeners\OnStarted.cs" />
