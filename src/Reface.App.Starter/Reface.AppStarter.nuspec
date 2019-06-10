@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Reface.AppStarter</id>
-    <version>0.10.2</version>
+    <version>0.10.3</version>
     <title>Reface.AppStarter</title>
     <authors>ShimizuShiori</authors>
     <owners>ShimizuShiori</owners>
@@ -17,6 +17,7 @@
     <dependencies>
       <dependency id="Newtonsoft.Json" version="12.0.2" />
       <dependency id="Autofac" version="4.9.2" />
+      <dependency id="Reface.EventBus" version="3.0.6" />
     </dependencies>
   </metadata>
 </package>
