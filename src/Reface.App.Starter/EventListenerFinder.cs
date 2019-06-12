@@ -1,4 +1,5 @@
-﻿using Reface.AppStarter.Attributes;
+﻿using Autofac;
+using Reface.AppStarter.Attributes;
 using Reface.EventBus;
 using System;
 using System.Collections.Generic;
@@ -8,16 +9,16 @@ namespace Reface.AppStarter
     [Component]
     public class EventListenerFinder : IEventListenerFinder
     {
-        private readonly Lazy<IEnumerable<IEventListener>> eventListeners;
+        private readonly ILifetimeScope lifetimeScope;
 
-        public EventListenerFinder(Lazy<IEnumerable<IEventListener>> eventListeners)
+        public EventListenerFinder(ILifetimeScope lifetimeScope)
         {
-            this.eventListeners = eventListeners;
+            this.lifetimeScope = lifetimeScope;
         }
 
         public IEnumerable<IEventListener> CreateAllEventListeners()
         {
-            return this.eventListeners.Value;
+            return this.lifetimeScope.Resolve<IEnumerable<IEventListener>>();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Reface.AppStarter.AutofacExt;
 using System;
 
 namespace Reface.AppStarter.AppContainers
@@ -7,15 +8,23 @@ namespace Reface.AppStarter.AppContainers
         : IComponentContainer
     {
         public ILifetimeScope LifetimeScope { get; private set; }
+        private readonly IComponentContainer parent;
 
-        public LifetimescopeComponentContainer(ILifetimeScope lifetimeScope)
+        public LifetimescopeComponentContainer(IComponentContainer parent, ILifetimeScope lifetimeScope)
         {
+            this.parent = parent;
+            this.parent.ComponentCreating += (sender, e) =>
+            {
+                this.ComponentCreating?.Invoke(this, e);
+            };
             LifetimeScope = lifetimeScope;
         }
 
+        public event EventHandler<ComponentCreatingEventArgs> ComponentCreating;
+
         public IComponentContainer BeginScope(string scopeName)
         {
-            return new LifetimescopeComponentContainer(this.LifetimeScope.BeginLifetimeScope(scopeName));
+            return new LifetimescopeComponentContainer(this, this.LifetimeScope.BeginLifetimeScope(scopeName));
         }
 
         public T CreateComponent<T>()
@@ -40,6 +49,10 @@ namespace Reface.AppStarter.AppContainers
         public void InjectProperties(object value)
         {
             this.LifetimeScope.InjectProperties(value);
+        }
+
+        public void OnAppPrepair(App app)
+        {
         }
     }
 }

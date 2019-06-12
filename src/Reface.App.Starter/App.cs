@@ -12,6 +12,7 @@ namespace Reface.AppStarter
         public App(IEnumerable<IAppContainer> appContainers)
         {
             this.appContainers = appContainers;
+            appContainers.ForEach(x => x.OnAppPrepair(this));
             appContainers.ForEach(x => x.OnAppStarted(this));
         }
 

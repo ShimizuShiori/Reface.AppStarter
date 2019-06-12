@@ -9,17 +9,24 @@ namespace Reface.AppStarter.AppContainers
     public class AutofacContainerComponentContainer : IComponentContainer
     {
         public IContainer Container { get; private set; }
+        private readonly ContainerBuilder containerBuilder;
         private readonly TriggerComponentCreatingEventAutofacSource triggerComponentCreatingEventAutofacSource;
+
+        public event EventHandler<ComponentCreatingEventArgs> ComponentCreating;
 
         public AutofacContainerComponentContainer(ContainerBuilder containerBuilder, TriggerComponentCreatingEventAutofacSource triggerComponentCreatingEventAutofacSource)
         {
+            this.containerBuilder = containerBuilder;
             this.triggerComponentCreatingEventAutofacSource = triggerComponentCreatingEventAutofacSource;
-            this.Container = containerBuilder.Build();
+            this.triggerComponentCreatingEventAutofacSource.ComponentCreating += (sender, e) =>
+            {
+                this.ComponentCreating?.Invoke(this, e);
+            };
         }
 
         public IComponentContainer BeginScope(string scopeName)
         {
-            return new LifetimescopeComponentContainer(this.Container.BeginLifetimeScope(scopeName));
+            return new LifetimescopeComponentContainer(this, this.Container.BeginLifetimeScope(scopeName));
         }
 
         public T CreateComponent<T>()
@@ -44,16 +51,18 @@ namespace Reface.AppStarter.AppContainers
                 IEventBus eventBus = scope.Resolve<IEventBus>();
                 eventBus.Publish(new AppStartedEvent(this, app));
             }
-            this.triggerComponentCreatingEventAutofacSource.ComponentCreating += (sender, e) =>
-            {
-                IEventBus eventBus = e.ComponentManager.CreateComponent<IEventBus>();
-                eventBus.Publish(new ComponentCreatingEvent(this, e));
-            };
         }
 
         public void InjectProperties(object value)
         {
             this.Container.InjectProperties(value);
+        }
+
+        public void OnAppPrepair(App app)
+        {
+            this.containerBuilder.RegisterInstance(app)
+                .SingleInstance();
+            this.Container = containerBuilder.Build();
         }
     }
 }

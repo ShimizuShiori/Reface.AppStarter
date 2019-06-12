@@ -6,6 +6,10 @@
         {
         }
 
+        public void OnAppPrepair(App app)
+        {
+        }
+
         public void OnAppStarted(App app)
         {
         }
