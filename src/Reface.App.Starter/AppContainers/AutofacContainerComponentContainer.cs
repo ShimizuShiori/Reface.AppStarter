@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Reface.AppStarter.AutofacExt;
 using Reface.AppStarter.Events;
 using Reface.EventBus;
 using System;
@@ -8,9 +9,11 @@ namespace Reface.AppStarter.AppContainers
     public class AutofacContainerComponentContainer : IComponentContainer
     {
         public IContainer Container { get; private set; }
+        private readonly TriggerComponentCreatingEventAutofacSource triggerComponentCreatingEventAutofacSource;
 
-        public AutofacContainerComponentContainer(ContainerBuilder containerBuilder)
+        public AutofacContainerComponentContainer(ContainerBuilder containerBuilder, TriggerComponentCreatingEventAutofacSource triggerComponentCreatingEventAutofacSource)
         {
+            this.triggerComponentCreatingEventAutofacSource = triggerComponentCreatingEventAutofacSource;
             this.Container = containerBuilder.Build();
         }
 
@@ -41,6 +44,11 @@ namespace Reface.AppStarter.AppContainers
                 IEventBus eventBus = scope.Resolve<IEventBus>();
                 eventBus.Publish(new AppStartedEvent(this, app));
             }
+            this.triggerComponentCreatingEventAutofacSource.ComponentCreating += (sender, e) =>
+            {
+                IEventBus eventBus = e.ComponentManager.CreateComponent<IEventBus>();
+                eventBus.Publish(new ComponentCreatingEvent(this, e));
+            };
         }
 
         public void InjectProperties(object value)

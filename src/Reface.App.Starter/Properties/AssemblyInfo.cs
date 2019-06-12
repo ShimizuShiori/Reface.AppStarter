@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("Reface.AppStarter")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("用于启动多模块化的应用程序，并同时在各个模块中配置自己的依赖组件")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("HP Inc.")]
+[assembly: AssemblyCompany("ShimizuShiori")]
 [assembly: AssemblyProduct("Reface.AppStarter")]
 [assembly: AssemblyCopyright("Copyright © HP Inc. 2019")]
 [assembly: AssemblyTrademark("")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // 可以指定所有值，也可以使用以下所示的 "*" 预置版本号和修订号
 //通过使用 "*"，如下所示:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.10.3")]
-[assembly: AssemblyFileVersion("0.10.3")]
+[assembly: AssemblyVersion("0.10.4")]
+[assembly: AssemblyFileVersion("0.10.4")]

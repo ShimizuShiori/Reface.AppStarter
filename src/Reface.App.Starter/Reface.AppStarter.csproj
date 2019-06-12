@@ -58,8 +58,11 @@
     <Compile Include="Attributes\ConfigAttribute.cs" />
     <Compile Include="AppModules\CoreAppModule.cs" />
     <Compile Include="AppContainers\EmptyAppContainer.cs" />
+    <Compile Include="AutofacExt\ComponentContextComponentManager.cs" />
+    <Compile Include="AutofacExt\IComponentManager.cs" />
     <Compile Include="EventListenerFinder.cs" />
     <Compile Include="Events\AppStartedEvent.cs" />
+    <Compile Include="Events\ComponentCreatingEvent.cs" />
     <Compile Include="Ext.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="AppContainers\IAppContainer.cs" />
@@ -67,9 +70,11 @@
     <Compile Include="AppModules\IAppModule.cs" />
     <Compile Include="AppContainers\IComponentContainer.cs" />
     <Compile Include="AppContainers\LifetimescopeComponentContainer.cs" />
+    <Compile Include="AutofacExt\ComponentCreatingEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Attributes\RegistionMode.cs" />
     <Compile Include="Attributes\ScannableAttribute.cs" />
+    <Compile Include="AutofacExt\TriggerComponentCreatingEventAutofacSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Reface.AppStarter.nuspec" />

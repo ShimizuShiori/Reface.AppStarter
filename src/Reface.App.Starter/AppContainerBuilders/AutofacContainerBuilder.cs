@@ -3,6 +3,7 @@ using System;
 using Reface.EventBus;
 using Reface.AppStarter.AppContainers;
 using Reface.AppStarter.Attributes;
+using Reface.AppStarter.AutofacExt;
 
 namespace Reface.AppStarter.AppContainerBuilders
 {
@@ -16,13 +17,16 @@ namespace Reface.AppStarter.AppContainerBuilders
         {
             get;
             private set;
-        } = new ContainerBuilder();
+        }
+
+        private readonly TriggerComponentCreatingEventAutofacSource triggerComponentCreatingEventAutofacSource = new TriggerComponentCreatingEventAutofacSource();
 
         public AutofacContainerBuilder()
         {
+            this.AutofacContainerBuilderInstance = new ContainerBuilder();
+            this.AutofacContainerBuilderInstance.RegisterSource(triggerComponentCreatingEventAutofacSource);
             this.Register(typeof(DefaultEventBus));
         }
-
         public void Register(Type componentType, RegistionMode registionMode = RegistionMode.AsInterfaces)
         {
             if (componentType.GetInterfaces().Length == 0)
@@ -64,7 +68,7 @@ namespace Reface.AppStarter.AppContainerBuilders
 
         public override IAppContainer BuildAppContainer(AppSetup appSetup)
         {
-            return new AutofacContainerComponentContainer(this.AutofacContainerBuilderInstance);
+            return new AutofacContainerComponentContainer(this.AutofacContainerBuilderInstance, this.triggerComponentCreatingEventAutofacSource);
         }
     }
 }
