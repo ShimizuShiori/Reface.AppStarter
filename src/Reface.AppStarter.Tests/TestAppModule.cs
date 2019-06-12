@@ -1,4 +1,5 @@
 ﻿using Reface.AppStarter.AppModules;
+using Reface.AppStarter.Tests.AppContainerBuilders;
 using System.Collections.Generic;
 
 namespace Reface.AppStarter.Tests
@@ -14,6 +15,8 @@ namespace Reface.AppStarter.Tests
 
         public void OnUsing(AppSetup setup)
         {
+            var container = setup.GetAppContainerBuilder<TestContainerBuilder>();
+            container.DoNothing();
         }
     }
 }

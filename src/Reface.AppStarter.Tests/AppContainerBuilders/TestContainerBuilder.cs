@@ -1,14 +1,16 @@
 ﻿using Reface.AppStarter.AppContainerBuilders;
 using Reface.AppStarter.AppContainers;
-using System;
+using Reface.AppStarter.Tests.AppContainers;
 
-namespace Reface.AppStarter.Tests
+namespace Reface.AppStarter.Tests.AppContainerBuilders
 {
     public class TestContainerBuilder : IAppContainerBuilder
     {
+        public void DoNothing() { }
+
         public IAppContainer Build(AppSetup setup)
         {
-            throw new NotImplementedException();
+            return new TestContainer();
         }
 
         public void Prepare(AppSetup setup)

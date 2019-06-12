@@ -58,17 +58,19 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="AppContainerBuilders\TestContainerBuilder.cs" />
+    <Compile Include="AppContainers\TestContainer.cs" />
     <Compile Include="AppSetupTests.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Class2.cs" />
     <Compile Include="Configs\Test2Config.cs" />
     <Compile Include="Configs\TestConfig.cs" />
     <Compile Include="Helpers\EnumHelperTests.cs" />
+    <Compile Include="Listeners\ListenerComponentCreating.cs" />
     <Compile Include="Listeners\OnStarted.cs" />
     <Compile Include="Listeners\OnStarted2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestAppModule.cs" />
-    <Compile Include="TestContainerBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.json">
