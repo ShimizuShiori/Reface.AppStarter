@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Reface.AppStarter</id>
-    <version>0.10.4</version>
+    <version>0.10.5</version>
     <title>Reface.AppStarter</title>
     <authors>ShimizuShiori</authors>
     <owners>ShimizuShiori</owners>
