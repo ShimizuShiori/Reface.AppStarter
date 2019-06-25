@@ -47,8 +47,9 @@ namespace Reface.AppStarter
             IEnumerable<AttributeAndTypeInfo> attributeAndTypeInfos = this.GetAttributeAndTypeInfosFromAppModule(appModule);
             this.appModuleToScannableAttributeAndTypeInfoMap[appModule] = new AppModuleScanResult(appModule, attributeAndTypeInfos);
             appModule.OnUsing(this);
-            if (appModule.DependentModules == null) return;
-            foreach (IAppModule subAppModule in appModule.DependentModules)
+            IEnumerable<IAppModule> dependentModules = appModule.DependentModules;
+            if (dependentModules == null || !dependentModules.Any()) return;
+            foreach (IAppModule subAppModule in dependentModules)
             {
                 this.Use(subAppModule);
             }
@@ -65,7 +66,9 @@ namespace Reface.AppStarter
                    .ForEach(x => x.Prepare(this))
                    .Select(x => x.Build(this))
                    .ToList();
-            return new App(appContainers);
+            App app = new App(appContainers);
+            appContainers.ForEach(x => x.OnAppStarted(app));
+            return app;
         }
 
         private IEnumerable<AttributeAndTypeInfo> GetAttributeAndTypeInfosFromAppModule(IAppModule appModule)

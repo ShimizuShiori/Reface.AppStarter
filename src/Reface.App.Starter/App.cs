@@ -13,7 +13,6 @@ namespace Reface.AppStarter
         {
             this.appContainers = appContainers;
             appContainers.ForEach(x => x.OnAppPrepair(this));
-            appContainers.ForEach(x => x.OnAppStarted(this));
         }
 
         public T GetAppContainer<T>()
