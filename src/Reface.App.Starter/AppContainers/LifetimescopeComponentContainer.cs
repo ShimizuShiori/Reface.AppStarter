@@ -17,10 +17,12 @@ namespace Reface.AppStarter.AppContainers
             {
                 this.ComponentCreating?.Invoke(this, e);
             };
+            this.parent.NoComponentRegisted += (sender, e) => this.NoComponentRegisted?.Invoke(this, e);
             LifetimeScope = lifetimeScope;
         }
 
         public event EventHandler<ComponentCreatingEventArgs> ComponentCreating;
+        public event EventHandler<NoComponentRegistedEventArgs> NoComponentRegisted;
 
         public IComponentContainer BeginScope(string scopeName)
         {

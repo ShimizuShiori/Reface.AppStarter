@@ -13,6 +13,7 @@ namespace Reface.AppStarter.AppContainers
         private readonly TriggerComponentCreatingEventAutofacSource triggerComponentCreatingEventAutofacSource;
 
         public event EventHandler<ComponentCreatingEventArgs> ComponentCreating;
+        public event EventHandler<NoComponentRegistedEventArgs> NoComponentRegisted;
 
         public AutofacContainerComponentContainer(ContainerBuilder containerBuilder, TriggerComponentCreatingEventAutofacSource triggerComponentCreatingEventAutofacSource)
         {
@@ -21,6 +22,10 @@ namespace Reface.AppStarter.AppContainers
             this.triggerComponentCreatingEventAutofacSource.ComponentCreating += (sender, e) =>
             {
                 this.ComponentCreating?.Invoke(this, e);
+            };
+            this.triggerComponentCreatingEventAutofacSource.NoComponentRegisted += (sender, e) =>
+            {
+                this.NoComponentRegisted?.Invoke(this, e);
             };
         }
 
