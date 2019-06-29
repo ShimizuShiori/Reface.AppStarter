@@ -1,6 +1,7 @@
 ﻿using Reface.AppStarter.AppContainerBuilders;
 using Reface.AppStarter.AppContainers;
 using Reface.AppStarter.Tests.AppContainers;
+using Reface.AppStarter.Tests.Services;
 
 namespace Reface.AppStarter.Tests.AppContainerBuilders
 {
@@ -15,6 +16,8 @@ namespace Reface.AppStarter.Tests.AppContainerBuilders
 
         public void Prepare(AppSetup setup)
         {
+            AutofacContainerBuilder autofacContainerBuilder = setup.GetAppContainerBuilder<AutofacContainerBuilder>();
+            autofacContainerBuilder.RegisterByFunc(c => new ServiceRegistedInTestContainerBuilder());
         }
     }
 }

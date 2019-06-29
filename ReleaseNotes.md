@@ -61,3 +61,4 @@
 * 添加了新的事件，用于监听向 Autofac 容器申请组件时，组件却没有被注册的情景。
 * 上述事件允许向 autofac 容器追加元件的注册。
 * 向 autofac 注册元件时，只能注册非抽象类
+* 以 Func 的方式向 AutofacContainerBuilder 注册元件

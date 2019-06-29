@@ -66,6 +66,14 @@ namespace Reface.AppStarter.AppContainerBuilders
                 .SingleInstance();
         }
 
+        public void RegisterByFunc<T>(Func<IComponentManager, T> creator)
+        {
+            this.AutofacContainerBuilderInstance
+                .Register(c => creator(new ComponentContextComponentManager(c)))
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+        }
+
         public override IAppContainer BuildAppContainer(AppSetup appSetup)
         {
             return new AutofacContainerComponentContainer(this.AutofacContainerBuilderInstance, this.triggerComponentCreatingEventAutofacSource);

@@ -71,6 +71,9 @@
     <Compile Include="Listeners\OnStarted2.cs" />
     <Compile Include="NoComponentRegistedTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisteAsFunTest.cs" />
+    <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\ServiceRegistedInTestContainerBuilder.cs" />
     <Compile Include="TestAppModule.cs" />
   </ItemGroup>
   <ItemGroup>
