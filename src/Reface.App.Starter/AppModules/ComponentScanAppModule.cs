@@ -25,6 +25,7 @@ namespace Reface.AppStarter.AppModules
             appModuleScanResult
                 .ScannableAttributeAndTypeInfos
                 .Where(x => x.Attribute is ComponentAttribute)
+                .Where(x => x.Type.IsClass && !x.Type.IsAbstract)
                 .ForEach(x =>
                 {
                     autofacContainerBuilder.Register(x.Type, ((ComponentAttribute)x.Attribute).RegistionMode);
