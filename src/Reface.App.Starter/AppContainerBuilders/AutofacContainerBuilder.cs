@@ -66,11 +66,11 @@ namespace Reface.AppStarter.AppContainerBuilders
                 .SingleInstance();
         }
 
-        public void RegisterByFunc<T>(Func<IComponentManager, T> creator)
+        public void RegisterByFunc(Type serviceType, Func<IComponentManager, object> creator)
         {
             this.AutofacContainerBuilderInstance
                 .Register(c => creator(new ComponentContextComponentManager(c)))
-                .AsImplementedInterfaces()
+                .As(serviceType)
                 .InstancePerLifetimeScope();
         }
 
