@@ -66,11 +66,26 @@ namespace Reface.AppStarter.AppContainerBuilders
                 .SingleInstance();
         }
 
+        [Obsolete("请使用 RegisterByCreator(Func<IComponentManager, object> creator, Type serviceType)")]
         public void RegisterByFunc(Type serviceType, Func<IComponentManager, object> creator)
+        {
+            this.RegisterByCreator(creator, serviceType);
+        }
+
+        public void RegisterByCreator(Func<IComponentManager, object> creator, Type serviceType)
         {
             this.AutofacContainerBuilderInstance
                 .Register(c => creator(new ComponentContextComponentManager(c)))
                 .As(serviceType)
+                .InstancePerLifetimeScope();
+        }
+
+        public void RegisterByCreator(Func<IComponentManager, object> creator)
+        {
+            this.AutofacContainerBuilderInstance
+                .Register(c => creator(new ComponentContextComponentManager(c)))
+                .AsImplementedInterfaces()
+                .AsSelf()
                 .InstancePerLifetimeScope();
         }
 

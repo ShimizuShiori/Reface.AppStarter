@@ -15,6 +15,7 @@ namespace Reface.AppStarter
         private readonly Dictionary<IAppModule, AppModuleScanResult> appModuleToScannableAttributeAndTypeInfoMap
             = new Dictionary<IAppModule, AppModuleScanResult>();
         public string ConfigFilePath { get; private set; }
+        private readonly HashSet<string> scannedAssemblyName = new HashSet<string>();
 
         public AppSetup(string configFilePath = "./app.json")
         {
@@ -73,7 +74,11 @@ namespace Reface.AppStarter
 
         private IEnumerable<AttributeAndTypeInfo> GetAttributeAndTypeInfosFromAppModule(IAppModule appModule)
         {
-            Type[] types = appModule.GetType().Assembly.GetExportedTypes();
+            var assembly = appModule.GetType().Assembly;
+            var assemblyName = assembly.FullName;
+            if (scannedAssemblyName.Contains(assemblyName))
+                return new AttributeAndTypeInfo[] { };
+            Type[] types = assembly.GetExportedTypes();
             List<AttributeAndTypeInfo> scannableAttributeAndTypeInfos
                  = new List<AttributeAndTypeInfo>();
             foreach (Type type in types)
@@ -86,6 +91,7 @@ namespace Reface.AppStarter
                     attributeAndTypeInfo
                 );
             }
+            scannedAssemblyName.Add(assemblyName);
             return scannableAttributeAndTypeInfos;
         }
     }
