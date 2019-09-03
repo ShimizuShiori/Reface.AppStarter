@@ -113,50 +113,8 @@ class MyAppModule : IAppModule
 }
 ```
 
-## 6 示例
+## 6 示例项目地址
 
-```csharp
-// IGreetingService.cs
-interface IGreetingService
-{
-    void Hello();
-}
-
-// GreetingService.cs
-[Component]
-class GreetingService : IGreetingService
-{
-    public void Hello()
-    {
-        Console.WriteLine("Hello");
-    }
-}
-
-// MyAppModule.cs
-class MyAppModule : IAppModule
-{
-    public IEnumerable<IAppModule> DependentModules =>
-        new IAppModule[]
-        {
-            new ComponentScanAppModule(this)
-        };
-
-    public void OnUsing(AppSetup appSetup)
-    {
-
-    }
-}
-
-// Program.cs
-void Main()
-{
-    AppSetup setup = new AppSetup();
-    IAppModule appModule = new MyAppModule();
-    var app = setup.Start(appModule);
-    IComponentContainer componentContainer = app.GetAppContainer<IComponentContainer>();
-    IGreetingService service = componentContainer.CreateComponent<IGreetingService>();
-    service.Hello(); // Hello
-    Console.ReadLine();
-}
+```shell
+git clone https://github.com/ShimizuShiori/Reface.AppStarter.Demo.git
 ```
-
