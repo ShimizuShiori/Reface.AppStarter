@@ -14,7 +14,7 @@ namespace Reface.AppStarter.Tests
         {
             IAppModule appModule = new TestAppModule();
             AppSetup setup = new AppSetup();
-            setup.Use(appModule);
+            setup.Use(null, appModule);
 
             AppModuleScanResult appModuleScanResult = setup.GetScanResult(appModule);
 

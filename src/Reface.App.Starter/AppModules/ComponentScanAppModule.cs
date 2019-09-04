@@ -5,23 +5,14 @@ using System.Linq;
 
 namespace Reface.AppStarter.AppModules
 {
-    public class ComponentScanAppModule : IAppModule
+    public class ComponentScanAppModule : AppModule
     {
-        private readonly IAppModule targetModule;
-
-        public IEnumerable<IAppModule> DependentModules => null;
-
-        public ComponentScanAppModule(IAppModule targetModule)
-        {
-            this.targetModule = targetModule;
-        }
-
-        public void OnUsing(AppSetup setup)
+        public override void OnUsing(AppSetup setup, IAppModule targetModule)
         {
             AutofacContainerBuilder autofacContainerBuilder
                 = setup.GetAppContainerBuilder<AutofacContainerBuilder>();
             AppModuleScanResult appModuleScanResult
-                = setup.GetScanResult(this.targetModule);
+                = setup.GetScanResult(targetModule);
             appModuleScanResult
                 .ScannableAttributeAndTypeInfos
                 .Where(x => x.Attribute is ComponentAttribute)

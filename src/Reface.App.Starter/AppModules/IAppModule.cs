@@ -6,6 +6,6 @@ namespace Reface.AppStarter.AppModules
     {
         IEnumerable<IAppModule> DependentModules { get; }
 
-        void OnUsing(AppSetup setup);
+        void OnUsing(AppSetup setup, IAppModule targetModule);
     }
 }

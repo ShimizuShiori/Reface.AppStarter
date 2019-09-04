@@ -1,13 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace Reface.AppStarter.AppModules
+﻿namespace Reface.AppStarter.AppModules
 {
-    class CoreAppModule : IAppModule
+    [AutoConfigAppModule]
+    [ComponentScanAppModule]
+    class CoreAppModule : AppModule
     {
-        public IEnumerable<IAppModule> DependentModules => null;
-
-        public void OnUsing(AppSetup setup)
-        {
-        }
     }
 }

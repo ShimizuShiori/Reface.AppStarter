@@ -1,25 +1,16 @@
 ﻿using Reface.AppStarter.AppContainerBuilders;
 using Reface.AppStarter.Attributes;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Reface.AppStarter.AppModules
 {
-    public class AutoConfigAppModule : IAppModule
+    public class AutoConfigAppModule : AppModule
     {
-        public IEnumerable<IAppModule> DependentModules => null;
-
-        private readonly IAppModule autoConfigAppModule;
-
-        public AutoConfigAppModule(IAppModule autoConfigAppModule)
+        public override void OnUsing(AppSetup setup, IAppModule targetModule)
         {
-            this.autoConfigAppModule = autoConfigAppModule;
-        }
-
-        public void OnUsing(AppSetup setup)
-        {
-            var result = setup.GetScanResult(this.autoConfigAppModule);
+            if (targetModule == null) return;
+            var result = setup.GetScanResult(targetModule);
             ConfigAppContainerBuilder builder = setup.GetAppContainerBuilder<ConfigAppContainerBuilder>();
             result
                 .ScannableAttributeAndTypeInfos

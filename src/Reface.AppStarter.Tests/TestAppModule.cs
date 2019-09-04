@@ -1,19 +1,13 @@
 ﻿using Reface.AppStarter.AppModules;
 using Reface.AppStarter.Tests.AppContainerBuilders;
-using System.Collections.Generic;
 
 namespace Reface.AppStarter.Tests
 {
-    public class TestAppModule : IAppModule
+    [AutoConfigAppModule]
+    [ComponentScanAppModule]
+    public class TestAppModule : AppModule
     {
-
-        public IEnumerable<IAppModule> DependentModules => new IAppModule[]
-        {
-            new AutoConfigAppModule(this),
-            new ComponentScanAppModule(this)
-        };
-
-        public void OnUsing(AppSetup setup)
+        public override void OnUsing(AppSetup setup, IAppModule targetModule)
         {
             var container = setup.GetAppContainerBuilder<TestContainerBuilder>();
             container.DoNothing();

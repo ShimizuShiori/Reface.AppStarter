@@ -43,25 +43,24 @@ namespace Reface.AppStarter
             return this.appModuleToScannableAttributeAndTypeInfoMap[appModule];
         }
 
-        public void Use(IAppModule appModule)
+        public void Use(IAppModule target, IAppModule appModule)
         {
             IEnumerable<AttributeAndTypeInfo> attributeAndTypeInfos = this.GetAttributeAndTypeInfosFromAppModule(appModule);
             this.appModuleToScannableAttributeAndTypeInfoMap[appModule] = new AppModuleScanResult(appModule, attributeAndTypeInfos);
-            appModule.OnUsing(this);
+            appModule.OnUsing(this, target);
             IEnumerable<IAppModule> dependentModules = appModule.DependentModules;
             if (dependentModules == null || !dependentModules.Any()) return;
             foreach (IAppModule subAppModule in dependentModules)
             {
-                this.Use(subAppModule);
+                this.Use(appModule, subAppModule);
             }
         }
 
         public App Start(IAppModule appModule)
         {
             CoreAppModule coreAppModule = new CoreAppModule();
-            this.Use(coreAppModule);
-            this.Use(new ComponentScanAppModule(coreAppModule));
-            this.Use(appModule);
+            this.Use(null, coreAppModule);
+            this.Use(null, appModule);
             IEnumerable<IAppContainer> appContainers
                 = this.appContainerBuilders
                    .ForEach(x => x.Prepare(this))
