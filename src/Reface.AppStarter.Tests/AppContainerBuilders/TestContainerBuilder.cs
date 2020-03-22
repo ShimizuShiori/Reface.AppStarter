@@ -17,7 +17,8 @@ namespace Reface.AppStarter.Tests.AppContainerBuilders
         public void Prepare(AppSetup setup)
         {
             AutofacContainerBuilder autofacContainerBuilder = setup.GetAppContainerBuilder<AutofacContainerBuilder>();
-            autofacContainerBuilder.RegisterByFunc(typeof(IService), c => new ServiceRegistedInTestContainerBuilder());
+            //autofacContainerBuilder.RegisterByFunc(typeof(IService), c => new ServiceRegistedInTestContainerBuilder());
+            autofacContainerBuilder.RegisterByCreator(cm => new ServiceRegistedInTestContainerBuilder(), typeof(IService));
         }
     }
 }
