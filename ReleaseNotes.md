@@ -67,3 +67,7 @@
 
 * 修改了 IAppModule 的 OnUsing 接口，当一个 模块A 需要使用 模块B 时，会将 模块A 的实例提供给 模块B 的 OnUsing 方法中，从而尽可能的不在 AppModule 中使用有参数的构造函数
 * 修改了 AppModule 的实现，让其继承于 Attribute ，并使用 AppModule 上的 Attribute 来得到依赖项，简化了定义依赖的方法
+
+# 1.0.0
+
+* 添加了完整的注释
