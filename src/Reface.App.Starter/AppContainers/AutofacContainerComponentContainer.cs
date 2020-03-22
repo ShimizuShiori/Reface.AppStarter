@@ -6,6 +6,9 @@ using System;
 
 namespace Reface.AppStarter.AppContainers
 {
+    /// <summary>
+    /// autofac Di容器的容器
+    /// </summary>
     public class AutofacContainerComponentContainer : IComponentContainer
     {
         public IContainer Container { get; private set; }

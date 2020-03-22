@@ -9,18 +9,6 @@ namespace Reface.AppStarter.Tests
     [TestClass()]
     public class AppSetupTests
     {
-        [TestMethod]
-        public void TestUse()
-        {
-            IAppModule appModule = new TestAppModule();
-            AppSetup setup = new AppSetup();
-            setup.Use(null, appModule);
-
-            AppModuleScanResult appModuleScanResult = setup.GetScanResult(appModule);
-
-            Assert.AreEqual(appModule, appModuleScanResult.AppModule);
-            //Assert.AreEqual(4, appModuleScanResult.ScannableAttributeAndTypeInfos.Count());
-        }
 
         [TestMethod]
         public void TestGetContainerBuilderTwiceAndResultAreSame()

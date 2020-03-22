@@ -6,6 +6,9 @@ using System.IO;
 
 namespace Reface.AppStarter.AppContainerBuilders
 {
+    /// <summary>
+    /// 配置相关的 应用程序容器构建器
+    /// </summary>
     public class ConfigAppContainerBuilder : BaseAppContainerBuilder
     {
         private readonly IList<AttributeAndTypeInfo> attributeAndTypeInfos = new List<AttributeAndTypeInfo>();

@@ -1,10 +1,12 @@
 ﻿using Reface.AppStarter.AppContainerBuilders;
 using Reface.AppStarter.Attributes;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Reface.AppStarter.AppModules
 {
+    /// <summary>
+    /// 组件扫描应用模块
+    /// </summary>
     public class ComponentScanAppModule : AppModule
     {
         public override void OnUsing(AppSetup setup, IAppModule targetModule)

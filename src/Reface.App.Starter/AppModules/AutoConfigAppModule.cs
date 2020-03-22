@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace Reface.AppStarter.AppModules
 {
+    /// <summary>
+    /// 自动配置应用模块
+    /// </summary>
     public class AutoConfigAppModule : AppModule
     {
         public override void OnUsing(AppSetup setup, IAppModule targetModule)

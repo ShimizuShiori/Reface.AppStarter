@@ -7,6 +7,9 @@ using Reface.AppStarter.AutofacExt;
 
 namespace Reface.AppStarter.AppContainerBuilders
 {
+    /// <summary>
+    /// autofac 容器构建器
+    /// </summary>
     public class AutofacContainerBuilder
         : NotifyBuildEventAppContainerBuilder
     {

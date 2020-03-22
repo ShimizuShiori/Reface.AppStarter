@@ -3,6 +3,10 @@ using System;
 
 namespace Reface.AppStarter.AppContainerBuilders
 {
+    /// <summary>
+    /// 允许向外部抛出构建前后事件的容器构建器，
+    /// 这是一个抽象的构建器
+    /// </summary>
     public abstract class NotifyBuildEventAppContainerBuilder : BaseAppContainerBuilder, INotifyBuildEvent
     {
         public event EventHandler<AppContainerBuilderBuildEventArgs> Building;
