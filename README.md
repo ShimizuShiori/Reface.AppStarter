@@ -9,10 +9,11 @@
 
 * 定义模块的依赖模块
 * 在系统启动时，对启动模块及其依赖的所有模块进行类型的扫描
-* 可以对类型进行分类，以便在扫描后区别处理
-* 允许创建新的分类
+* 可以对类型进行分类 ( 通过 *Attribute* )，以便在扫描后区别处理
+* 允许创建新的分类 ( 创建新的 *Attribute* )
 * 允许自定义模块在被使用时进行一些额外的扩展
-* 集成了 [事件总线](https://github.com/ShimizuShiori/EventBus) 功能
+* 集成了 [EventBus] 功能
+* 集成了 [CommandBus] 功能
 * 自动装配配置类
 
 ## 3 主要对象
@@ -58,7 +59,7 @@ var app = setup.Start(myApp); // 这样便启用了所有功能
 
 程序运行时，可以通过注入 App 来得到 app 的实例，并访问其中的所有容器。
 
-## 4 所有特征
+## 4 常用的 Attribute
 
 ### ScannableAttribute
 
@@ -66,11 +67,23 @@ var app = setup.Start(myApp); // 这样便启用了所有功能
 
 ### ComponentAttribute
 
-表示这个类型将被注册到 autofac 容器中
+表示这个类型将被注册到 autofac 容器中，
+有两种注册方式
+* AsInterfaces , 以自身实现的接口注册
+* AsSelf , 以自身的类型注册
+* Both , 同时以接口和自身类型两种方式进行注册
 
 ### ConfigAttribute
 
-表示这个类型中的属性值会被配置文件自动注入
+表示这个类型中的属性值会被配置文件自动注入，该功能属于 [AutoConfig][Config]
+
+### ListenerAttribute
+
+表示这个类型是一个事件监听器，该事件属于 [EventBus]
+
+### CommandHandlerAttribute
+
+表示该类型是一个命令处理器，该功能属于 [CommandBus]
 
 ## 5 基本模块及使用方法
 
@@ -81,15 +94,9 @@ var app = setup.Start(myApp); // 这样便启用了所有功能
 大部分情况下，该模块是作为依赖项定义在别的 **IAppModule** 中
 ```csharp
 // MyAppModule.cs
-class MyAppModule : IAppModule
+[ComponentScanAppModule]
+class MyAppModule : AppModule
 {
-    public IEnumerable<IAppModule> DependentModules 
-        => new IAppModule[]{ new ComponentScanAppModule(this) };
-    
-    public void OnUsing(AppSetup setup)
-    {
-
-    }
 }
 ```
 
@@ -97,21 +104,16 @@ class MyAppModule : IAppModule
 
 注入配置模块。
 申明该模块时，需要指定对哪个模块中的 **ConfigAttribute** 标识的类型进行配置的自动注入。
+
+点击阅读 [使用方法][Config]。
+
 ```csharp
 // MyAppModule.cs
-class MyAppModule : IAppModule
+[ComponentScanAppModule]
+[AutoConfigAppModule]
+class MyAppModule : AppModule
 {
-    public IEnumerable<IAppModule> DependentModules 
-        => new IAppModule[]
-        { 
-            new ComponentScanAppModule(this), 
-            new AutoConfigAppModule(this) 
-        };
-    
-    public void OnUsing(AppSetup setup)
-    {
 
-    }
 }
 ```
 
@@ -120,3 +122,7 @@ class MyAppModule : IAppModule
 ```shell
 git clone https://github.com/ShimizuShiori/Reface.AppStarter.Demo.git
 ```
+
+[EventBus]: https://github.com/ShimizuShiori/EventBus
+[CommandBus]: https://github.com/ShimizuShiori/Reface.CommandBus
+[Config]: ./docs/AutoConfig.md
