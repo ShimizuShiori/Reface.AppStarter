@@ -7,6 +7,7 @@
     <authors>ShimizuShiori</authors>
     <owners>ShimizuShiori</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
     <description>
       <![CDATA[
         用于启动多模块化的应用程序，并同时在各个模块中配置自己的依赖组件
