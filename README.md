@@ -34,9 +34,11 @@ var app = setup.Start(myApp); // 这样便启用了所有功能
 ### 3.3 IAppModule
 
 该接口用来描述一个应用程序模块。
-描述的内容只有两项
+该接口提供三个功能
+
 * 依赖的其它模块
 * 加载时的自定义行为
+* 额外定义参与 IOC / DI 的组件，[查看详情](./docs/ComponentCreator.md)
 
 使用 **Reface.AppStarter** 进行模块化加载就意味着，你需要对你的每一个模块都要创建一个 **IAppModule** 用于定义依赖关系。
 你还需要为你的启动项定义一个 **IAppModule** 用于 **AppSetup.Start(module)**
