@@ -1,4 +1,6 @@
 ﻿using Reface.AppStarter.Attributes;
+using Reface.CommandBus;
+using Reface.EventBus;
 
 namespace Reface.AppStarter.AppModules
 {
@@ -13,6 +15,18 @@ namespace Reface.AppStarter.AppModules
         public override void OnUsing(AppSetup setup, IAppModule targetModule)
         {
             base.OnUsing(setup, targetModule);
+        }
+
+        [ComponentCreator]
+        public IEventBus GetEventBus(IEventListenerFinder eventListenerFinder)
+        {
+            return new DefaultEventBus(eventListenerFinder);
+        }
+
+        [ComponentCreator]
+        public ICommandBus GetCommandBus(ICommandHandlerFactory commandHandlerFactory)
+        {
+            return new DefaultCommandBus(commandHandlerFactory);
         }
     }
 }

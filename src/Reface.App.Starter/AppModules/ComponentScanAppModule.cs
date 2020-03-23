@@ -1,5 +1,6 @@
 ﻿using Reface.AppStarter.AppContainerBuilders;
 using Reface.AppStarter.Attributes;
+using Reface.AppStarter.AutofacExt;
 using System;
 using System.Linq;
 using System.Reflection;

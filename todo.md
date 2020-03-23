@@ -1,0 +1,1 @@
+* *ComponentScanAppModule* 使用 *Emit* 完成对标有 *ComponentCreatorAttribute* 方法的组件进行注册
