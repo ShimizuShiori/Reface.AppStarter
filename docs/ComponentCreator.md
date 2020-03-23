@@ -2,7 +2,7 @@
 
 **版本要求**
 
-* &gt;= Reface.AppStarter 1.1.0
+* Reface.AppStarter &gt;= 1.1.0
 
 
 一个单独的模块可能会引用其它的功能库，这些功能库存在它自己的依赖关系，并且可能没有 IOC / DI 的关系。
