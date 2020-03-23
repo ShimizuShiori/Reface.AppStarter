@@ -61,6 +61,7 @@
     <Compile Include="Attributes\ConfigAttribute.cs" />
     <Compile Include="AppModules\CoreAppModule.cs" />
     <Compile Include="AppContainers\EmptyAppContainer.cs" />
+    <Compile Include="Attributes\ListenerAttribute.cs" />
     <Compile Include="AutofacExt\ComponentContextComponentManager.cs" />
     <Compile Include="AutofacExt\IComponentManager.cs" />
     <Compile Include="EventListenerFinder.cs" />

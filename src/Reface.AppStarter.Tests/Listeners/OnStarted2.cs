@@ -5,7 +5,7 @@ using System;
 
 namespace Reface.AppStarter.Tests.Listeners
 {
-    [Component]
+    [Listener]
     public class OnStarted2 : IEventListener<AppStartedEvent>
     {
         public void Handle(AppStartedEvent @event)
