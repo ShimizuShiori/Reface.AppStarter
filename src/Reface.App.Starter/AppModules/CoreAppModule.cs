@@ -1,4 +1,6 @@
-﻿namespace Reface.AppStarter.AppModules
+﻿using Reface.AppStarter.Attributes;
+
+namespace Reface.AppStarter.AppModules
 {
     /// <summary>
     /// 核心应用程序模块，即 Reface.AppStarter 代码库。

@@ -3,6 +3,7 @@ using Reface.AppStarter.AppContainers;
 using Reface.AppStarter.AppModules;
 using Reface.AppStarter.Tests.AppContainerBuilders;
 using Reface.AppStarter.Tests.Configs;
+using Reface.AppStarter.Tests.Services;
 
 namespace Reface.AppStarter.Tests
 {
@@ -84,6 +85,22 @@ namespace Reface.AppStarter.Tests
                 Test2Config config2 = scope.CreateComponent<Test2Config>();
                 Assert.AreEqual("Test2", config1.Mode);
                 Assert.AreEqual(config1, config2);
+            }
+        }
+
+        [TestMethod]
+        public void GetServiceThatRegistedByTestAppModule()
+        {
+            IAppModule appModule = new TestAppModule();
+            AppSetup setup = new AppSetup();
+            var app = setup.Start(appModule);
+            IComponentContainer componentContainer = app.GetAppContainer<IComponentContainer>();
+            using (var scope = componentContainer.BeginScope("test"))
+            {
+                IServiceRegistedByAppModule service
+                    = scope.CreateComponent<IServiceRegistedByAppModule>();
+                Assert.IsNotNull(service);
+                Assert.IsInstanceOfType(service, typeof(DefaultServiceRegistedByAppModule));
             }
         }
     }

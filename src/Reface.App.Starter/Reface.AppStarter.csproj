@@ -59,6 +59,7 @@
     <Compile Include="Attributes\ComponentAttribute.cs" />
     <Compile Include="AppModules\ComponentScanAppModule.cs" />
     <Compile Include="AppContainerBuilders\ConfigAppContainerBuilder.cs" />
+    <Compile Include="Attributes\ComponentCreatorAttribute.cs" />
     <Compile Include="Attributes\ConfigAttribute.cs" />
     <Compile Include="AppModules\CoreAppModule.cs" />
     <Compile Include="AppContainers\EmptyAppContainer.cs" />

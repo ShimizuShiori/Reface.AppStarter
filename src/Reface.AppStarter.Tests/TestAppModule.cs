@@ -1,5 +1,7 @@
 ﻿using Reface.AppStarter.AppModules;
+using Reface.AppStarter.Attributes;
 using Reface.AppStarter.Tests.AppContainerBuilders;
+using Reface.AppStarter.Tests.Services;
 
 namespace Reface.AppStarter.Tests
 {
@@ -11,6 +13,12 @@ namespace Reface.AppStarter.Tests
         {
             var container = setup.GetAppContainerBuilder<TestContainerBuilder>();
             container.DoNothing();
+        }
+
+        [ComponentCreator]
+        public IServiceRegistedByAppModule GetServiceRegistedByAppModule()
+        {
+            return new DefaultServiceRegistedByAppModule();
         }
     }
 }

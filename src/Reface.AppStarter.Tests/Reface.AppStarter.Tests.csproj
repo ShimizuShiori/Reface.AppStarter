@@ -80,6 +80,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisteAsFunTest.cs" />
     <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\IServiceRegistedByAppModule.cs" />
     <Compile Include="Services\ServiceRegistedInTestContainerBuilder.cs" />
     <Compile Include="TestAppModule.cs" />
   </ItemGroup>
