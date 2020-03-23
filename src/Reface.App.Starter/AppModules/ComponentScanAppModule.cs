@@ -29,6 +29,7 @@ namespace Reface.AppStarter.AppModules
         private static void RegisterComponentFromMethods(IAppModule targetModule, AutofacContainerBuilder autofacContainerBuilder)
         {
             var methods = targetModule.GetType().GetMethods()
+                .Where(x => x.ReturnType != typeof(void))
                 .Select(x => new
                 {
                     Method = x,
