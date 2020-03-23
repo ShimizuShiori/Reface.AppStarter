@@ -55,6 +55,7 @@
     <Compile Include="AppModules\AutoConfigAppModule.cs" />
     <Compile Include="AppContainers\AutofacContainerComponentContainer.cs" />
     <Compile Include="AppContainerBuilders\AutofacContainerBuilder.cs" />
+    <Compile Include="Attributes\CommandHandlerAttribute.cs" />
     <Compile Include="Attributes\ComponentAttribute.cs" />
     <Compile Include="AppModules\ComponentScanAppModule.cs" />
     <Compile Include="AppContainerBuilders\ConfigAppContainerBuilder.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Attributes\ListenerAttribute.cs" />
     <Compile Include="AutofacExt\ComponentContextComponentManager.cs" />
     <Compile Include="AutofacExt\IComponentManager.cs" />
+    <Compile Include="CommandHandlerFactory.cs" />
     <Compile Include="EventListenerFinder.cs" />
     <Compile Include="Events\AppStartedEvent.cs" />
     <Compile Include="Ext.cs" />
@@ -88,6 +90,9 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Reface.CommandBus">
+      <Version>1.1.1</Version>
     </PackageReference>
     <PackageReference Include="Reface.EventBus">
       <Version>3.2.0</Version>

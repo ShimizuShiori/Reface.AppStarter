@@ -4,6 +4,7 @@ using Reface.EventBus;
 using Reface.AppStarter.AppContainers;
 using Reface.AppStarter.Attributes;
 using Reface.AppStarter.AutofacExt;
+using Reface.CommandBus;
 
 namespace Reface.AppStarter.AppContainerBuilders
 {
@@ -29,6 +30,7 @@ namespace Reface.AppStarter.AppContainerBuilders
             this.AutofacContainerBuilderInstance = new ContainerBuilder();
             this.AutofacContainerBuilderInstance.RegisterSource(triggerComponentCreatingEventAutofacSource);
             this.Register(typeof(DefaultEventBus));
+            this.Register(typeof(DefaultCommandBus));
         }
         public void Register(Type componentType, RegistionMode registionMode = RegistionMode.AsInterfaces)
         {

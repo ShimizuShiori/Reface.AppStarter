@@ -8,5 +8,9 @@
     [ComponentScanAppModule]
     class CoreAppModule : AppModule
     {
+        public override void OnUsing(AppSetup setup, IAppModule targetModule)
+        {
+            base.OnUsing(setup, targetModule);
+        }
     }
 }
