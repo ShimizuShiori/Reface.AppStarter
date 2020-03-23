@@ -72,7 +72,11 @@
 
 * 添加了完整的注释
 
-# ?.?.?
+# 1.1.0
 
-* 新增 *Listener* 特征，用于 事件监听器 的特征
+## 2020-03-25
+
+* 新增 *Listener* 特征，用于 **事件监听器** 的特征
 * 集成了 *CommandBus* 功能
+* 新增了 *ComponentCreator** 功能
+* 将 *EventBus* 和 *CommandBus* 的注册通过 *ComponentCreator* 完成
