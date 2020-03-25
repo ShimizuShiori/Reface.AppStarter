@@ -77,17 +77,6 @@ namespace Reface.AppStarter.AppContainerBuilders
             this.RegisterByCreator(creator, serviceType);
         }
 
-        //public void RegisterByCreator(Func<IComponentManager, object> creator, RegistionMode mode)
-        //{
-        //    var x = this.AutofacContainerBuilderInstance
-        //        .Register(c => creator(new ComponentContextComponentManager(c)))
-        //        .InstancePerLifetimeScope();
-        //    if (EnumHelper.HasFlag(mode, RegistionMode.AsInterfaces))
-        //        x.AsImplementedInterfaces();
-        //    if (EnumHelper.HasFlag(mode, RegistionMode.AsSelf))
-        //        x.AsSelf;
-        //}
-
         public void RegisterByCreator(Func<IComponentManager, object> creator, Type serviceType)
         {
             this.AutofacContainerBuilderInstance
