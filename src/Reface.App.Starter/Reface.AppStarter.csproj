@@ -48,6 +48,7 @@
     <Compile Include="AppContainerBuilders\AppContainerBuilderBuildEventArgs.cs" />
     <Compile Include="AppContainerBuilders\INotifyBuildEvent.cs" />
     <Compile Include="AppContainerBuilders\ReplaceServiceContainerBuilder.cs" />
+    <Compile Include="AppContainers\BaseAppContainer.cs" />
     <Compile Include="AppContainers\NoComponentRegistedEventArgs.cs" />
     <Compile Include="AppModuleScanResult.cs" />
     <Compile Include="AppModules\AppModule.cs" />
