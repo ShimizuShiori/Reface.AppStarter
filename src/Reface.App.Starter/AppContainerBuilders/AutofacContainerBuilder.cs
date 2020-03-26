@@ -29,9 +29,8 @@ namespace Reface.AppStarter.AppContainerBuilders
         {
             this.AutofacContainerBuilderInstance = new ContainerBuilder();
             this.AutofacContainerBuilderInstance.RegisterSource(triggerComponentCreatingEventAutofacSource);
-            //this.Register(typeof(DefaultEventBus));
-            //this.Register(typeof(DefaultCommandBus));
         }
+
         public void Register(Type componentType, RegistionMode registionMode = RegistionMode.AsInterfaces)
         {
             if (componentType.GetInterfaces().Length == 0)
