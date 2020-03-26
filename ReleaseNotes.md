@@ -81,10 +81,11 @@
 * 新增了 *ComponentCreator** 功能
 * 将 *EventBus* 和 *CommandBus* 的注册通过 *ComponentCreator* 完成
 
-# ?.?.?
+# 1.2.0
 
-## ????-??-??
+## 2020-03-26
 
 * 重写了 *AutofacContainerBuilder* 对组件注册的逻辑，不是直接注册到 *autofac* 的 *builder*，而是先记录，当 *AutofacContainerBuilder.Build()* 时才注册
 * *AutofacContainerBuilder* 提供按 *ServiceType* 删除注册的功能，允许子模块重新注册 *ServiceType* 的实现类
 * 为 *AppSetup* 添加事件，当所有的 *AppModule* 都被加载后，触发 *AllModulesLoaded* 事件
+* 添加 *ReplaceCreator* 特征，用于在 *AppMOdule* 替换已有的组件
