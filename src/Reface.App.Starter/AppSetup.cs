@@ -20,6 +20,11 @@ namespace Reface.AppStarter
             = new Dictionary<IAppModule, AppModuleScanResult>();
 
         /// <summary>
+        /// 所有 AppModule 加载完成后的事件
+        /// </summary>
+        public event EventHandler AllModulesLoaded;
+
+        /// <summary>
         /// 配置文件路径
         /// </summary>
         public string ConfigFilePath { get; private set; }
@@ -93,6 +98,7 @@ namespace Reface.AppStarter
             CoreAppModule coreAppModule = new CoreAppModule();
             this.Use(null, coreAppModule);
             this.Use(null, appModule);
+            this.AllModulesLoaded?.Invoke(this, EventArgs.Empty);
             IEnumerable<IAppContainer> appContainers
                 = this.appContainerBuilders
                    .ForEach(x => x.Prepare(this))

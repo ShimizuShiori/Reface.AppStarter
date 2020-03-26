@@ -1,10 +1,10 @@
 ﻿using Autofac;
-using System;
-using Reface.EventBus;
 using Reface.AppStarter.AppContainers;
 using Reface.AppStarter.Attributes;
+using Reface.AppStarter.AutofacComponentRegistions;
 using Reface.AppStarter.AutofacExt;
-using Reface.CommandBus;
+using System;
+using System.Collections.Generic;
 
 namespace Reface.AppStarter.AppContainerBuilders
 {
@@ -25,49 +25,44 @@ namespace Reface.AppStarter.AppContainerBuilders
 
         private readonly TriggerComponentCreatingEventAutofacSource triggerComponentCreatingEventAutofacSource = new TriggerComponentCreatingEventAutofacSource();
 
+        private readonly Dictionary<Type, List<IAutofacComponentRegistion>>
+            serviceTypeToRegistionsMap = new Dictionary<Type, List<IAutofacComponentRegistion>>();
+
         public AutofacContainerBuilder()
         {
             this.AutofacContainerBuilderInstance = new ContainerBuilder();
             this.AutofacContainerBuilderInstance.RegisterSource(triggerComponentCreatingEventAutofacSource);
         }
 
+        private void RegisterAutofacComponentRegistion(Type serviceType, IAutofacComponentRegistion registion)
+        {
+            List<IAutofacComponentRegistion> registions;
+            if (!serviceTypeToRegistionsMap.TryGetValue(serviceType, out registions))
+            {
+                registions = new List<IAutofacComponentRegistion>();
+                serviceTypeToRegistionsMap[serviceType] = registions;
+            }
+            registions.Add(registion);
+        }
+        private void RegisterAutofacComponentRegistion(IAutofacComponentRegistion registion)
+        {
+            foreach (var serviceType in registion.ServiceTypes)
+                this.RegisterAutofacComponentRegistion(serviceType, registion);
+        }
+
+        public void RemoveComponentByServiceType(Type serviceType)
+        {
+            this.serviceTypeToRegistionsMap.Remove(serviceType);
+        }
+
         public void Register(Type componentType, RegistionMode registionMode = RegistionMode.AsInterfaces)
         {
-            if (componentType.GetInterfaces().Length == 0)
-            {
-                // 若组件没有实现任何接口，则移除注册为接口的方式
-                // 除移除后没有注册方式，则注册到自身上
-                registionMode = EnumHelper.RemoveFlag(registionMode, RegistionMode.AsInterfaces);
-                if (registionMode == RegistionMode.No) registionMode = RegistionMode.AsSelf;
-            }
-            if (componentType.IsGenericType)
-            {
-                var r = this.AutofacContainerBuilderInstance
-                    .RegisterGeneric(componentType)
-                    .InstancePerLifetimeScope();
-                if (EnumHelper.HasFlag(registionMode, RegistionMode.AsSelf))
-                    r.AsSelf();
-                if (EnumHelper.HasFlag(registionMode, RegistionMode.AsInterfaces))
-                    r.AsImplementedInterfaces();
-            }
-            else
-            {
-                var r = this.AutofacContainerBuilderInstance
-                    .RegisterType(componentType)
-                    .InstancePerLifetimeScope();
-                if (EnumHelper.HasFlag(registionMode, RegistionMode.AsSelf))
-                    r.AsSelf();
-                if (EnumHelper.HasFlag(registionMode, RegistionMode.AsInterfaces))
-                    r.AsImplementedInterfaces();
-            }
+            this.RegisterAutofacComponentRegistion(new ScannedComponentRegistion(componentType, registionMode));
         }
 
         public void RegisterInstance(Object value)
         {
-            this.AutofacContainerBuilderInstance
-                .RegisterInstance(value)
-                .AsSelf()
-                .SingleInstance();
+            this.RegisterAutofacComponentRegistion(new InstanceComponentRegistion(value));
         }
 
         [Obsolete("请使用 RegisterByCreator(Func<IComponentManager, object> creator, Type serviceType)")]
@@ -78,14 +73,19 @@ namespace Reface.AppStarter.AppContainerBuilders
 
         public void RegisterByCreator(Func<IComponentManager, object> creator, Type serviceType)
         {
-            this.AutofacContainerBuilderInstance
-                .Register(c => creator(new ComponentContextComponentManager(c)))
-                .As(serviceType)
-                .InstancePerLifetimeScope();
+            this.RegisterAutofacComponentRegistion(new CreatorComponentRegistion(serviceType, creator));
         }
 
         public override IAppContainer BuildAppContainer(AppSetup appSetup)
         {
+            foreach (var pair in this.serviceTypeToRegistionsMap)
+            {
+                Type serviceType = pair.Key;
+                foreach (var registion in pair.Value)
+                {
+                    registion.RegisterToAutofac(this.AutofacContainerBuilderInstance, serviceType);
+                }
+            }
             return new AutofacContainerComponentContainer(this.AutofacContainerBuilderInstance, this.triggerComponentCreatingEventAutofacSource);
         }
     }

@@ -65,6 +65,7 @@
     <Compile Include="AppContainerBuilders\TestContainerBuilder.cs" />
     <Compile Include="AppContainers\TestContainer.cs" />
     <Compile Include="AppSetupTests.cs" />
+    <Compile Include="CL1ServiceTests.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Class2.cs" />
     <Compile Include="CommandBusTests.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="NoComponentRegistedTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisteAsFunTest.cs" />
+    <Compile Include="Services\MyDefaultCL1Service.cs" />
     <Compile Include="Services\IService.cs" />
     <Compile Include="Services\IServiceRegistedByAppModule.cs" />
     <Compile Include="Services\ServiceRegistedInTestContainerBuilder.cs" />
@@ -91,6 +93,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\ClassLibrary1.csproj">
+      <Project>{b0c0b151-eae0-4615-9c2f-ed5a313060eb}</Project>
+      <Name>ClassLibrary1</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Reface.App.Starter\Reface.AppStarter.csproj">
       <Project>{4A9A9ABC-C3E0-40BC-AF74-3940460BE294}</Project>
       <Name>Reface.AppStarter</Name>

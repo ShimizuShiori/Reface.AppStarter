@@ -1,5 +1,7 @@
 ﻿using Autofac;
+using Autofac.Core.Registration;
 using Reface.AppStarter.AutofacExt;
+using Reface.AppStarter.Errors;
 using System;
 
 namespace Reface.AppStarter.AppContainers
@@ -31,12 +33,26 @@ namespace Reface.AppStarter.AppContainers
 
         public T CreateComponent<T>()
         {
-            return this.LifetimeScope.Resolve<T>();
+            try
+            {
+                return this.LifetimeScope.Resolve<T>();
+            }
+            catch (ComponentNotRegisteredException)
+            {
+                throw new ComponentNotRegistedException(typeof(T));
+            }
         }
 
         public object CreateComponent(Type type)
         {
-            return this.LifetimeScope.Resolve(type);
+            try
+            {
+                return this.LifetimeScope.Resolve(type);
+            }
+            catch (ComponentNotRegisteredException)
+            {
+                throw new ComponentNotRegistedException(type);
+            }
         }
 
         public void Dispose()
