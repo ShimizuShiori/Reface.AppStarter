@@ -21,7 +21,7 @@ namespace Reface.AppStarter.AppContainerBuilders
 
         public override IAppContainer Build(AppSetup setup)
         {
-            return new EmptyAppContainer();
+            return EmptyAppContainer.Default;
         }
 
         public override void Prepare(AppSetup setup)

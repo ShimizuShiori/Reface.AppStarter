@@ -5,6 +5,21 @@
     /// </summary>
     public class EmptyAppContainer : IAppContainer
     {
+        private static readonly EmptyAppContainer def = new EmptyAppContainer();
+
+        private EmptyAppContainer()
+        {
+
+        }
+
+        public static EmptyAppContainer Default
+        {
+            get
+            {
+                return def;
+            }
+        }
+
         public void Dispose()
         {
         }

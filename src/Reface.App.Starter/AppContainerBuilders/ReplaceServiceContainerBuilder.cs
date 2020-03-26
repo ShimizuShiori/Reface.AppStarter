@@ -52,7 +52,7 @@ namespace Reface.AppStarter.AppContainerBuilders
 
         public IAppContainer Build(AppSetup setup)
         {
-            return new EmptyAppContainer();
+            return EmptyAppContainer.Default;
         }
 
         public void Prepare(AppSetup setup)
