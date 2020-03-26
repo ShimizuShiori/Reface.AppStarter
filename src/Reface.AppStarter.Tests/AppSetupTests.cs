@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Reface.AppStarter.AppContainers;
 using Reface.AppStarter.AppModules;
-using Reface.AppStarter.Tests.AppContainerBuilders;
 using Reface.AppStarter.Tests.Configs;
 using Reface.AppStarter.Tests.Services;
 
@@ -10,19 +9,6 @@ namespace Reface.AppStarter.Tests
     [TestClass()]
     public class AppSetupTests
     {
-
-        [TestMethod]
-        public void TestGetContainerBuilderTwiceAndResultAreSame()
-        {
-            IAppModule appModule = new TestAppModule();
-            AppSetup setup = new AppSetup();
-
-            TestContainerBuilder testContainerBuilder1
-                = setup.GetAppContainerBuilder<TestContainerBuilder>();
-            TestContainerBuilder testContainerBuilder2
-                = setup.GetAppContainerBuilder<TestContainerBuilder>();
-            Assert.AreEqual(testContainerBuilder1, testContainerBuilder2);
-        }
 
         [TestMethod]
         public void TestStart()

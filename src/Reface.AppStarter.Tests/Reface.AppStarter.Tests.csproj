@@ -65,7 +65,7 @@
     <Compile Include="AppContainerBuilders\TestContainerBuilder.cs" />
     <Compile Include="AppContainers\TestContainer.cs" />
     <Compile Include="AppSetupTests.cs" />
-    <Compile Include="CL1ServiceTests.cs" />
+    <Compile Include="ReplaceServiceTests.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Class2.cs" />
     <Compile Include="CommandBusTests.cs" />
@@ -84,6 +84,7 @@
     <Compile Include="Services\IService.cs" />
     <Compile Include="Services\IServiceRegistedByAppModule.cs" />
     <Compile Include="Services\ServiceRegistedInTestContainerBuilder.cs" />
+    <Compile Include="TestAppModule2.cs" />
     <Compile Include="TestAppModule.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +97,10 @@
     <ProjectReference Include="..\ClassLibrary1\ClassLibrary1.csproj">
       <Project>{b0c0b151-eae0-4615-9c2f-ed5a313060eb}</Project>
       <Name>ClassLibrary1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mail\Mail.csproj">
+      <Project>{858D8F56-437F-4235-B7DC-AF5DA09A33FE}</Project>
+      <Name>Mail</Name>
     </ProjectReference>
     <ProjectReference Include="..\Reface.App.Starter\Reface.AppStarter.csproj">
       <Project>{4A9A9ABC-C3E0-40BC-AF74-3940460BE294}</Project>

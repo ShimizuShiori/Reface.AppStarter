@@ -3,6 +3,7 @@ using Reface.AppStarter.AppContainers;
 using Reface.AppStarter.AppModules;
 using Reface.AppStarter.Tests.Commands;
 using Reface.CommandBus;
+using System;
 
 namespace Reface.AppStarter.Tests
 {
@@ -14,6 +15,7 @@ namespace Reface.AppStarter.Tests
         [TestInitialize]
         public void Init()
         {
+            Console.WriteLine("CommandBusTests.Init");
             IAppModule appModule = new TestAppModule();
             AppSetup setup = new AppSetup();
             var app = setup.Start(appModule);
