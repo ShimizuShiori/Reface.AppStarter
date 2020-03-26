@@ -124,6 +124,13 @@ class MyAppModule : AppModule
 git clone https://github.com/ShimizuShiori/Reface.AppStarter.Demo.git
 ```
 
+## 7 其它 *AppModule*
+
+* [单元测试](https://github.com/ShimizuShiori/Reface.AppStarter.UnitTest)
+* [AOP 以及动态实现接口](https://github.com/ShimizuShiori/Reface.AppStarter.Proxy)
+* [缓存 AOP](https://github.com/ShimizuShiori/Reface.AppStarter.Cache)
+* [WebApi](https://github.com/ShimizuShiori/Reface.AppStarter.WebApi)
+
 [EventBus]: https://github.com/ShimizuShiori/EventBus
 [CommandBus]: https://github.com/ShimizuShiori/Reface.CommandBus
 [Config]: ./docs/AutoConfig.md
