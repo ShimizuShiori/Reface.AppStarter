@@ -26,14 +26,6 @@ namespace Reface.AppStarter.AppContainerBuilders
 
         public override void Prepare(AppSetup setup)
         {
-            AutofacContainerBuilder autofacContainerBuilder
-                = setup.GetAppContainerBuilder<AutofacContainerBuilder>();
-            autofacContainerBuilder.Building += AutofacContainerBuilder_Building;
-        }
-
-        private void AutofacContainerBuilder_Building(object sender, AppContainerBuilderBuildEventArgs e)
-        {
-            var setup = e.AppSetup;
             JObject jObject = null;
             if (File.Exists(setup.ConfigFilePath))
             {
