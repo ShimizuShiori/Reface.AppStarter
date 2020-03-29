@@ -76,7 +76,7 @@ namespace Reface.AppStarter.AppContainerBuilders
             this.RegisterAutofacComponentRegistion(new CreatorComponentRegistion(serviceType, creator));
         }
 
-        public override IAppContainer BuildAppContainer(AppSetup appSetup)
+        public override void Prepare(AppSetup setup)
         {
             foreach (var pair in this.serviceTypeToRegistionsMap)
             {
@@ -86,6 +86,10 @@ namespace Reface.AppStarter.AppContainerBuilders
                     registion.RegisterToAutofac(this.AutofacContainerBuilderInstance, serviceType);
                 }
             }
+        }
+
+        public override IAppContainer BuildAppContainer(AppSetup appSetup)
+        {
             return new AutofacContainerComponentContainer(this.AutofacContainerBuilderInstance, this.triggerComponentCreatingEventAutofacSource);
         }
     }
