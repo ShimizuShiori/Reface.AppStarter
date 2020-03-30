@@ -59,6 +59,13 @@ namespace Reface.AppStarter.AppContainerBuilders
         {
             AutofacContainerBuilder autofacContainerBuilder
                 = setup.GetAppContainerBuilder<AutofacContainerBuilder>();
+            autofacContainerBuilder.Building += AutofacContainerBuilder_Building;
+
+        }
+
+        private void AutofacContainerBuilder_Building(object sender, AppContainerBuilderBuildEventArgs e)
+        {
+            AutofacContainerBuilder autofacContainerBuilder = (AutofacContainerBuilder)sender;
             foreach (var method in methods)
             {
                 autofacContainerBuilder.RegisterByCreator(cm =>
