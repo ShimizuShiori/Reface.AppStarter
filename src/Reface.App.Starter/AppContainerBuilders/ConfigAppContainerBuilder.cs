@@ -26,13 +26,22 @@ namespace Reface.AppStarter.AppContainerBuilders
 
         public override void Prepare(AppSetup setup)
         {
+            AutofacContainerBuilder autofacContainerBuilder = setup.GetAppContainerBuilder<AutofacContainerBuilder>();
+            autofacContainerBuilder.Building += AutofacContainerBuilder_Building;
+
+        }
+
+        private void AutofacContainerBuilder_Building(object sender, AppContainerBuilderBuildEventArgs e)
+        {
+            AutofacContainerBuilder autofacContainerBuilder = (AutofacContainerBuilder)sender;
+            AppSetup setup = e.AppSetup;
             JObject jObject = null;
             if (File.Exists(setup.ConfigFilePath))
             {
                 string json = File.ReadAllText(setup.ConfigFilePath);
                 jObject = JObject.Parse(json);
             }
-            AutofacContainerBuilder autofacContainerBuilder = setup.GetAppContainerBuilder<AutofacContainerBuilder>();
+
             this.attributeAndTypeInfos
                 .ForEach(x =>
                 {
