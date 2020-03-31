@@ -89,3 +89,10 @@
 * *AutofacContainerBuilder* 提供按 *ServiceType* 删除注册的功能，允许子模块重新注册 *ServiceType* 的实现类
 * 为 *AppSetup* 添加事件，当所有的 *AppModule* 都被加载后，触发 *AllModulesLoaded* 事件
 * 添加 *ReplaceCreator* 特征，用于在 *AppMOdule* 替换已有的组件
+
+# 1.5.0
+
+## 2020-03-31
+
+* 重写了 *ReplaceServiceContainerBuilder* 的逻辑，通过监听 *AutofacContainerBuilder.Building* 事件进行组件的替换
+* 重写了 *ConfigAppContainerBuilder* 的逻辑，通过监听 *AutofacContainerBuilder.Building* 事件进行组件的替换
