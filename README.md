@@ -45,6 +45,8 @@ var app = setup.Start(myApp); // 这样便启用了所有功能
 使用 **Reface.AppStarter** 进行模块化加载就意味着，你需要对你的每一个模块都要创建一个 **IAppModule** 用于定义依赖关系。
 你还需要为你的启动项定义一个 **IAppModule** 用于 **AppSetup.Start(module)**
 
+点击 [此处](docs/AppModule.md) 阅读开发 AppModule 的方法
+
 ### 3.4 可扫描组件
 
 **AppSetup** 会扫描每一个 **IAppModule** 所在程序集中的每一个类型，并将标有 **Scannable** 特征的类型进行提取和提存，以便进行各种扩展。
@@ -54,11 +56,13 @@ var app = setup.Start(myApp); // 这样便启用了所有功能
 应用容器，以及容器构建器。
 构建器如其名，是用来构建容器用的。
 对于一个 **AppSetup** 实例，每种类型的构建器是单例的，当开发者通过 **IAppModule.Use** 方法进行扩展时，将操作同样构建器，以达到生成容器的准确性。
-> 例. AutofacContainerBuilder 构建器会在每个模块加载后，将 autofac 的 ContainerBuilder 进行元件的注册
+> 例. *AutofacContainerBuilder* 构建器会在每个模块加载后，将 *autofac* 的 *ContainerBuilder* 进行元件的注册
 
-所有的容器构建器都有 Build 方法，当 AppSetup.Start 把所有模块扫描完成后，会统一执行每个构建器的 Build 方法，并将生成的容器放在 App 内部，以便访问。
+所有的容器构建器都有 *Build* 方法，当 *AppSetup.Start* 把所有模块扫描完成后，会统一执行每个构建器的 *Build* 方法，并将生成的容器放在 App 内部，以便访问。
 
 程序运行时，可以通过注入 App 来得到 app 的实例，并访问其中的所有容器。
+
+点击 [此处](docs/AppContainer.md) 阅读如何自定义 *AppContainer*
 
 ## 4 常用的 Attribute
 

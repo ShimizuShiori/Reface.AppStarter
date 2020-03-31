@@ -32,3 +32,7 @@ public class MyAppModule : AppModule
 替换是以 *ServiceType* 为依据进行替换的，
 我们会将 *ReplaceCreator* 的返回类型作为 *ServiceType* 删除系统内已有的注册信息，再重新注册。
 所以请不要用实现类的类进作为 *method* 的返回类型。
+
+---
+
+[返回](../readme.md)
