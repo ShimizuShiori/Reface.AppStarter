@@ -14,20 +14,6 @@ namespace Reface.AppStarter.AppModules
     /// </summary>
     public class ComponentScanAppModule : AppModule
     {
-        /// <summary>
-        /// 记录已替换过的服务。
-        /// 由于记录在不同 AppModule 上的特征是不同的实例，
-        /// 因此将此属性设为静态
-        /// </summary>
-        private static readonly Dictionary<string, IAppModule>
-            replacedServiceToAppModuleMap = new Dictionary<string, IAppModule>();
-
-        public static void CleanCachedData()
-        {
-            Console.WriteLine("ComponentScanAppModule.CleanCachedData");
-            replacedServiceToAppModuleMap.Clear();
-        }
-
         public override void OnUsing(AppSetup setup, IAppModule targetModule)
         {
             AutofacContainerBuilder autofacContainerBuilder
@@ -72,7 +58,6 @@ namespace Reface.AppStarter.AppModules
                 .Select(x => x.Method);
             foreach (var method in methods)
             {
-                CheckCanRemove(targetModule, method);
                 RemoveService(targetModule, autofacContainerBuilder, method);
             }
             RegisterMethods(targetModule, autofacContainerBuilder, methods);
@@ -87,19 +72,6 @@ namespace Reface.AppStarter.AppModules
         private static void RemoveService(IAppModule targetModule, AutofacContainerBuilder autofacContainerBuilder, MethodInfo method)
         {
             autofacContainerBuilder.RemoveComponentByServiceType(method.ReturnType);
-            replacedServiceToAppModuleMap[method.ReturnType.FullName] = targetModule;
-        }
-
-        /// <summary>
-        /// 检查是否可以替换服务
-        /// </summary>
-        /// <param name="targetModule"></param>
-        /// <param name="method"></param>
-        private static void CheckCanRemove(IAppModule targetModule, MethodInfo method)
-        {
-            IAppModule module;
-            if (replacedServiceToAppModuleMap.TryGetValue(method.ReturnType.FullName, out module))
-                throw new ServiceHasBeenReplacedException(method.ReturnType, targetModule.GetType());
         }
 
         /// <summary>

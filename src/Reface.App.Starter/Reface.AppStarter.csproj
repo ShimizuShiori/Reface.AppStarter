@@ -86,7 +86,6 @@
     <Compile Include="AppContainers\LifetimescopeComponentContainer.cs" />
     <Compile Include="AppContainers\ComponentCreatingEventArgs.cs" />
     <Compile Include="IAutofacComponentRegistion.cs" />
-    <Compile Include="Listeners\CleanComponentScanAppModuleCachedData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Attributes\RegistionMode.cs" />
     <Compile Include="Attributes\ScannableAttribute.cs" />
