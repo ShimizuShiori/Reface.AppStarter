@@ -11,12 +11,6 @@ namespace Reface.AppStarter.Tests
     [CL1AppModule]
     public class TestAppModule : AppModule
     {
-        public override void OnUsing(AppSetup setup, IAppModule targetModule)
-        {
-            //var container = setup.GetAppContainerBuilder<TestContainerBuilder>();
-            //container.DoNothing();
-        }
-
         [ComponentCreator]
         public IServiceRegistedByAppModule GetServiceRegistedByAppModule()
         {

@@ -15,6 +15,7 @@ namespace Reface.AppStarter.Tests
             TestAppModule testAppModule = new TestAppModule();
             var app = appSetup.Start(testAppModule);
             var container = app.GetAppContainer<IComponentContainer>();
+            
             using (var scope = container.BeginScope("test"))
             {
                 var t = scope.CreateComponent<IService>();
