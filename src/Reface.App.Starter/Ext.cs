@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace Reface.AppStarter
 {
@@ -30,5 +32,16 @@ namespace Reface.AppStarter
         }
 
         #endregion
+
+        #region Reflection
+
+        public static string GetDescription(this MemberInfo memberInfo)
+        {
+            var attr = memberInfo.GetCustomAttribute<DescriptionAttribute>();
+            return attr != null ? attr.Description : memberInfo.Name;
+        }
+
+        #endregion
+
     }
 }

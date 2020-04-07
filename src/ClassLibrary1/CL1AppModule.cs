@@ -1,18 +1,19 @@
-﻿using ClassLibrary1.Services;
-using Mail;
+﻿using Reface.AppStarter;
 using Reface.AppStarter.AppModules;
-using Reface.AppStarter.Attributes;
+using System;
 
 namespace ClassLibrary1
 {
     [ComponentScanAppModule]
-    [MailAppModule]
     public class CL1AppModule : AppModule
     {
-        [ReplaceCreator]
-        public IMailSender GetMailSender()
+        public override void OnUsing(AppSetup setup, IAppModule targetModule)
         {
-            return new MailService();
+            var infos = setup.GetScanResult(targetModule);
+            foreach (var info in infos.ScannableAttributeAndTypeInfos)
+            {
+                Console.WriteLine($"{this.GetType()} : {info.Type}");
+            }
         }
     }
 }

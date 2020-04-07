@@ -1,5 +1,6 @@
 ﻿using Reface.AppStarter.AppContainers;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Reface.AppStarter
 {
@@ -16,8 +17,8 @@ namespace Reface.AppStarter
 
         internal App(IEnumerable<IAppContainer> appContainers)
         {
-            this.appContainers = appContainers;
-            appContainers.ForEach(x => x.OnAppPrepair(this));
+            this.appContainers = appContainers.Where(x => !(x is IEmptyAppContainer));
+            this.appContainers.ForEach(x => x.OnAppPrepair(this));
         }
 
         /// <summary>

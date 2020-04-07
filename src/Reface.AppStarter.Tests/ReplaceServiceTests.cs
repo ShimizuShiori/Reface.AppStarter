@@ -22,16 +22,5 @@ namespace Reface.AppStarter.Tests
                 Assert.AreEqual("TEST", service.GetName());
             }
         }
-
-        [TestMethod]
-        public void CanNotReplaceMailSenderMoreThanOnce()
-        {
-            IAppModule appModule = new TestAppModule2();
-            AppSetup setup = new AppSetup();
-            Assert.ThrowsException<ServiceHasBeenReplacedException>(() =>
-            {
-                var app = setup.Start(appModule);
-            });
-        }
     }
 }

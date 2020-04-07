@@ -28,7 +28,12 @@ namespace Reface.AppStarter
         /// 配置文件路径
         /// </summary>
         public string ConfigFilePath { get; private set; }
-        private readonly HashSet<string> scannedAssemblyName = new HashSet<string>();
+
+        /// <summary>
+        /// 缓存那些已经扫描过的结果，提高运行时的速度。
+        /// </summary>
+        private readonly Dictionary<string, IEnumerable<AttributeAndTypeInfo>>
+            sacennedAssemlyNameToInfoCache = new Dictionary<string, IEnumerable<AttributeAndTypeInfo>>();
 
         /// <summary>
         /// 
@@ -78,7 +83,9 @@ namespace Reface.AppStarter
         private void Use(IAppModule target, IAppModule appModule)
         {
             IEnumerable<AttributeAndTypeInfo> attributeAndTypeInfos = this.ScanAppModule(appModule);
+
             this.appModuleToScannableAttributeAndTypeInfoMap[appModule] = new AppModuleScanResult(appModule, attributeAndTypeInfos);
+
             appModule.OnUsing(this, target);
             IEnumerable<IAppModule> dependentModules = appModule.DependentModules;
             if (dependentModules == null || !dependentModules.Any()) return;
@@ -118,8 +125,11 @@ namespace Reface.AppStarter
         {
             var assembly = appModule.GetType().Assembly;
             var assemblyName = assembly.FullName;
-            if (scannedAssemblyName.Contains(assemblyName))
-                return new AttributeAndTypeInfo[] { };
+            IEnumerable<AttributeAndTypeInfo> result;
+
+            if (sacennedAssemlyNameToInfoCache.TryGetValue(assemblyName, out result))
+                return result;
+
             Type[] types = assembly.GetExportedTypes();
             List<AttributeAndTypeInfo> scannableAttributeAndTypeInfos
                  = new List<AttributeAndTypeInfo>();
@@ -127,13 +137,18 @@ namespace Reface.AppStarter
             {
                 object[] objects = type.GetCustomAttributes(typeof(ScannableAttribute), true);
                 if (objects.Length == 0) continue;
-                AttributeAndTypeInfo attributeAndTypeInfo
-                    = new AttributeAndTypeInfo(objects[0] as ScannableAttribute, type);
-                scannableAttributeAndTypeInfos.Add(
-                    attributeAndTypeInfo
-                );
+
+                foreach (var obj in objects)
+                {
+                    AttributeAndTypeInfo attributeAndTypeInfo
+                        = new AttributeAndTypeInfo(obj as ScannableAttribute, type);
+                    scannableAttributeAndTypeInfos.Add(
+                        attributeAndTypeInfo
+                    );
+
+                }
             }
-            scannedAssemblyName.Add(assemblyName);
+            sacennedAssemlyNameToInfoCache[assemblyName] = scannableAttributeAndTypeInfos;
             return scannableAttributeAndTypeInfos;
         }
     }

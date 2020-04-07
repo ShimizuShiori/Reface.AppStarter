@@ -11,6 +11,7 @@ namespace Reface.AppStarter.Tests
     [AutoConfigAppModule]
     [ComponentScanAppModule]
     [CL1AppModule]
+    [MailAppModule]
     public class TestAppModule2 : AppModule
     {
         public override void OnUsing(AppSetup setup, IAppModule targetModule)

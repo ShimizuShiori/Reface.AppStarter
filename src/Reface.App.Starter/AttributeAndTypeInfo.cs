@@ -23,5 +23,10 @@ namespace Reface.AppStarter
             Attribute = attribute;
             Type = type;
         }
+
+        public override string ToString()
+        {
+            return $"{this.Attribute.GetType().Name} : {this.Type.Name}";
+        }
     }
 }
