@@ -96,3 +96,11 @@
 
 * 重写了 *ReplaceServiceContainerBuilder* 的逻辑，通过监听 *AutofacContainerBuilder.Building* 事件进行组件的替换
 * 重写了 *ConfigAppContainerBuilder* 的逻辑，通过监听 *AutofacContainerBuilder.Building* 事件进行组件的替换
+
+# 1.6.0
+
+## 2020-04-07
+
+* **新功能** 系统启动时，生成 *Json Schema* 文件，配置文件可以通过引用此 *schema* 实现提示功能。
+* 创建新接口 *IEmptyAppContainer* 表示一个空的容器，让 *App* 忽略对其的托管
+* 修改 *AppSetup* 中的一些逻辑，让其现在支持在同一个 *Library* 中存在多个 *AppModule*
