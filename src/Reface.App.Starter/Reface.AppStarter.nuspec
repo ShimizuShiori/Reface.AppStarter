@@ -2,10 +2,10 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Reface.AppStarter</id>
-    <version>1.5.1</version>
+    <version>1.6.0</version>
     <title>Reface.AppStarter</title>
-    <authors>Shiori</authors>
-    <owners>Shiori</owners>
+    <authors>Felix</authors>
+    <owners>Felix</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/ShimizuShiori/Reface.AppStarter</projectUrl>
