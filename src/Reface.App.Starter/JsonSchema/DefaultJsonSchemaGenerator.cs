@@ -8,16 +8,21 @@ using System.Reflection;
 
 namespace Reface.AppStarter.JsonSchema
 {
+    /// <summary>
+    /// <see cref="IJsonSchemaGenerator"/> 的默认实现类，
+    /// 使用 Newtonsoft.Json 中的 <see cref="JObject"/> 作为媒介生成 Json，
+    /// 生成的过程中，对于不可写属性将不生成 Schema
+    /// </summary>
     [Component]
     public class DefaultJsonSchemaGenerator : IJsonSchemaGenerator
     {
         public string Generate(IEnumerable<AttributeAndTypeInfo> configAttributeAndTypeInfos)
         {
             JObject jo = new JObject();
-            jo["$schema"] = "http://json-schema.org/schema#";
-            jo["type"] = "object";
+            jo[Constant.PROPERTY_SCHEMA] = Constant.SCHEMA_DEFAULT;
+            jo[Constant.PROPERTY_TYPE] = Constant.TYPE_OBJECT;
             JObject properties = new JObject();
-            jo["properties"] = properties;
+            jo[Constant.PROPERTY_PROPERTIES] = properties;
 
             foreach (var info in configAttributeAndTypeInfos)
             {

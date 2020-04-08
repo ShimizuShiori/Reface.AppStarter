@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using Reface.AppStarter.Errors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace Reface.AppStarter.JsonSchema
                 };
                 return builder.Build();
             }
-            else throw new NotSupportedException();
+            else throw new CanNotConvertToJsonTypeException(this.ItemType);
 
             return jItems;
         }

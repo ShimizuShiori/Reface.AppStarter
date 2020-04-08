@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using Reface.AppStarter.Errors;
 using System;
 
 namespace Reface.AppStarter.JsonSchema
@@ -41,7 +42,7 @@ namespace Reface.AppStarter.JsonSchema
 
             }
             else
-                throw new NotSupportedException();
+                throw new CanNotConvertToJsonTypeException(this.Type);
 
             return jProp;
         }
