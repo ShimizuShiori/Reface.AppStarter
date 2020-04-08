@@ -75,6 +75,8 @@
     <Compile Include="AutofacExt\ComponentContextComponentManager.cs" />
     <Compile Include="AutofacExt\IComponentManager.cs" />
     <Compile Include="CommandHandlerFactory.cs" />
+    <Compile Include="Configs\AppConfig.cs" />
+    <Compile Include="Errors\CanNotConvertToJsonTypeException.cs" />
     <Compile Include="Errors\ComponentNotRegistedException.cs" />
     <Compile Include="Errors\ServiceHasBeenReplacedException.cs" />
     <Compile Include="EventListenerFinder.cs" />

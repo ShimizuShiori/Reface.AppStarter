@@ -1,5 +1,8 @@
-﻿using Reface.AppStarter.JsonSchema;
+﻿using Reface.AppStarter.Configs;
+using Reface.AppStarter.JsonSchema;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 
 namespace Reface.AppStarter.AppContainers
@@ -24,6 +27,8 @@ namespace Reface.AppStarter.AppContainers
             IComponentContainer componentContainer = app.GetAppContainer<IComponentContainer>();
             using (var scope = componentContainer.BeginScope("GenerateJsonSchema"))
             {
+                AppConfig appConfig = scope.CreateComponent<AppConfig>();
+                if (!appConfig.GenerateConfigJsonSchema) return;
                 IJsonSchemaGenerator generator = scope.CreateComponent<IJsonSchemaGenerator>();
                 string json = generator.Generate(this.infos);
                 string path = this.configFilePath.Replace(".json", ".schema.json");

@@ -15,6 +15,7 @@ namespace Reface.AppStarter.Errors
             : base($"无法生成对应的 Json 类型 : {type.FullName}")
         {
             this.Type = type;
+            this.HelpLink = "https://github.com/ShimizuShiori/Reface.AppStarter/blob/master/docs/errors/CanNotConvertToJsonTypeException.md";
         }
     }
 }

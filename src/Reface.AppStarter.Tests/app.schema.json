@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "App": {
+      "type": "object",
+      "description": "面向 Reface.AppStarter 的配置",
+      "properties": {
+        "GenerateConfigJsonSchema": {
+          "description": "是否生成与配置文件相关的 JsonSchema 文件",
+          "type": "boolean"
+        }
+      }
+    },
+    "Test2": {
+      "type": "object",
+      "description": "Test2Config",
+      "properties": {
+        "Mode": {
+          "description": "Mode",
+          "type": "string"
+        }
+      }
+    },
+    "Test": {
+      "type": "object",
+      "description": "TestConfig",
+      "properties": {
+        "Mode": {
+          "description": "工作模式",
+          "type": "string"
+        },
+        "Printers": {
+          "description": "打印机",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Printer",
+            "properties": {
+              "PrintType": {
+                "description": "打印机类型",
+                "type": "string"
+              },
+              "Values": {
+                "description": "待注入的值",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "description": "属性值对",
+                  "properties": {
+                    "Name": {
+                      "description": "属性名称",
+                      "type": "string"
+                    },
+                    "Value": {
+                      "description": "属性值",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "IdList": {
+          "description": "Id集合",
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}

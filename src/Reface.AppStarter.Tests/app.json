@@ -1,5 +1,29 @@
 ﻿{
+  "$schema": "./app.schema.json",
+  "App": {
+    "GenerateConfigJsonSchema": false
+  },
   "Test": {
-    "Mode": "Dev"
+    "Mode": "Dev",
+    "IdList": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "Printers": [
+      {
+        "PrintType": "ConsolePrint",
+        "Values": [
+          {
+            "Name": "Id",
+            "Value": "1"
+          }
+        ]
+      }
+    ]
+  },
+  "Test2": {
+    "Mode": "Dev2"
   }
 }
