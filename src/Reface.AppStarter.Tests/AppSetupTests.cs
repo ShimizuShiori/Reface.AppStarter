@@ -58,21 +58,6 @@ namespace Reface.AppStarter.Tests
             }
         }
 
-        [TestMethod]
-        public void TestConfigWithSectionNotExists()
-        {
-            IAppModule appModule = new TestAppModule();
-            AppSetup setup = new AppSetup();
-            var app = setup.Start(appModule);
-            IComponentContainer componentContainer = app.GetAppContainer<IComponentContainer>();
-            using (var scope = componentContainer.BeginScope("test"))
-            {
-                Test2Config config1 = scope.CreateComponent<Test2Config>();
-                Test2Config config2 = scope.CreateComponent<Test2Config>();
-                Assert.AreEqual("Test2", config1.Mode);
-                Assert.AreEqual(config1, config2);
-            }
-        }
 
         [TestMethod]
         public void GetServiceThatRegistedByTestAppModule()
