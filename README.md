@@ -141,6 +141,4 @@ git clone https://github.com/ShimizuShiori/Reface.AppStarter.Demo.git
 
 ---
 
-更多信息可以关注公众号
-
-![WxQrCode](pics/wcqrcod.jpg)
+更多信息可以关注公众号 : 清水潭
