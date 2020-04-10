@@ -104,3 +104,10 @@
 * **新功能** 系统启动时，生成 *Json Schema* 文件，配置文件可以通过引用此 *schema* 实现提示功能。
 * 创建新接口 *IEmptyAppContainer* 表示一个空的容器，让 *App* 忽略对其的托管
 * 修改 *AppSetup* 中的一些逻辑，让其现在支持在同一个 *Library* 中存在多个 *AppModule*
+
+# 1.7.0
+
+## 2020-04-10
+
+* 新增 *Predicate* 功能，有利于写出更易阅读的条件判断
+* 新增 *AutofacContainerBuilder* 的功能，允许以注册的类型移除已注册的类型
