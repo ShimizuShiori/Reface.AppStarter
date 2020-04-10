@@ -5,6 +5,7 @@ using Reface.AppStarter.AutofacComponentRegistions;
 using Reface.AppStarter.AutofacExt;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Reface.AppStarter.AppContainerBuilders
 {
@@ -53,6 +54,14 @@ namespace Reface.AppStarter.AppContainerBuilders
         public void RemoveComponentByServiceType(Type serviceType)
         {
             this.serviceTypeToRegistionsMap.Remove(serviceType);
+        }
+
+        public void RemoveComponentByComponentType(Type componentType)
+        {
+            ComponentAttribute componentAttribute = componentType.GetCustomAttribute<ComponentAttribute>();
+
+            bool asSelf = EnumHelper.HasFlag(componentAttribute.RegistionMode, RegistionMode.AsSelf);
+
         }
 
         public void Register(Type componentType, RegistionMode registionMode = RegistionMode.AsInterfaces)
