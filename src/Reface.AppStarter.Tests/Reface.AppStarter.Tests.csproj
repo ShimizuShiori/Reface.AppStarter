@@ -68,6 +68,8 @@
     <Compile Include="Configs\Printer.cs" />
     <Compile Include="Configs\PropertyValue.cs" />
     <Compile Include="JsonSchema\DefaultJsonSchemaGeneratorTests.cs" />
+    <Compile Include="RemoveComponentByComponentTypeTestAppModule.cs" />
+    <Compile Include="RemoveComponentTests.cs" />
     <Compile Include="ReplaceServiceTests.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Class2.cs" />

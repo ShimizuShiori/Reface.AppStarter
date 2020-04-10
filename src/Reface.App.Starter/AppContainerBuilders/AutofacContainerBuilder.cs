@@ -3,6 +3,7 @@ using Reface.AppStarter.AppContainers;
 using Reface.AppStarter.Attributes;
 using Reface.AppStarter.AutofacComponentRegistions;
 using Reface.AppStarter.AutofacExt;
+using Reface.AppStarter.Predicates;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -59,9 +60,24 @@ namespace Reface.AppStarter.AppContainerBuilders
         public void RemoveComponentByComponentType(Type componentType)
         {
             ComponentAttribute componentAttribute = componentType.GetCustomAttribute<ComponentAttribute>();
+            Type[] interfaces = componentType.GetInterfaces();
 
-            bool asSelf = EnumHelper.HasFlag(componentAttribute.RegistionMode, RegistionMode.AsSelf);
+            var hasInterface = Predicate.Create(() => interfaces.Length > 0);
+            var doesNotHaveInterface = hasInterface.Not();
+            var hasSelf = Predicate.Create(() => EnumHelper.HasFlag(componentAttribute.RegistionMode, RegistionMode.AsSelf));
+            var hasInterfaces = Predicate.Create(() => EnumHelper.HasFlag(componentAttribute.RegistionMode, RegistionMode.AsInterfaces));
+            var asSelf = doesNotHaveInterface.Or(hasSelf);
 
+            if (asSelf.IsTrue())
+            {
+                this.RemoveComponentByServiceType(componentType);
+                return;
+            }
+
+            foreach (var @interface in interfaces)
+            {
+                this.RemoveComponentByServiceType(@interface);
+            }
         }
 
         public void Register(Type componentType, RegistionMode registionMode = RegistionMode.AsInterfaces)

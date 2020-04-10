@@ -43,9 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="AppContainerBuilders\AppContainerBuilderBuildEventArgs.cs" />
     <Compile Include="AppContainerBuilders\BaseAppContainerBuilder.cs" />
     <Compile Include="AppContainerBuilders\NotifyBuildEventAppContainerBuilder.cs" />
-    <Compile Include="AppContainerBuilders\AppContainerBuilderBuildEventArgs.cs" />
     <Compile Include="AppContainerBuilders\INotifyBuildEvent.cs" />
     <Compile Include="AppContainerBuilders\ReplaceServiceContainerBuilder.cs" />
     <Compile Include="AppContainers\BaseAppContainer.cs" />
@@ -98,6 +98,11 @@
     <Compile Include="JsonSchema\JsonPropertiesBuilder.cs" />
     <Compile Include="JsonSchema\JsonPropertyBuilder.cs" />
     <Compile Include="JsonSchema\JsonTypeHelper.cs" />
+    <Compile Include="Predicates\AndPredicate.cs" />
+    <Compile Include="Predicates\FuncPredicate.cs" />
+    <Compile Include="Predicates\NotPredicate.cs" />
+    <Compile Include="Predicates\OrPredicate.cs" />
+    <Compile Include="Predicates\Predicate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Attributes\RegistionMode.cs" />
     <Compile Include="Attributes\ScannableAttribute.cs" />

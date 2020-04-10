@@ -1,7 +1,14 @@
-﻿namespace Reface.AppStarter.Predicates
+﻿using System;
+
+namespace Reface.AppStarter.Predicates
 {
     public abstract class Predicate
     {
+        public static Predicate Create(Func<bool> func)
+        {
+            return new FuncPredicate(func);
+        }
+
         public abstract bool IsTrue();
         public bool IsFalse()
         {
