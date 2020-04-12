@@ -65,6 +65,7 @@
     <Compile Include="AppContainerBuilders\TestContainerBuilder.cs" />
     <Compile Include="AppContainers\TestContainer.cs" />
     <Compile Include="AppSetupTests.cs" />
+    <Compile Include="Configs\Modes.cs" />
     <Compile Include="Configs\Printer.cs" />
     <Compile Include="Configs\PropertyValue.cs" />
     <Compile Include="JsonSchema\DefaultJsonSchemaGeneratorTests.cs" />

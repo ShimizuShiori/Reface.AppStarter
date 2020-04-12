@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
 using Reface.AppStarter.Errors;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Reface.AppStarter.JsonSchema
 {
@@ -18,6 +20,19 @@ namespace Reface.AppStarter.JsonSchema
 
             if (JsonTypeHelper.IsString(this.Type))
                 jProp[Constant.PROPERTY_TYPE] = Constant.TYPE_STRING;
+            else if (JsonTypeHelper.IsEnum(this.Type))
+            {
+                jProp[Constant.PROPERTY_TYPE] = Constant.TYPE_STRING;
+                JArray array = new JArray();
+                StringBuilder descBuilder = new StringBuilder();
+                foreach (var item in Enum.GetNames(this.Type))
+                {
+                    descBuilder.Append($"\n{item} : {this.Type.GetField(item).GetDescription()}");
+                    array.Add(item);
+                }
+                jProp["enum"] = array;
+                jProp[Constant.PROPERTY_DESCRIPTION] = this.Description + descBuilder;
+            }
             else if (JsonTypeHelper.IsNumber(this.Type))
                 jProp[Constant.PROPERTY_TYPE] = Constant.TYPE_NUMBER;
             else if (JsonTypeHelper.IsBoolean(this.Type))

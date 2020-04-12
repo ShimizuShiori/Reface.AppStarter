@@ -10,6 +10,11 @@ namespace Reface.AppStarter.JsonSchema
             return type == typeof(string);
         }
 
+        public static bool IsEnum(Type type)
+        {
+            return type.IsEnum;
+        }
+
         public static bool IsNumber(Type type)
         {
             return type == typeof(int)

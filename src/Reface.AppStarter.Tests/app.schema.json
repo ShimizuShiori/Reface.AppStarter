@@ -18,7 +18,12 @@
       "properties": {
         "Mode": {
           "description": "Mode",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Tst",
+            "Dev",
+            "Prd"
+          ]
         }
       }
     },

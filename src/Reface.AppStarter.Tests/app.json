@@ -1,7 +1,7 @@
 ﻿{
   "$schema": "./app.schema.json",
   "App": {
-    "GenerateConfigJsonSchema": false
+    "GenerateConfigJsonSchema": true
   },
   "Test": {
     "Mode": "Dev",
@@ -24,6 +24,6 @@
     ]
   },
   "Test2": {
-    "Mode": "Dev2"
+    "Mode":"Dev"
   }
 }
