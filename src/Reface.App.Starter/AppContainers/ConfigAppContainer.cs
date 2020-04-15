@@ -11,13 +11,13 @@ namespace Reface.AppStarter.AppContainers
     /// </summary>
     public class ConfigAppContainer : BaseAppContainer
     {
-        private readonly IEnumerable<AttributeAndTypeInfo> infos;
         private readonly string configFilePath;
+        private readonly IEnumerable<IConfigRegistion> registions;
 
-        public ConfigAppContainer(string configFilePath, IEnumerable<AttributeAndTypeInfo> infos)
+        public ConfigAppContainer(string configFilePath, IEnumerable<IConfigRegistion> registions)
         {
             this.configFilePath = configFilePath;
-            this.infos = infos;
+            this.registions = registions;
         }
 
         public override void OnAppStarted(App app)
@@ -28,7 +28,7 @@ namespace Reface.AppStarter.AppContainers
                 AppConfig appConfig = scope.CreateComponent<AppConfig>();
                 if (!appConfig.GenerateConfigJsonSchema) return;
                 IJsonSchemaGenerator generator = scope.CreateComponent<IJsonSchemaGenerator>();
-                string json = generator.Generate(this.infos);
+                string json = generator.Generate(this.registions);
                 string path = this.configFilePath.Replace(".json", ".schema.json");
                 File.WriteAllText(path, json);
             }

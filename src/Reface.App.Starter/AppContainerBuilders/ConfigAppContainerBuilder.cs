@@ -1,9 +1,12 @@
 ﻿using Newtonsoft.Json.Linq;
 using Reface.AppStarter.AppContainers;
+using Reface.AppStarter.AppModules;
 using Reface.AppStarter.Attributes;
+using Reface.AppStarter.ConfigRegistions;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 
 namespace Reface.AppStarter.AppContainerBuilders
 {
@@ -12,17 +15,25 @@ namespace Reface.AppStarter.AppContainerBuilders
     /// </summary>
     public class ConfigAppContainerBuilder : BaseAppContainerBuilder
     {
-        private readonly IList<AttributeAndTypeInfo> attributeAndTypeInfos = new List<AttributeAndTypeInfo>();
+        private readonly Dictionary<Type, IConfigRegistion> configTypeToRegistionMap = new Dictionary<Type, IConfigRegistion>();
 
         public void AutoConfig(AttributeAndTypeInfo attributeAndTypeInfo)
         {
             if (!(attributeAndTypeInfo.Attribute is ConfigAttribute)) return;
-            this.attributeAndTypeInfos.Add(attributeAndTypeInfo);
+
+            this.configTypeToRegistionMap[attributeAndTypeInfo.Type] = new ScannedConfigRegistion(attributeAndTypeInfo);
+        }
+
+        public void AddConfig(IAppModule appModule, MethodInfo methodInfo)
+        {
+            Type returnType = methodInfo.ReturnType;
+            ConfigCreatorAttribute attr = methodInfo.GetCustomAttribute<ConfigCreatorAttribute>();
+            this.configTypeToRegistionMap[returnType] = new CreatorConfigRegistion(appModule, attr, methodInfo);
         }
 
         public override IAppContainer Build(AppSetup setup)
         {
-            return new ConfigAppContainer(setup.ConfigFilePath, this.attributeAndTypeInfos);
+            return new ConfigAppContainer(setup.ConfigFilePath, this.configTypeToRegistionMap.Values);
         }
 
         public override void Prepare(AppSetup setup)
@@ -43,20 +54,21 @@ namespace Reface.AppStarter.AppContainerBuilders
                 jObject = JObject.Parse(json);
             }
 
-            this.attributeAndTypeInfos
+            this.configTypeToRegistionMap
                 .ForEach(x =>
                 {
-                    ConfigAttribute configAttribute = x.Attribute as ConfigAttribute;
-                    JToken subObject = jObject?.GetValue(configAttribute.Section);
+                    string section = x.Value.Section;
+                    JToken subObject = jObject?.GetValue(section);
                     object configValue;
 
                     if (subObject == null)
-                        configValue = System.Activator.CreateInstance(x.Type);
+                        configValue = x.Value.CreateDefaultInstance();
                     else
-                        configValue = subObject.ToObject(x.Type);
+                        configValue = subObject.ToObject(x.Key);
 
                     autofacContainerBuilder.RegisterInstance(configValue);
                 });
+
             this.ConfigObjectRegisted?.Invoke(this, new AppContainerBuilderBuildEventArgs(setup));
         }
 

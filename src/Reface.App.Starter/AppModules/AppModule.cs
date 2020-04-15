@@ -29,12 +29,26 @@ namespace Reface.AppStarter.AppModules
         public virtual IEnumerable<IAppModule> DependentModules => dependentModules;
 
         /// <summary>
-        /// 该方法会在反射 Attribute 模块后调用，允许开发者继续追加更多的模块
+        /// 该方法会在反射 Attribute 模块后调用，允许开发者继续追加更多的模块。
+        /// 请不要调用这个方法。
+        /// 预计在 2.0 版本以后取消此方法，
+        /// 改为通过事件通知 AppModulesOnAttributeLoaded 来让开发者可以额外定义 <see cref="AppModule"/>
         /// </summary>
         /// <param name="modules"></param>
         protected virtual void AppendOtherModules(List<IAppModule> modules)
         {
 
+        }
+
+        /// <summary>
+        /// 添加新的 <see cref="AppModule"/> 实例
+        /// </summary>
+        /// <param name="appModule"></param>
+        /// <returns></returns>
+        protected AppModule AddModule(IAppModule appModule)
+        {
+            this.dependentModules.Add(appModule);
+            return this;
         }
 
         /// <summary>

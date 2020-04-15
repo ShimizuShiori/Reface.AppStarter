@@ -67,6 +67,7 @@
     <Compile Include="Attributes\ConfigAttribute.cs" />
     <Compile Include="AppModules\CoreAppModule.cs" />
     <Compile Include="AppContainers\EmptyAppContainer.cs" />
+    <Compile Include="Attributes\ConfigCreatorAttribute.cs" />
     <Compile Include="Attributes\ListenerAttribute.cs" />
     <Compile Include="Attributes\ReplaceCreatorAttribute.cs" />
     <Compile Include="AutofacComponentRegistions\CreatorComponentRegistion.cs" />
@@ -75,6 +76,8 @@
     <Compile Include="AutofacExt\ComponentContextComponentManager.cs" />
     <Compile Include="AutofacExt\IComponentManager.cs" />
     <Compile Include="CommandHandlerFactory.cs" />
+    <Compile Include="ConfigRegistions\CreatorConfigRegistion.cs" />
+    <Compile Include="ConfigRegistions\ScannedConfigRegistion.cs" />
     <Compile Include="Configs\AppConfig.cs" />
     <Compile Include="Errors\CanNotConvertToJsonTypeException.cs" />
     <Compile Include="Errors\ComponentNotRegistedException.cs" />
@@ -90,6 +93,7 @@
     <Compile Include="AppContainers\LifetimescopeComponentContainer.cs" />
     <Compile Include="AppContainers\ComponentCreatingEventArgs.cs" />
     <Compile Include="IAutofacComponentRegistion.cs" />
+    <Compile Include="IConfigRegistion.cs" />
     <Compile Include="JsonSchema\Constant.cs" />
     <Compile Include="JsonSchema\DefaultJsonSchemaGenerator.cs" />
     <Compile Include="JsonSchema\IJsonSchemaGenerator.cs" />

@@ -2,6 +2,7 @@
 using ClassLibrary1.Services;
 using Reface.AppStarter.AppModules;
 using Reface.AppStarter.Attributes;
+using Reface.AppStarter.Tests.Configs;
 using Reface.AppStarter.Tests.Services;
 
 namespace Reface.AppStarter.Tests
@@ -21,6 +22,18 @@ namespace Reface.AppStarter.Tests
         public ICL1Service GetCL1Service()
         {
             return new MyDefaultCL1Service();
+        }
+
+        [ConfigCreator("Game")]
+        public SomeConfigWithoutAttribute GetSomeConfigWithoutAttribute()
+        {
+            return new SomeConfigWithoutAttribute()
+            {
+                CanGenerateMinusNumber = false,
+                PlayerName = "Test",
+                RootId = 1,
+                Seed = 123456
+            };
         }
     }
 }
