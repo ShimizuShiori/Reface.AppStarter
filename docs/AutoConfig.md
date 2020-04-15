@@ -4,7 +4,7 @@
 
 为了减化配置的过程，我设计将配置文件改为简单的 *json* 文件。
 
-并简化配置加载的过程，直接将 json 中相应的节点反序列化给相应的类型，并将这些类型注册到 IOC / DI 容器中。
+并简化配置加载的过程，直接将 json 中相应的节点反序列化给相应的类型，并将这些类型注册到 **IOC / DI** 容器中。
 
 ## 1 添加功能模块
 
@@ -74,6 +74,33 @@ public class MyConfig
 // 如果不提供配置文件路径，则以 ./app.json 作为默认值
 AppSetup setup = new AppSetup("./myapp.json");
 ```
+
+## 5 在 AppModule 指定配置类
+
+*该功能自 v1.7.2 起加入。*
+
+当与第三方库融合的时候，你无法对第三方库的配置类添加 **ConfigAttribute** 。
+此时，你可以通过 **ConfigCreatorAttribute** 向系统提供配置类。
+
+**ConfigCreatorAttribute** 必须加在 **AppModule** 中某个 **公开的**、**无参数的**、**有返回值** 的方法上。
+
+```csharp
+public class SomeAppModule : AppModule
+{
+    [ConfigCreator]
+    public SomeConfig GetSomeConfig()
+    {
+        return new SomeConfig()
+        {
+            A = 1,
+            B = "abd",
+            C = true
+            D = Types.E
+        };
+    }
+}
+```
+
 
 ---
 
