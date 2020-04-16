@@ -1,12 +1,12 @@
 ﻿{
-  "$schema": "./app.schema.json",
+  "$schema": "./bin/Debug/app.schema.json",
   "App": {
     "GenerateConfigJsonSchema": true
   },
   "Test": {
     "Mode": "Dev",
     "IdList": [
-      1,
+      1,  
       2,
       3,
       4
@@ -25,5 +25,11 @@
   },
   "Test2": {
     "Mode":"Dev"
+  },
+  "Game": {
+    "CanGenerateMinusNumber": true,
+    "PlayerName": "NoName",
+    "RootId": 1,
+    "Seed": 123456
   }
 }

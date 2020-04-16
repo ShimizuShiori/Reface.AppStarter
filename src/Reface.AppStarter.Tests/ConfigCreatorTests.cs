@@ -13,9 +13,9 @@ namespace Reface.AppStarter.Tests
             var app = new AppSetup().Start(new TestAppModule());
             var container = app.GetAppContainer<IComponentContainer>();
             var config = container.CreateComponent<SomeConfigWithoutAttribute>();
-            Assert.AreEqual("Test", config.PlayerName);
+            Assert.AreEqual("NoName", config.PlayerName);
             Assert.AreEqual(1, config.RootId);
-            Assert.AreEqual(false, config.CanGenerateMinusNumber);
+            Assert.AreEqual(true, config.CanGenerateMinusNumber);
             Assert.AreEqual(123456, config.Seed);
         }
     }

@@ -17,11 +17,11 @@
       "description": "Test2Config",
       "properties": {
         "Mode": {
-          "description": "Mode",
+          "description": "程序工作模式\nDev : 开发环境\nTst : 测试环境\nPrd : 生产环境",
           "type": "string",
           "enum": [
-            "Tst",
             "Dev",
+            "Tst",
             "Prd"
           ]
         }
@@ -73,6 +73,28 @@
           "items": {
             "type": "number"
           }
+        }
+      }
+    },
+    "Game": {
+      "type": "object",
+      "description": "某个不依赖 ConfigAttribute 的配置类",
+      "properties": {
+        "RootId": {
+          "description": "根ID",
+          "type": "number"
+        },
+        "CanGenerateMinusNumber": {
+          "description": "是否会生成负数",
+          "type": "boolean"
+        },
+        "Seed": {
+          "description": "种子",
+          "type": "number"
+        },
+        "PlayerName": {
+          "description": "玩家姓名",
+          "type": "string"
         }
       }
     }
