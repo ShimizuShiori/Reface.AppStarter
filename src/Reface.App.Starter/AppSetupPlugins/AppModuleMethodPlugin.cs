@@ -1,4 +1,5 @@
-﻿using Reface.AppStarter.AppSetupPlugins.Arguments;
+﻿using Reface.AppStarter.AppModuleMethodHandlers;
+using Reface.AppStarter.AppSetupPlugins.Arguments;
 using Reface.AppStarter.Attributes;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Reface.AppStarter.AppSetupPlugins
 
         public override void OnAppModuleUsed(AppSetup setup, OnAppModuleUsedArguments arguments)
         {
-            foreach (var method in this.GetType().GetMethods())
+            foreach (var method in arguments.AppModule.GetType().GetMethods())
             {
                 IEnumerable<AppModuleMethodAttribute> attrs = method.GetCustomAttributes<AppModuleMethodAttribute>();
                 foreach (var attr in attrs)
@@ -25,7 +26,7 @@ namespace Reface.AppStarter.AppSetupPlugins
                             throw new InvalidCastException($"无法将 {attr.AppModuleMethodHandlerType} 转换为 {typeof(IAppModuleMethodHandler)}");
                         attrToHandlerMap[attr.GetType()] = handler;
                     }
-                    handler.Handle(setup, arguments.AppModule, method);
+                    handler.Handle(setup, arguments.AppModule, method, attr);
                 }
             }
         }

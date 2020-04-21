@@ -53,6 +53,9 @@
     <Compile Include="AppContainers\ConfigAppContainer.cs" />
     <Compile Include="AppContainers\IEmptyAppContainer.cs" />
     <Compile Include="AppContainers\NoComponentRegistedEventArgs.cs" />
+    <Compile Include="AppModuleMethodHandlers\ComponentCreatorHandler.cs" />
+    <Compile Include="AppModuleMethodHandlers\ComponentReplaceHandler.cs" />
+    <Compile Include="AppModuleMethodHandlers\ConfigCreatorHandler.cs" />
     <Compile Include="AppModuleScanResult.cs" />
     <Compile Include="AppModules\AppModule.cs" />
     <Compile Include="AppModules\DependentModuleFromAttributesBuiltEventArgs.cs" />
@@ -104,7 +107,7 @@
     <Compile Include="AppContainers\IComponentContainer.cs" />
     <Compile Include="AppContainers\LifetimescopeComponentContainer.cs" />
     <Compile Include="AppContainers\ComponentCreatingEventArgs.cs" />
-    <Compile Include="IAppModuleMethodHandler.cs" />
+    <Compile Include="AppModuleMethodHandlers\IAppModuleMethodHandler.cs" />
     <Compile Include="AppSetupPlugins\IAppSetupPlugin.cs" />
     <Compile Include="IAutofacComponentRegistion.cs" />
     <Compile Include="IConfigRegistion.cs" />
@@ -140,11 +143,9 @@
       <Version>1.1.1</Version>
     </PackageReference>
     <PackageReference Include="Reface.EventBus">
-      <Version>3.2.3</Version>
+      <Version>3.2.5</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AppModuleMethodHandlers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

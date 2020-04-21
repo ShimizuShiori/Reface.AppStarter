@@ -122,7 +122,7 @@ namespace Reface.AppStarter.Tests
             var app = setup.Start(new ThisAppModule());
 
             List<Type> builderTypeList = (List<Type>)setup.Context[CONTEXT_KEY_BUILDER_TYPES];
-            Assert.AreEqual(4, builderTypeList.Count);
+            Assert.AreEqual(3, builderTypeList.Count);
 
             List<Type> moduleTypeList = (List<Type>)setup.Context[CONTEXT_KEY_MODULE_TYPES];
             Assert.AreEqual(4, moduleTypeList.Count);

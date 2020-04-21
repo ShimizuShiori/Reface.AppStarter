@@ -49,7 +49,7 @@
       <HintPath>..\packages\Reface.CommandBus.1.1.1\lib\net461\Reface.CommandBus.dll</HintPath>
     </Reference>
     <Reference Include="Reface.EventBus, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Reface.EventBus.3.2.3\lib\net40\Reface.EventBus.dll</HintPath>
+      <HintPath>..\packages\Reface.EventBus.3.2.5\lib\net40\Reface.EventBus.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>

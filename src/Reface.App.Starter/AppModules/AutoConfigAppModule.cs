@@ -29,15 +29,6 @@ namespace Reface.AppStarter.AppModules
             arguments.ScannedAttributeAndTypeInfos
                 .Where(x => x.Attribute is ConfigAttribute)
                 .ForEach(x => builder.AutoConfig(x));
-
-            if (targetModule == null) return;
-
-            targetModule.GetType()
-                .GetMethods()
-                .Where(x => x.GetParameters().Length == 0)
-                .Where(x => x.ReturnType != typeof(void))
-                .Where(x => x.GetCustomAttribute<ConfigCreatorAttribute>() != null)
-                .ForEach(x => builder.AddConfig(targetModule, x));
         }
     }
 }

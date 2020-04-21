@@ -33,6 +33,16 @@ namespace Reface.AppStarter.AppContainerBuilders
 
         private readonly List<TargetAndMethodInfo> methods = new List<TargetAndMethodInfo>();
 
+        public void TryRegister(IAppModule appModule, MethodInfo method)
+        {
+            if (method.ReturnType == typeof(void)) return;
+            IAppModule appModuleHasBeenReplaced;
+            if (replacedServiceToAppModuleMap.TryGetValue(method.ReturnType.FullName, out appModuleHasBeenReplaced))
+                throw new ServiceHasBeenReplacedException(method.ReturnType, appModuleHasBeenReplaced.GetType());
+            replacedServiceToAppModuleMap[method.ReturnType.FullName] = appModule;
+            methods.Add(new TargetAndMethodInfo(appModule, method));
+        }
+
         public void TryRegister(IAppModule appModule)
         {
             var scannedMethods = appModule.GetType().GetMethods()
@@ -42,11 +52,7 @@ namespace Reface.AppStarter.AppContainerBuilders
                 .Select(x => x.Method);
             foreach (var method in scannedMethods)
             {
-                IAppModule appModuleHasBeenReplaced;
-                if (replacedServiceToAppModuleMap.TryGetValue(method.ReturnType.FullName, out appModuleHasBeenReplaced))
-                    throw new ServiceHasBeenReplacedException(method.ReturnType, appModuleHasBeenReplaced.GetType());
-                replacedServiceToAppModuleMap[method.ReturnType.FullName] = appModule;
-                methods.Add(new TargetAndMethodInfo(appModule, method));
+                this.TryRegister(appModule, method);
             }
         }
 
@@ -68,6 +74,7 @@ namespace Reface.AppStarter.AppContainerBuilders
             AutofacContainerBuilder autofacContainerBuilder = (AutofacContainerBuilder)sender;
             foreach (var method in methods)
             {
+                autofacContainerBuilder.RemoveComponentByComponentType(method.Method.ReturnType);
                 autofacContainerBuilder.RegisterByCreator(cm =>
                 {
                     ParameterInfo[] ps = method.Method.GetParameters();

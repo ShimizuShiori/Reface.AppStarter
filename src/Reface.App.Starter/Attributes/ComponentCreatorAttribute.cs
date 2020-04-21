@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reface.AppStarter.AppModuleMethodHandlers;
+using System;
 
 namespace Reface.AppStarter.Attributes
 {
@@ -7,7 +8,8 @@ namespace Reface.AppStarter.Attributes
     /// 标记了 <see cref="ComponentCreatorAttribute"/> 的方法必须有返回值，且返回类型就是注册的服务类型。
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class ComponentCreatorAttribute : Attribute
+    public class ComponentCreatorAttribute : AppModuleMethodAttribute
     {
+        public override Type AppModuleMethodHandlerType => typeof(ComponentCreatorHandler);
     }
 }

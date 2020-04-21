@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reface.AppStarter.AppModuleMethodHandlers;
+using System;
 
 namespace Reface.AppStarter.Attributes
 {
@@ -9,9 +10,11 @@ namespace Reface.AppStarter.Attributes
     /// 开发者可以通过这个标签创建那些第三方库中，无法添加自定义 <see cref=""/>
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class ConfigCreatorAttribute : Attribute
+    public class ConfigCreatorAttribute : AppModuleMethodAttribute
     {
         public string Section { get; set; }
+
+        public override Type AppModuleMethodHandlerType => typeof(ConfigCreatorHandler);
 
         public ConfigCreatorAttribute(string section)
         {

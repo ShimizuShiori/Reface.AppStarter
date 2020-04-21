@@ -23,30 +23,10 @@ namespace Reface.AppStarter.AppModules
 
             AutofacContainerBuilder autofacContainerBuilder
                 = setup.GetAppContainerBuilder<AutofacContainerBuilder>();
-            ReplaceServiceContainerBuilder replaceServiceContainerBuilder
-                = setup.GetAppContainerBuilder<ReplaceServiceContainerBuilder>();
-
-            replaceServiceContainerBuilder.TryRegister(targetModule);
 
             RegisterScanResult(setup, targetModule, autofacContainerBuilder, infos);
-            RegisterComponentFromMethods(targetModule, autofacContainerBuilder);
         }
 
-        /// <summary>
-        /// 从 <see cref="IAppModule"/> 实例的方法中创建组件，
-        /// 这些方法必须被标记 <see cref="ComponentAttribute"/> 特征。
-        /// </summary>
-        /// <param name="targetModule"></param>
-        /// <param name="autofacContainerBuilder"></param>
-        private static void RegisterComponentFromMethods(IAppModule targetModule, AutofacContainerBuilder autofacContainerBuilder)
-        {
-            var methods = targetModule.GetType().GetMethods()
-                .Where(x => x.ReturnType != typeof(void))
-                .Select(x => new { Method = x, Attribute = x.GetCustomAttribute<ComponentCreatorAttribute>() })
-                .Where(x => x.Attribute != null)
-                .Select(x => x.Method);
-            RegisterMethods(targetModule, autofacContainerBuilder, methods);
-        }
 
         /// <summary>
         /// 从 <see cref="IAppModule"/> 实例的方法中创建组件，
@@ -65,7 +45,7 @@ namespace Reface.AppStarter.AppModules
             {
                 RemoveService(targetModule, autofacContainerBuilder, method);
             }
-            RegisterMethods(targetModule, autofacContainerBuilder, methods);
+            //RegisterMethods(targetModule, autofacContainerBuilder, methods);
         }
 
         /// <summary>
@@ -77,33 +57,6 @@ namespace Reface.AppStarter.AppModules
         private static void RemoveService(IAppModule targetModule, AutofacContainerBuilder autofacContainerBuilder, MethodInfo method)
         {
             autofacContainerBuilder.RemoveComponentByServiceType(method.ReturnType);
-        }
-
-        /// <summary>
-        /// 注册所有方法
-        /// </summary>
-        /// <param name="targetModule"></param>
-        /// <param name="autofacContainerBuilder"></param>
-        /// <param name="methods"></param>
-        private static void RegisterMethods(IAppModule targetModule, AutofacContainerBuilder autofacContainerBuilder, System.Collections.Generic.IEnumerable<MethodInfo> methods)
-        {
-            foreach (var method in methods)
-            {
-                autofacContainerBuilder.RegisterByCreator(cm =>
-                {
-                    ParameterInfo[] ps = method.GetParameters();
-                    if (ps.Length == 0)
-                        return method.Invoke(targetModule, null);
-                    object[] values = new object[ps.Length];
-                    for (int i = 0; i < ps.Length; i++)
-                    {
-                        Type pType = ps[i].ParameterType;
-                        object value = cm.CreateComponent(pType);
-                        values[i] = value;
-                    }
-                    return method.Invoke(targetModule, values);
-                }, method.ReturnType);
-            }
         }
 
         /// <summary>
