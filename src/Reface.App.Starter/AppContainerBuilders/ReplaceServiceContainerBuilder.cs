@@ -9,6 +9,9 @@ using System.Reflection;
 
 namespace Reface.AppStarter.AppContainerBuilders
 {
+    /// <summary>
+    /// 替换服务的容器构建器
+    /// </summary>
     public class ReplaceServiceContainerBuilder : IAppContainerBuilder
     {
         public class TargetAndMethodInfo

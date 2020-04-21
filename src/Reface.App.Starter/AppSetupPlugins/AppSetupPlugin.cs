@@ -14,11 +14,6 @@ namespace Reface.AppStarter.AppSetupPlugins
         public virtual void OnAppModuleBeforeUsing(AppSetup setup, AppModuleUsingArguments arguments)
         {
         }
-
-        public virtual void OnAppModuleScanned(AppSetup setup, OnAppModuleScannedArguments arguments)
-        {
-        }
-
         public virtual void OnAppModuleUsed(AppSetup setup, OnAppModuleUsedArguments arguments)
         {
         }

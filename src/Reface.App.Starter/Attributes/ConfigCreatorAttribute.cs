@@ -12,6 +12,9 @@ namespace Reface.AppStarter.Attributes
     [AttributeUsage(AttributeTargets.Method)]
     public class ConfigCreatorAttribute : AppModuleMethodAttribute
     {
+        /// <summary>
+        /// 在配置文件中的节点名称
+        /// </summary>
         public string Section { get; set; }
 
         public override Type AppModuleMethodHandlerType => typeof(ConfigCreatorHandler);

@@ -1,6 +1,5 @@
 ﻿using Reface.AppStarter.AppContainerBuilders;
 using Reface.AppStarter.Attributes;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -8,7 +7,9 @@ using System.Reflection;
 namespace Reface.AppStarter.AppModules
 {
     /// <summary>
-    /// 组件扫描应用模块
+    /// 组件扫描应用模块。
+    /// 使用此 <see cref="AppModule"/> 你可以将程序集内标记有 <see cref="ComponentAttribute"/> 的类型自动注入到 IOC/DI 容器中。
+    /// 该类型实现了 <see cref="INamespaceFilterer"/> 接口。因此你可以通过设置该接口的属性来改变自动注入的范围。
     /// </summary>
     public class ComponentScanAppModule : AppModule, INamespaceFilterer
     {

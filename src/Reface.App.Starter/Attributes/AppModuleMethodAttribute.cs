@@ -1,4 +1,5 @@
 ﻿using System;
+using Reface.AppStarter.AppModuleMethodHandlers;
 
 namespace Reface.AppStarter.Attributes
 {

@@ -4,9 +4,13 @@ using Reface.AppStarter.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Reface.AppStarter.AppModules;
 
 namespace Reface.AppStarter.AppSetupPlugins
 {
+    /// <summary>
+    /// 对 <see cref="AppModule"/> 中标有 <see cref="AppModuleMethodAttribute"/> 的方法进行处理的插件。
+    /// </summary>
     public class AppModuleMethodPlugin : AppSetupPlugin
     {
         private readonly Dictionary<Type, IAppModuleMethodHandler> attrToHandlerMap = new Dictionary<Type, IAppModuleMethodHandler>();

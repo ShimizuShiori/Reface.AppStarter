@@ -11,7 +11,6 @@ namespace Reface.AppStarter.AppSetupPlugins
     {
         public override void OnAppModuleBeforeUsing(AppSetup setup, AppModuleUsingArguments arguments)
         {
-
             if (!(arguments.UsingAppModule is INamespaceFilterer)) return;
 
             INamespaceFilterer filter = (INamespaceFilterer)arguments.UsingAppModule;
