@@ -9,7 +9,7 @@ namespace Reface.AppStarter.AppModules
     /// 过滤的实现是通过 <see cref="NamespaceFilterPlugin" /> 完成的。
     /// 白名单先于黑名单处理，当白名单与黑名单拥有相同的内容时，会被移除。
     /// </summary>
-    public interface INamespaceFilterer
+    public interface INamespaceFilter
     {
         /// <summary>
         /// 包含的命名空间，比如 A.B 将会包含 A.B.C 和 A.B.C.D。

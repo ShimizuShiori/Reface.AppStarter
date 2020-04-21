@@ -113,5 +113,17 @@
 * 新增 *AutofacContainerBuilder* 的功能，允许以注册的类型移除已注册的类型
 
 # 1.7.1
-## 2020-04-012
+## 2020-04-12
 * 生成 *JsonSchema* 文件能够对应 *Enum* 类型，并且能够生成相应的描述信息
+
+# 2.0.3
+## 2020-04-21
+* 新增 *INamespaceFilter* 接口
+* *ComponentScanAppModule*、*AutoConfigAppModule* 实现 *INamespaceFilter* 接口
+* 新增 *IAppSetupPlugin* 用于对 *AppSetup* 中的一些节点进入介入
+* 创建 *NamespaceFilterPlugin* , *AppModuleMethodPlugin* 分别用于实现 *ComponentScanAppModule* 和 *AutoConfigAppModule* 的功能
+* 新增 *AppModuleMethodAttribute* 用于为所有标记在 *AppModule* 内的方法的特征提供基本的功能
+* *ComponentCreator* , *ConfigCreator* , *ReplaceCreator* 继承于 *AppModuleMethdoAttribute*
+* 新增 *ComponentCreatorHandler , ConfigCreatorHandler , ComponentReplaceHandler* 用于实现 *ComponentCreator* , *ConfigCreator* , *ReplaceCreator* 的功能
+* 重新定义了 *OnUsing* 的参数为 *AppModuleUsingArguments*
+* AppModule 中不允许使用 appSetup.GetScanResult，而是直接将结果放在 *AppModuleUsingArguments* 中

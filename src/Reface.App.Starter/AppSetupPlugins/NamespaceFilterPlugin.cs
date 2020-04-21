@@ -11,9 +11,9 @@ namespace Reface.AppStarter.AppSetupPlugins
     {
         public override void OnAppModuleBeforeUsing(AppSetup setup, AppModuleUsingArguments arguments)
         {
-            if (!(arguments.UsingAppModule is INamespaceFilterer)) return;
+            if (!(arguments.UsingAppModule is INamespaceFilter)) return;
 
-            INamespaceFilterer filter = (INamespaceFilterer)arguments.UsingAppModule;
+            INamespaceFilter filter = (INamespaceFilter)arguments.UsingAppModule;
 
             IEnumerable<AttributeAndTypeInfo> infos = arguments.ScannedAttributeAndTypeInfos;
             if (filter.IncludeNamespaces != null && filter.IncludeNamespaces.Length > 0)

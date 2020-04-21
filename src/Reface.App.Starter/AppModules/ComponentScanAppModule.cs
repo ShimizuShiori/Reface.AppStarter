@@ -9,9 +9,9 @@ namespace Reface.AppStarter.AppModules
     /// <summary>
     /// 组件扫描应用模块。
     /// 使用此 <see cref="AppModule"/> 你可以将程序集内标记有 <see cref="ComponentAttribute"/> 的类型自动注入到 IOC/DI 容器中。
-    /// 该类型实现了 <see cref="INamespaceFilterer"/> 接口。因此你可以通过设置该接口的属性来改变自动注入的范围。
+    /// 该类型实现了 <see cref="INamespaceFilter"/> 接口。因此你可以通过设置该接口的属性来改变自动注入的范围。
     /// </summary>
-    public class ComponentScanAppModule : AppModule, INamespaceFilterer
+    public class ComponentScanAppModule : AppModule, INamespaceFilter
     {
         public string[] IncludeNamespaces { get; set; }
         public string[] ExcludeNamespaces { get; set; }

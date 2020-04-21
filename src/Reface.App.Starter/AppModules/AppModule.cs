@@ -7,7 +7,7 @@ namespace Reface.AppStarter.AppModules
     /// 应用程序模块实现类，这是一个类，同时也是一个特征。
     /// 它会自动将加载其特征上的模块成为依赖项。
     /// 如果你的 <see cref="AppModule"/> 需要使用到目标模块中的扫描类型，
-    /// 你可以让其实现 <see cref="INamespaceFilterer"/> 接口
+    /// 你可以让其实现 <see cref="INamespaceFilter"/> 接口
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
     public abstract class AppModule : Attribute, IAppModule
