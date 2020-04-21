@@ -13,7 +13,7 @@ IAppModule 提供如下的成员
 IEnumerable<IAppModule> DependentModules { get; }
 
 // 当一个 AppModule 被依赖时，可以添加的额外操作
-void OnUsing(AppSetup setup, IAppModule targetModule);
+void OnUsing(AppModuleUsingArguments arguments);
 ```
 
 **注意**
@@ -33,6 +33,7 @@ public class YourAppModule : AppModule
     // 还可以 重写 AppendOtherModules 方法手动添加更多的 AppModule
     // 还可以 添加 [ComponentCreator]
     // 还可以 添加 [ReplaceCreator]
+    // 还可以 添加 [ConfigCreator]
 }
 ```
 
