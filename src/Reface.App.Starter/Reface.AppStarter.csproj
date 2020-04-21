@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Reface.AppStarter.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -54,6 +55,8 @@
     <Compile Include="AppContainers\NoComponentRegistedEventArgs.cs" />
     <Compile Include="AppModuleScanResult.cs" />
     <Compile Include="AppModules\AppModule.cs" />
+    <Compile Include="AppModules\DependentModuleFromAttributesBuiltEventArgs.cs" />
+    <Compile Include="AppModules\NamespaceFilterAppModule.cs" />
     <Compile Include="AppSetup.cs" />
     <Compile Include="AttributeAndTypeInfo.cs" />
     <Compile Include="AppModules\AutoConfigAppModule.cs" />

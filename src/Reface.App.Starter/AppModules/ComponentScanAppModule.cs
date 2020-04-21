@@ -1,9 +1,7 @@
 ﻿using Reface.AppStarter.AppContainerBuilders;
 using Reface.AppStarter.Attributes;
-using Reface.AppStarter.Errors;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -12,20 +10,8 @@ namespace Reface.AppStarter.AppModules
     /// <summary>
     /// 组件扫描应用模块
     /// </summary>
-    public class ComponentScanAppModule : AppModule
+    public class ComponentScanAppModule : NamespaceFilterAppModule
     {
-        public override void OnUsing(AppSetup setup, IAppModule targetModule)
-        {
-            AutofacContainerBuilder autofacContainerBuilder
-                = setup.GetAppContainerBuilder<AutofacContainerBuilder>();
-            ReplaceServiceContainerBuilder replaceServiceContainerBuilder
-                = setup.GetAppContainerBuilder<ReplaceServiceContainerBuilder>();
-
-            replaceServiceContainerBuilder.TryRegister(targetModule);
-
-            RegisterScanResult(setup, targetModule, autofacContainerBuilder);
-            RegisterComponentFromMethods(targetModule, autofacContainerBuilder);
-        }
 
         /// <summary>
         /// 从 <see cref="IAppModule"/> 实例的方法中创建组件，
@@ -107,18 +93,27 @@ namespace Reface.AppStarter.AppModules
         /// <param name="setup"></param>
         /// <param name="targetModule">目标模块，A 使用 B，那 A 就是 targetModule</param>
         /// <param name="autofacContainerBuilder">autofac 容器构建器</param>
-        private static void RegisterScanResult(AppSetup setup, IAppModule targetModule, AutofacContainerBuilder autofacContainerBuilder)
+        private static void RegisterScanResult(AppSetup setup, IAppModule targetModule, AutofacContainerBuilder autofacContainerBuilder, IEnumerable<AttributeAndTypeInfo> infos)
         {
-            AppModuleScanResult appModuleScanResult
-                = setup.GetScanResult(targetModule);
-            appModuleScanResult
-                .ScannableAttributeAndTypeInfos
-                .Where(x => x.Attribute is ComponentAttribute)
+            infos.Where(x => x.Attribute is ComponentAttribute)
                 .Where(x => x.Type.IsClass && !x.Type.IsAbstract)
                 .ForEach(x =>
                 {
                     autofacContainerBuilder.Register(x.Type, ((ComponentAttribute)x.Attribute).RegistionMode);
                 });
+        }
+
+        protected override void OnScanResultFiltered(AppSetup setup, IAppModule targetModule, IEnumerable<AttributeAndTypeInfo> attributeAndTypeInfos)
+        {
+            AutofacContainerBuilder autofacContainerBuilder
+                = setup.GetAppContainerBuilder<AutofacContainerBuilder>();
+            ReplaceServiceContainerBuilder replaceServiceContainerBuilder
+                = setup.GetAppContainerBuilder<ReplaceServiceContainerBuilder>();
+
+            replaceServiceContainerBuilder.TryRegister(targetModule);
+
+            RegisterScanResult(setup, targetModule, autofacContainerBuilder, attributeAndTypeInfos);
+            RegisterComponentFromMethods(targetModule, autofacContainerBuilder);
         }
     }
 }

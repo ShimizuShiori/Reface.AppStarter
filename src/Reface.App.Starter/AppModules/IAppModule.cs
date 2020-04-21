@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace Reface.AppStarter.AppModules
 {
     /// <summary>
-    /// 应用模块接口，这是 Reface.AppStarter 框架的核心接口
+    /// 应用模块接口，这是 Reface.AppStarter 框架的核心接口。
+    /// 你可以直接从 <see cref="AppModule"/> 继承来得到以 <see cref="Attribute"/> 的方式定义依赖关系。
+    /// 你也可以从 <see cref="NamespaceFilterAppModule"/> 继承来得到对命名空间进行黑白名单过滤的功能。
     /// </summary>
     public interface IAppModule
     {

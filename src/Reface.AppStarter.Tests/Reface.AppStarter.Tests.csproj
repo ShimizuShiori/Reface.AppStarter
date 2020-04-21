@@ -62,6 +62,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="APlusBAppModule.cs" />
+    <Compile Include="APlusBTests.cs" />
     <Compile Include="AppContainerBuilders\TestContainerBuilder.cs" />
     <Compile Include="AppContainers\TestContainer.cs" />
     <Compile Include="AppSetupTests.cs" />
@@ -71,6 +73,14 @@
     <Compile Include="Configs\PropertyValue.cs" />
     <Compile Include="Configs\SomeConfigWithoutAttribute.cs" />
     <Compile Include="JsonSchema\DefaultJsonSchemaGeneratorTests.cs" />
+    <Compile Include="ModuleA\AAppModule.cs" />
+    <Compile Include="ModuleA\Configs\ConfigA.cs" />
+    <Compile Include="ModuleA\Dal\ADao.cs" />
+    <Compile Include="ModuleA\Services\ServiceA.cs" />
+    <Compile Include="ModuleB\BAppModule.cs" />
+    <Compile Include="ModuleB\Configs\ConfigB.cs" />
+    <Compile Include="ModuleB\Services\ServiceB.cs" />
+    <Compile Include="NamespaceTests.cs" />
     <Compile Include="RemoveComponentByComponentTypeTestAppModule.cs" />
     <Compile Include="RemoveComponentTests.cs" />
     <Compile Include="ReplaceServiceTests.cs" />

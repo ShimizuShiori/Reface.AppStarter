@@ -3,6 +3,7 @@ using Reface.AppStarter.Attributes;
 using System.Linq;
 using System.Reflection;
 using Reface.AppStarter.AppContainers;
+using System.Collections.Generic;
 
 namespace Reface.AppStarter.AppModules
 {
@@ -14,17 +15,17 @@ namespace Reface.AppStarter.AppModules
     /// 3、将 <see cref="AppSetup"/> 中指定的配置文件内容反序列化到配置类中；
     /// 4、将所有被赋值过的配置类，以实例的形式注册到 <see cref="IComponentContainer"/> 中。
     /// </summary>
-    public class AutoConfigAppModule : AppModule
+    public class AutoConfigAppModule : NamespaceFilterAppModule
     {
-        public override void OnUsing(AppSetup setup, IAppModule targetModule)
+
+        protected override void OnScanResultFiltered(AppSetup setup, IAppModule targetModule, IEnumerable<AttributeAndTypeInfo> attributeAndTypeInfos)
         {
-            if (targetModule == null) return;
-            var result = setup.GetScanResult(targetModule);
             ConfigAppContainerBuilder builder = setup.GetAppContainerBuilder<ConfigAppContainerBuilder>();
-            result
-                .ScannableAttributeAndTypeInfos
+            attributeAndTypeInfos
                 .Where(x => x.Attribute is ConfigAttribute)
                 .ForEach(x => builder.AutoConfig(x));
+
+            if (targetModule == null) return;
 
             targetModule.GetType()
                 .GetMethods()

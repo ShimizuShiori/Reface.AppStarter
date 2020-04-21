@@ -1,43 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace Reface.AppStarter.AppModules
 {
     /// <summary>
     /// 应用程序模块实现类，这是一个类，同时也是一个特征。
-    /// 它会自动将加载其特征上的模块成为依赖项
+    /// 它会自动将加载其特征上的模块成为依赖项。
+    /// 如果你的 <see cref="AppModule"/> 需要使用到目标模块中的扫描类型，建议从 <see cref="NamespaceFilterAppModule"/> 继承，<see cref="NamespaceFilterAppModule"/> 允许定义命名空间的黑白名单过滤器，可以提供更灵活的功能。
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public class AppModule : Attribute, IAppModule
+    public abstract class AppModule : Attribute, IAppModule
     {
-        private readonly List<IAppModule> dependentModules = new List<IAppModule>();
+        private List<IAppModule> dependentModules;
 
-        public AppModule()
+        public event EventHandler<DependentModuleFromAttributesBuiltEventArgs> DependentModuleFromAttributesBuilt;
+
+        private void BuildDependentModulesWhenItIsNull()
         {
+            if (this.dependentModules != null) return;
+            this.dependentModules = new List<IAppModule>();
             object[] attrs = this.GetType().GetCustomAttributes(true);
             foreach (var attr in attrs)
             {
                 if (!(attr is AppModule)) continue;
                 dependentModules.Add(attr as AppModule);
             }
-            this.AppendOtherModules(this.dependentModules);
+            this.DependentModuleFromAttributesBuilt?.Invoke(this, new DependentModuleFromAttributesBuiltEventArgs(this.dependentModules));
+        }
+
+        public AppModule()
+        {
         }
 
         /// <summary>
         /// 实现于 <see cref="IAppModule.DependentModules"/>
         /// </summary>
-        public virtual IEnumerable<IAppModule> DependentModules => dependentModules;
-
-        /// <summary>
-        /// 该方法会在反射 Attribute 模块后调用，允许开发者继续追加更多的模块。
-        /// 请不要调用这个方法。
-        /// 预计在 2.0 版本以后取消此方法，
-        /// 改为通过事件通知 AppModulesOnAttributeLoaded 来让开发者可以额外定义 <see cref="AppModule"/>
-        /// </summary>
-        /// <param name="modules"></param>
-        protected virtual void AppendOtherModules(List<IAppModule> modules)
+        public virtual IEnumerable<IAppModule> DependentModules
         {
-
+            get
+            {
+                BuildDependentModulesWhenItIsNull();
+                return this.dependentModules;
+            }
         }
 
         /// <summary>
