@@ -14,7 +14,7 @@ namespace Reface.AppStarter.Tests
     [MailAppModule]
     public class TestAppModule2 : AppModule
     {
-        public override void OnUsing(AppSetup setup, IAppModule targetModule)
+        public override void OnUsing(AppModuleUsingArguments arguments)
         {
             //var container = setup.GetAppContainerBuilder<TestContainerBuilder>();
             //container.DoNothing();

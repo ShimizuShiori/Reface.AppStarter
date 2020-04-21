@@ -10,8 +10,27 @@ namespace Reface.AppStarter.AppModules
     /// <summary>
     /// 组件扫描应用模块
     /// </summary>
-    public class ComponentScanAppModule : NamespaceFilterAppModule
+    public class ComponentScanAppModule : AppModule, INamespaceFilterer
     {
+        public string[] IncludeNamespaces { get; set; }
+        public string[] ExcludeNamespaces { get; set; }
+
+        public override void OnUsing(AppModuleUsingArguments arguments)
+        {
+            var setup = arguments.AppSetup;
+            var targetModule = arguments.TargetAppModule;
+            var infos = arguments.ScannedAttributeAndTypeInfos;
+
+            AutofacContainerBuilder autofacContainerBuilder
+                = setup.GetAppContainerBuilder<AutofacContainerBuilder>();
+            ReplaceServiceContainerBuilder replaceServiceContainerBuilder
+                = setup.GetAppContainerBuilder<ReplaceServiceContainerBuilder>();
+
+            replaceServiceContainerBuilder.TryRegister(targetModule);
+
+            RegisterScanResult(setup, targetModule, autofacContainerBuilder, infos);
+            RegisterComponentFromMethods(targetModule, autofacContainerBuilder);
+        }
 
         /// <summary>
         /// 从 <see cref="IAppModule"/> 实例的方法中创建组件，
@@ -103,17 +122,5 @@ namespace Reface.AppStarter.AppModules
                 });
         }
 
-        protected override void OnScanResultFiltered(AppSetup setup, IAppModule targetModule, IEnumerable<AttributeAndTypeInfo> attributeAndTypeInfos)
-        {
-            AutofacContainerBuilder autofacContainerBuilder
-                = setup.GetAppContainerBuilder<AutofacContainerBuilder>();
-            ReplaceServiceContainerBuilder replaceServiceContainerBuilder
-                = setup.GetAppContainerBuilder<ReplaceServiceContainerBuilder>();
-
-            replaceServiceContainerBuilder.TryRegister(targetModule);
-
-            RegisterScanResult(setup, targetModule, autofacContainerBuilder, attributeAndTypeInfos);
-            RegisterComponentFromMethods(targetModule, autofacContainerBuilder);
-        }
     }
 }

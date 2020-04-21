@@ -18,8 +18,7 @@ namespace Reface.AppStarter.AppModules
         /// <summary>
         /// 当该模块被使用时
         /// </summary>
-        /// <param name="setup">应用程序安装类</param>
-        /// <param name="targetModule">使用 this 的模块信息</param>
-        void OnUsing(AppSetup setup, IAppModule targetModule);
+        /// <param name="args"></param>
+        void OnUsing(AppModuleUsingArguments args);
     }
 }

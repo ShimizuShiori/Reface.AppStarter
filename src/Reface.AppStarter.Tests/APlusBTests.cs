@@ -7,11 +7,6 @@ using Reface.AppStarter.Tests.ModuleA.Services;
 using Reface.AppStarter.Tests.ModuleB.Configs;
 using Reface.AppStarter.Tests.ModuleB.Services;
 using Reface.AppStarter.Tests.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Reface.AppStarter.Tests
 {

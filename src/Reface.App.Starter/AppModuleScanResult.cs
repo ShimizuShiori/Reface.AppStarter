@@ -1,4 +1,5 @@
 ﻿using Reface.AppStarter.AppModules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,6 +29,14 @@ namespace Reface.AppStarter
         public override string ToString()
         {
             return $"{AppModule.GetType().Name} : {ScannableAttributeAndTypeInfos.Count()}";
+        }
+
+        public static AppModuleScanResult Empty
+        {
+            get
+            {
+                return new AppModuleScanResult(null, new AttributeAndTypeInfo[] { });
+            }
         }
     }
 }

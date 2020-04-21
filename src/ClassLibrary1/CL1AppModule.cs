@@ -7,10 +7,9 @@ namespace ClassLibrary1
     [ComponentScanAppModule]
     public class CL1AppModule : AppModule
     {
-        public override void OnUsing(AppSetup setup, IAppModule targetModule)
+        public override void OnUsing(AppModuleUsingArguments args)
         {
-            var infos = setup.GetScanResult(targetModule);
-            foreach (var info in infos.ScannableAttributeAndTypeInfos)
+            foreach (var info in args.ScannedAttributeAndTypeInfos)
             {
                 Console.WriteLine($"{this.GetType()} : {info.Type}");
             }

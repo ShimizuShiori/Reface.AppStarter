@@ -1,6 +1,8 @@
 ﻿using Reface.AppStarter.AppContainerBuilders;
 using Reface.AppStarter.AppContainers;
 using Reface.AppStarter.AppModules;
+using Reface.AppStarter.AppSetupPlugins;
+using Reface.AppStarter.AppSetupPlugins.Arguments;
 using Reface.AppStarter.Attributes;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,23 @@ namespace Reface.AppStarter
             = new List<IAppContainerBuilder>();
         private readonly Dictionary<IAppModule, AppModuleScanResult> appModuleToScannableAttributeAndTypeInfoMap
             = new Dictionary<IAppModule, AppModuleScanResult>();
+        private readonly Dictionary<Type, IAppSetupPlugin> plugins = new Dictionary<Type, IAppSetupPlugin>();
+
+        /// <summary>
+        /// 所有的插件
+        /// </summary>
+        public IEnumerable<IAppSetupPlugin> Plugins
+        {
+            get
+            {
+                return plugins.Values;
+            }
+        }
+
+        /// <summary>
+        /// 可以存储自定义数据的上下文
+        /// </summary>
+        public Dictionary<string, object> Context { get; private set; } = new Dictionary<string, object>();
 
         /// <summary>
         /// 所有 AppModule 加载完成后的事件
@@ -42,6 +61,31 @@ namespace Reface.AppStarter
         public AppSetup(string configFilePath = "./app.json")
         {
             this.ConfigFilePath = configFilePath;
+            this.AddPlugin(new NamespaceFilterPlugin());
+            this.AddPlugin(new AppModuleMethodPlugin());
+        }
+
+        /// <summary>
+        /// 添加一个插件
+        /// </summary>
+        /// <param name="plugin"></param>
+        public void AddPlugin(IAppSetupPlugin plugin)
+        {
+            Type type = plugin.GetType();
+            if (this.plugins.ContainsKey(type)) return;
+            this.plugins[type] = plugin;
+        }
+
+        /// <summary>
+        /// 调用所有的插件
+        /// </summary>
+        /// <param name="parameterBuilder"></param>
+        /// <param name="action"></param>
+        public TParameter InvokePlugins<TParameter>(Func<TParameter> parameterBuilder, Action<TParameter, IAppSetupPlugin> action)
+        {
+            TParameter parameter = parameterBuilder();
+            this.Plugins.ForEach(p => action(parameter, p));
+            return parameter;
         }
 
         /// <summary>
@@ -60,6 +104,10 @@ namespace Reface.AppStarter
             if (builder == null)
             {
                 builder = new T();
+                this.InvokePlugins(
+                    () => new OnAppContainerBuilderCreatedArguments(builder),
+                    (para, plug) => plug.OnAppContainerBuilderCreated(this, para)
+                );
                 this.appContainerBuilders.Add(builder);
             }
             return (T)builder;
@@ -70,9 +118,11 @@ namespace Reface.AppStarter
         /// </summary>
         /// <param name="appModule"></param>
         /// <returns></returns>
-        public AppModuleScanResult GetScanResult(IAppModule appModule)
+        private AppModuleScanResult GetScanResult(IAppModule appModule)
         {
-            return this.appModuleToScannableAttributeAndTypeInfoMap[appModule];
+            if (appModule != null)
+                return this.appModuleToScannableAttributeAndTypeInfoMap[appModule];
+            return AppModuleScanResult.Empty;
         }
 
         /// <summary>
@@ -86,7 +136,17 @@ namespace Reface.AppStarter
 
             this.appModuleToScannableAttributeAndTypeInfoMap[appModule] = new AppModuleScanResult(appModule, attributeAndTypeInfos);
 
-            appModule.OnUsing(this, target);
+            AppModuleUsingArguments arguments = this.InvokePlugins(
+                    () => new AppModuleUsingArguments(this, appModule, target, this.GetScanResult(target).ScannableAttributeAndTypeInfos),
+                    (para, plug) => plug.OnAppModuleBeforeUsing(this, para)
+                );
+
+            appModule.OnUsing(arguments);
+            this.InvokePlugins(
+                () => new OnAppModuleUsedArguments(appModule),
+                (para, plug) => plug.OnAppModuleUsed(this, para)
+                );
+
             IEnumerable<IAppModule> dependentModules = appModule.DependentModules;
             if (dependentModules == null || !dependentModules.Any()) return;
             foreach (IAppModule subAppModule in dependentModules)
@@ -128,10 +188,12 @@ namespace Reface.AppStarter
             IEnumerable<AttributeAndTypeInfo> result;
 
             if (sacennedAssemlyNameToInfoCache.TryGetValue(assemblyName, out result))
+            {
                 return result;
+            }
 
             Type[] types = assembly.GetExportedTypes();
-            List<AttributeAndTypeInfo> scannableAttributeAndTypeInfos
+            IList<AttributeAndTypeInfo> scannableAttributeAndTypeInfos
                  = new List<AttributeAndTypeInfo>();
             foreach (Type type in types)
             {
@@ -148,6 +210,7 @@ namespace Reface.AppStarter
 
                 }
             }
+
             sacennedAssemlyNameToInfoCache[assemblyName] = scannableAttributeAndTypeInfos;
             return scannableAttributeAndTypeInfos;
         }

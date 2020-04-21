@@ -15,13 +15,18 @@ namespace Reface.AppStarter.AppModules
     /// 3、将 <see cref="AppSetup"/> 中指定的配置文件内容反序列化到配置类中；
     /// 4、将所有被赋值过的配置类，以实例的形式注册到 <see cref="IComponentContainer"/> 中。
     /// </summary>
-    public class AutoConfigAppModule : NamespaceFilterAppModule
+    public class AutoConfigAppModule : AppModule, INamespaceFilterer
     {
+        public string[] IncludeNamespaces { get; set; }
+        public string[] ExcludeNamespaces { get; set; }
 
-        protected override void OnScanResultFiltered(AppSetup setup, IAppModule targetModule, IEnumerable<AttributeAndTypeInfo> attributeAndTypeInfos)
+        public override void OnUsing(AppModuleUsingArguments arguments)
         {
+            var setup = arguments.AppSetup;
+            var targetModule = arguments.TargetAppModule;
+
             ConfigAppContainerBuilder builder = setup.GetAppContainerBuilder<ConfigAppContainerBuilder>();
-            attributeAndTypeInfos
+            arguments.ScannedAttributeAndTypeInfos
                 .Where(x => x.Attribute is ConfigAttribute)
                 .ForEach(x => builder.AutoConfig(x));
 

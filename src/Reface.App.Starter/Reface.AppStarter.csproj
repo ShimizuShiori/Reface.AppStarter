@@ -56,8 +56,16 @@
     <Compile Include="AppModuleScanResult.cs" />
     <Compile Include="AppModules\AppModule.cs" />
     <Compile Include="AppModules\DependentModuleFromAttributesBuiltEventArgs.cs" />
+    <Compile Include="AppModules\INamespaceFilterer.cs" />
     <Compile Include="AppModules\NamespaceFilterAppModule.cs" />
+    <Compile Include="AppModuleUsingArguments.cs" />
     <Compile Include="AppSetup.cs" />
+    <Compile Include="AppSetupPlugins\AppModuleMethodPlugin.cs" />
+    <Compile Include="AppSetupPlugins\AppSetupPlugin.cs" />
+    <Compile Include="AppSetupPlugins\Arguments\OnAppContainerBuilderCreatedArguments.cs" />
+    <Compile Include="AppSetupPlugins\Arguments\OnAppModuleScannedArguments.cs" />
+    <Compile Include="AppSetupPlugins\Arguments\OnAppModuleUsedArguments.cs" />
+    <Compile Include="AppSetupPlugins\NamespaceFilterPlugin.cs" />
     <Compile Include="AttributeAndTypeInfo.cs" />
     <Compile Include="AppModules\AutoConfigAppModule.cs" />
     <Compile Include="AppContainers\AutofacContainerComponentContainer.cs" />
@@ -71,6 +79,7 @@
     <Compile Include="AppModules\CoreAppModule.cs" />
     <Compile Include="AppContainers\EmptyAppContainer.cs" />
     <Compile Include="Attributes\ConfigCreatorAttribute.cs" />
+    <Compile Include="Attributes\AppModuleMethodAttribute.cs" />
     <Compile Include="Attributes\ListenerAttribute.cs" />
     <Compile Include="Attributes\ReplaceCreatorAttribute.cs" />
     <Compile Include="AutofacComponentRegistions\CreatorComponentRegistion.cs" />
@@ -95,6 +104,8 @@
     <Compile Include="AppContainers\IComponentContainer.cs" />
     <Compile Include="AppContainers\LifetimescopeComponentContainer.cs" />
     <Compile Include="AppContainers\ComponentCreatingEventArgs.cs" />
+    <Compile Include="IAppModuleMethodHandler.cs" />
+    <Compile Include="AppSetupPlugins\IAppSetupPlugin.cs" />
     <Compile Include="IAutofacComponentRegistion.cs" />
     <Compile Include="IConfigRegistion.cs" />
     <Compile Include="JsonSchema\Constant.cs" />
@@ -129,9 +140,11 @@
       <Version>1.1.1</Version>
     </PackageReference>
     <PackageReference Include="Reface.EventBus">
-      <Version>3.2.0</Version>
+      <Version>3.2.3</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="AppModuleMethodHandlers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

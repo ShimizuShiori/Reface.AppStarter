@@ -9,12 +9,12 @@ namespace Reface.AppStarter.Tests
     [AutoConfigAppModule]
     public class RemoveComponentByComponentTypeTestAppModule : AppModule
     {
-        public override void OnUsing(AppSetup setup, IAppModule targetModule)
+        public override void OnUsing(AppModuleUsingArguments args)
         {
-            AutofacContainerBuilder builder = setup.GetAppContainerBuilder<AutofacContainerBuilder>();
+            AutofacContainerBuilder builder = args.AppSetup.GetAppContainerBuilder<AutofacContainerBuilder>();
             builder.Building += Builder_Building;
 
-            ConfigAppContainerBuilder configBuilder = setup.GetAppContainerBuilder<ConfigAppContainerBuilder>();
+            ConfigAppContainerBuilder configBuilder = args.AppSetup.GetAppContainerBuilder<ConfigAppContainerBuilder>();
             configBuilder.ConfigObjectRegisted += ConfigBuilder_ConfigObjectRegisted;
 
         }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 
 namespace Reface.AppStarter.AppModules
 {
@@ -14,6 +13,9 @@ namespace Reface.AppStarter.AppModules
     {
         private List<IAppModule> dependentModules;
 
+        /// <summary>
+        /// 当从 Attribute 上解析出所有依赖项后的事件
+        /// </summary>
         public event EventHandler<DependentModuleFromAttributesBuiltEventArgs> DependentModuleFromAttributesBuilt;
 
         private void BuildDependentModulesWhenItIsNull()
@@ -27,10 +29,6 @@ namespace Reface.AppStarter.AppModules
                 dependentModules.Add(attr as AppModule);
             }
             this.DependentModuleFromAttributesBuilt?.Invoke(this, new DependentModuleFromAttributesBuiltEventArgs(this.dependentModules));
-        }
-
-        public AppModule()
-        {
         }
 
         /// <summary>
@@ -56,12 +54,7 @@ namespace Reface.AppStarter.AppModules
             return this;
         }
 
-        /// <summary>
-        /// 实现于 <see cref="IAppModule.OnUsing(AppSetup, IAppModule)"/>
-        /// </summary>
-        /// <param name="setup"></param>
-        /// <param name="targetModule"></param>
-        public virtual void OnUsing(AppSetup setup, IAppModule targetModule)
+        public virtual void OnUsing(AppModuleUsingArguments args)
         {
         }
     }
