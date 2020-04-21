@@ -59,7 +59,7 @@
     <Compile Include="AppModuleScanResult.cs" />
     <Compile Include="AppModules\AppModule.cs" />
     <Compile Include="AppModules\DependentModuleFromAttributesBuiltEventArgs.cs" />
-    <Compile Include="AppModules\INamespaceFilterer.cs" />
+    <Compile Include="AppModules\INamespaceFilter.cs" />
     <Compile Include="AppModuleUsingArguments.cs" />
     <Compile Include="AppSetup.cs" />
     <Compile Include="AppSetupPlugins\AppModuleMethodPlugin.cs" />
