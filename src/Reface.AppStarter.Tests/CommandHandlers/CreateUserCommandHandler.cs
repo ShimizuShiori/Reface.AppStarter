@@ -7,9 +7,9 @@ namespace Reface.AppStarter.Tests.CommandHandlers
     [CommandHandler]
     public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand>
     {
-        public object Handler(CreateUserCommand command)
+        public void Handle(CreateUserCommand command)
         {
-            return "1234";
+            command.CreateResult = "1234";
         }
     }
 }

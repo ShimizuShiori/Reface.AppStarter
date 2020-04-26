@@ -45,8 +45,8 @@
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.3.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Reface.CommandBus, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Reface.CommandBus.1.1.1\lib\net461\Reface.CommandBus.dll</HintPath>
+    <Reference Include="Reface.CommandBus, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Reface.CommandBus.2.0.1\lib\net461\Reface.CommandBus.dll</HintPath>
     </Reference>
     <Reference Include="Reface.EventBus, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Reface.EventBus.3.2.5\lib\net40\Reface.EventBus.dll</HintPath>

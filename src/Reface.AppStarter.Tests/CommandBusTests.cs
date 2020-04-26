@@ -36,8 +36,8 @@ namespace Reface.AppStarter.Tests
         {
             ICommandBus commandBus = ComponentContainer.CreateComponent<ICommandBus>();
             CreateUserCommand command = new CreateUserCommand("Shiori", "987654321");
-            string newId = commandBus.Dispatch<CreateUserCommand, string>(command);
-            Assert.AreEqual("1234", newId);
+            commandBus.Dispatch(command);
+            Assert.AreEqual("1234", command.CreateResult);
         }
 
         [TestCleanup]

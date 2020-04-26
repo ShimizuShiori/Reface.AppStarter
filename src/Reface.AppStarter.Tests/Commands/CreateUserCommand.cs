@@ -7,6 +7,8 @@ namespace Reface.AppStarter.Tests.Commands
         public string UserName { get; private set; }
         public string Password { get; private set; }
 
+        public string CreateResult { get; set; }
+
         public CreateUserCommand(string userName, string password)
         {
             UserName = userName;

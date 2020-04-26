@@ -1,34 +1,45 @@
 ﻿using Autofac;
 using Reface.AppStarter.Attributes;
 using Reface.CommandBus;
-using Reface.CommandBus.Errors;
+using Reface.CommandBus.Core;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Reface.AppStarter
 {
     [Component]
+    /// <summary>
+    /// 基于 autofac 的 <see cref="ICommandHandlerFactory"/>
+    /// </summary>
     public class CommandHandlerFactory : ICommandHandlerFactory
     {
         private readonly ILifetimeScope lifetimeScope;
-        private readonly Type commandHandlerBareTtypetypeof;
+        private readonly Type commandHandlerTypeBase;
+
         public CommandHandlerFactory(ILifetimeScope lifetimeScope)
         {
             this.lifetimeScope = lifetimeScope;
-            this.commandHandlerBareTtypetypeof = typeof(ICommandHandler<>);
+            this.commandHandlerTypeBase = typeof(ICommandHandler<>);
         }
-        public ICommandHandler<TCommand> Create<TCommand>() where TCommand : ICommand
+
+        public IEnumerable<ICommandHandler> GetHandlers(Type commandType)
         {
-            Type requiredHandlerCommandType = this.commandHandlerBareTtypetypeof.MakeGenericType(typeof(TCommand));
-            IEnumerable<ICommandHandler> commandHandlers = this.lifetimeScope.Resolve<IEnumerable<ICommandHandler>>();
-            var result = commandHandlers
-                .FirstOrDefault(x => requiredHandlerCommandType.IsAssignableFrom(x.GetType()));
+            IEnumerable<ICommandHandler> handlers = this.lifetimeScope
+                .Resolve<IEnumerable<ICommandHandler>>();
+            List<ICommandHandler> result = new List<ICommandHandler>();
+            foreach (var handler in handlers)
+            {
+                Type thisCommandType = GetCommandType(handler.GetType());
+                if (!thisCommandType.IsAssignableFrom(commandType)) continue;
+                result.Add(handler);
+            }
+            return result;
+        }
 
-            if (result == null)
-                throw new CommandHandlerNotFoundException(typeof(TCommand));
-
-            return (ICommandHandler<TCommand>)result;
+        private Type GetCommandType(Type commandHandlerType)
+        {
+            Type baseType = commandHandlerType.GetInterface(this.commandHandlerTypeBase.FullName);
+            return baseType.GetGenericArguments()[0];
         }
     }
 }
