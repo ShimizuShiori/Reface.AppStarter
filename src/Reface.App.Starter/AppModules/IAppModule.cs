@@ -16,7 +16,8 @@ namespace Reface.AppStarter.AppModules
         /// <summary>
         /// 当该模块被使用时
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="args">参数</param>
         void OnUsing(AppModuleUsingArguments args);
+
     }
 }

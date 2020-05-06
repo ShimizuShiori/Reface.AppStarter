@@ -94,7 +94,7 @@ namespace Reface.AppStarter.Tests
         {
             var setup = new AppSetup();
             setup.AddPlugin(new TestPlugs());
-            Assert.AreEqual(3, setup.Plugins.Count());
+            Assert.AreEqual(1, setup.Plugins.Count());
         }
 
         [TestMethod]
@@ -103,7 +103,7 @@ namespace Reface.AppStarter.Tests
             var setup = new AppSetup();
             setup.AddPlugin(new TestPlugs());
             setup.AddPlugin(new TestPlugs());
-            Assert.AreEqual(3, setup.Plugins.Count());
+            Assert.AreEqual(1, setup.Plugins.Count());
         }
         [TestMethod]
         public void AddDifferentPlugins()
@@ -111,7 +111,7 @@ namespace Reface.AppStarter.Tests
             var setup = new AppSetup();
             setup.AddPlugin(new TestPlugs());
             setup.AddPlugin(new Test2Plugs());
-            Assert.AreEqual(4, setup.Plugins.Count());
+            Assert.AreEqual(2, setup.Plugins.Count());
         }
 
         [TestMethod]

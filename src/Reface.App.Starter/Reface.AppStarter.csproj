@@ -56,6 +56,7 @@
     <Compile Include="AppModuleMethodHandlers\ComponentCreatorHandler.cs" />
     <Compile Include="AppModuleMethodHandlers\ComponentReplaceHandler.cs" />
     <Compile Include="AppModuleMethodHandlers\ConfigCreatorHandler.cs" />
+    <Compile Include="AppModulePrepareArguments.cs" />
     <Compile Include="AppModuleScanResult.cs" />
     <Compile Include="AppModules\AppModule.cs" />
     <Compile Include="AppModules\DependentModuleFromAttributesBuiltEventArgs.cs" />
@@ -72,6 +73,10 @@
     <Compile Include="AppModules\AutoConfigAppModule.cs" />
     <Compile Include="AppContainers\AutofacContainerComponentContainer.cs" />
     <Compile Include="AppContainerBuilders\AutofacContainerBuilder.cs" />
+    <Compile Include="Attributes\AddDefaultPluginsAttribute.cs" />
+    <Compile Include="Attributes\AddPluginsAttribute.cs" />
+    <Compile Include="Attributes\AppModulePrepairAttribute.cs" />
+    <Compile Include="Attributes\AutoSetAttribute.cs" />
     <Compile Include="Attributes\CommandHandlerAttribute.cs" />
     <Compile Include="Attributes\ComponentAttribute.cs" />
     <Compile Include="AppModules\ComponentScanAppModule.cs" />
@@ -82,8 +87,10 @@
     <Compile Include="AppContainers\EmptyAppContainer.cs" />
     <Compile Include="Attributes\ConfigCreatorAttribute.cs" />
     <Compile Include="Attributes\AppModuleMethodAttribute.cs" />
+    <Compile Include="Attributes\CustomAddPluginsAttribute.cs" />
     <Compile Include="Attributes\ListenerAttribute.cs" />
     <Compile Include="Attributes\ReplaceCreatorAttribute.cs" />
+    <Compile Include="Attributes\RegisterAsAttribute.cs" />
     <Compile Include="AutofacComponentRegistions\CreatorComponentRegistion.cs" />
     <Compile Include="AutofacComponentRegistions\InstanceComponentRegistion.cs" />
     <Compile Include="AutofacComponentRegistions\ScannedComponentRegistion.cs" />
@@ -93,6 +100,8 @@
     <Compile Include="ConfigRegistions\CreatorConfigRegistion.cs" />
     <Compile Include="ConfigRegistions\ScannedConfigRegistion.cs" />
     <Compile Include="Configs\AppConfig.cs" />
+    <Compile Include="DefaultAllAppModuleTypeCollectionor.cs" />
+    <Compile Include="DefaultAppModuleScanner.cs" />
     <Compile Include="Errors\CanNotConvertToJsonTypeException.cs" />
     <Compile Include="Errors\ComponentNotRegistedException.cs" />
     <Compile Include="Errors\ServiceHasBeenReplacedException.cs" />
@@ -108,6 +117,8 @@
     <Compile Include="AppContainers\ComponentCreatingEventArgs.cs" />
     <Compile Include="AppModuleMethodHandlers\IAppModuleMethodHandler.cs" />
     <Compile Include="AppSetupPlugins\IAppSetupPlugin.cs" />
+    <Compile Include="IAllAppModuleTypeCollector.cs" />
+    <Compile Include="IAppModuleScanner.cs" />
     <Compile Include="IAutofacComponentRegistion.cs" />
     <Compile Include="IConfigRegistion.cs" />
     <Compile Include="JsonSchema\Constant.cs" />
@@ -127,6 +138,8 @@
     <Compile Include="Attributes\RegistionMode.cs" />
     <Compile Include="Attributes\ScannableAttribute.cs" />
     <Compile Include="AutofacExt\TriggerComponentCreatingEventAutofacSource.cs" />
+    <Compile Include="ServiceCreator.cs" />
+    <Compile Include="ServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Reface.AppStarter.nuspec" />

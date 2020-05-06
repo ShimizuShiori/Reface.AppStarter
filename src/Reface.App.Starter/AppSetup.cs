@@ -7,6 +7,7 @@ using Reface.AppStarter.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Reface.AppStarter
 {
@@ -16,11 +17,22 @@ namespace Reface.AppStarter
     /// </summary>
     public class AppSetup
     {
+        #region Private Fields
+
         private readonly IList<IAppContainerBuilder> appContainerBuilders
             = new List<IAppContainerBuilder>();
         private readonly Dictionary<IAppModule, AppModuleScanResult> appModuleToScannableAttributeAndTypeInfoMap
             = new Dictionary<IAppModule, AppModuleScanResult>();
         private readonly Dictionary<Type, IAppSetupPlugin> plugins = new Dictionary<Type, IAppSetupPlugin>();
+
+        private readonly IAllAppModuleTypeCollector allAppModuleTypeCollector;
+        private readonly IAppModuleScanner scanner;
+
+
+        #endregion
+
+        #region Public Properties
+
 
         /// <summary>
         /// 所有的插件
@@ -38,21 +50,25 @@ namespace Reface.AppStarter
         /// </summary>
         public Dictionary<string, object> Context { get; private set; } = new Dictionary<string, object>();
 
-        /// <summary>
-        /// 所有 AppModule 加载完成后的事件
-        /// </summary>
-        public event EventHandler AllModulesLoaded;
 
         /// <summary>
         /// 配置文件路径
         /// </summary>
         public string ConfigFilePath { get; private set; }
 
+        #endregion
+
+        #region Public Events
+
         /// <summary>
-        /// 缓存那些已经扫描过的结果，提高运行时的速度。
+        /// 所有 AppModule 加载完成后的事件
         /// </summary>
-        private readonly Dictionary<string, IEnumerable<AttributeAndTypeInfo>>
-            sacennedAssemlyNameToInfoCache = new Dictionary<string, IEnumerable<AttributeAndTypeInfo>>();
+        public event EventHandler AllModulesLoaded;
+
+        #endregion
+
+
+        #region 构造函数
 
         /// <summary>
         /// 
@@ -61,9 +77,14 @@ namespace Reface.AppStarter
         public AppSetup(string configFilePath = "./app.json")
         {
             this.ConfigFilePath = configFilePath;
-            this.AddPlugin(new NamespaceFilterPlugin());
-            this.AddPlugin(new AppModuleMethodPlugin());
+            this.allAppModuleTypeCollector = ServiceFactory.GetService<IAllAppModuleTypeCollector>();
+            this.scanner = ServiceFactory.GetService<IAppModuleScanner>();
         }
+
+        #endregion
+
+        #region Publis Methods
+
 
         /// <summary>
         /// 添加一个插件
@@ -120,6 +141,20 @@ namespace Reface.AppStarter
         /// <returns></returns>
         public App Start(IAppModule appModule)
         {
+            IEnumerable<IAppModule> rootModules = new IAppModule[]
+            {
+                new CoreAppModule(),
+                appModule
+            };
+            IEnumerable<Type> allAppModuleTypes = this.allAppModuleTypeCollector.Collect(rootModules);
+            AppModulePrepareArguments appModulePrepareArguments = new AppModulePrepareArguments(this);
+            foreach (var type in allAppModuleTypes)
+            {
+                AppModulePrepairAttribute attr = type.GetCustomAttribute<AppModulePrepairAttribute>();
+                if (attr == null) continue;
+                attr.Prepair(appModulePrepareArguments);
+            }
+
             CoreAppModule coreAppModule = new CoreAppModule();
             this.Use(null, coreAppModule);
             this.Use(null, appModule);
@@ -134,6 +169,8 @@ namespace Reface.AppStarter
             return app;
         }
 
+        #endregion
+
         #region Private Methods
 
 
@@ -144,36 +181,7 @@ namespace Reface.AppStarter
         /// <returns></returns>
         private IEnumerable<AttributeAndTypeInfo> ScanAppModule(IAppModule appModule)
         {
-            var assembly = appModule.GetType().Assembly;
-            var assemblyName = assembly.FullName;
-            IEnumerable<AttributeAndTypeInfo> result;
-
-            if (sacennedAssemlyNameToInfoCache.TryGetValue(assemblyName, out result))
-            {
-                return result;
-            }
-
-            Type[] types = assembly.GetExportedTypes();
-            IList<AttributeAndTypeInfo> scannableAttributeAndTypeInfos
-                 = new List<AttributeAndTypeInfo>();
-            foreach (Type type in types)
-            {
-                object[] objects = type.GetCustomAttributes(typeof(ScannableAttribute), true);
-                if (objects.Length == 0) continue;
-
-                foreach (var obj in objects)
-                {
-                    AttributeAndTypeInfo attributeAndTypeInfo
-                        = new AttributeAndTypeInfo(obj as ScannableAttribute, type);
-                    scannableAttributeAndTypeInfos.Add(
-                        attributeAndTypeInfo
-                    );
-
-                }
-            }
-
-            sacennedAssemlyNameToInfoCache[assemblyName] = scannableAttributeAndTypeInfos;
-            return scannableAttributeAndTypeInfos;
+            return this.scanner.Scan(appModule);
         }
 
 

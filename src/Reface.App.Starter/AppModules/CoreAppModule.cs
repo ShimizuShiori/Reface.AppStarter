@@ -10,6 +10,7 @@ namespace Reface.AppStarter.AppModules
     /// </summary>
     [AutoConfigAppModule]
     [ComponentScanAppModule]
+    [AddDefaultPlugins]
     class CoreAppModule : AppModule
     {
 
