@@ -114,48 +114,6 @@ namespace Reface.AppStarter
         }
 
         /// <summary>
-        /// 获取指定模块的扫描结果
-        /// </summary>
-        /// <param name="appModule"></param>
-        /// <returns></returns>
-        private AppModuleScanResult GetScanResult(IAppModule appModule)
-        {
-            if (appModule != null)
-                return this.appModuleToScannableAttributeAndTypeInfoMap[appModule];
-            return AppModuleScanResult.Empty;
-        }
-
-        /// <summary>
-        /// 应用一个模块，当 A 使用 B 时， A 就是 target ，B 就是 appModule
-        /// </summary>
-        /// <param name="target"></param>
-        /// <param name="appModule"></param>
-        private void Use(IAppModule target, IAppModule appModule)
-        {
-            IEnumerable<AttributeAndTypeInfo> attributeAndTypeInfos = this.ScanAppModule(appModule);
-
-            this.appModuleToScannableAttributeAndTypeInfoMap[appModule] = new AppModuleScanResult(appModule, attributeAndTypeInfos);
-
-            AppModuleUsingArguments arguments = this.InvokePlugins(
-                    () => new AppModuleUsingArguments(this, appModule, target, this.GetScanResult(target).ScannableAttributeAndTypeInfos),
-                    (para, plug) => plug.OnAppModuleBeforeUsing(this, para)
-                );
-
-            appModule.OnUsing(arguments);
-            this.InvokePlugins(
-                () => new OnAppModuleUsedArguments(appModule),
-                (para, plug) => plug.OnAppModuleUsed(this, para)
-                );
-
-            IEnumerable<IAppModule> dependentModules = appModule.DependentModules;
-            if (dependentModules == null || !dependentModules.Any()) return;
-            foreach (IAppModule subAppModule in dependentModules)
-            {
-                this.Use(appModule, subAppModule);
-            }
-        }
-
-        /// <summary>
         /// 启动应用程序，并返回 <see cref="App"/> 的一个实例
         /// </summary>
         /// <param name="appModule"></param>
@@ -175,6 +133,9 @@ namespace Reface.AppStarter
             appContainers.ForEach(x => x.OnAppStarted(app));
             return app;
         }
+
+        #region Private Methods
+
 
         /// <summary>
         /// 扫描指定的模块，返回扫描得到的结果集
@@ -214,5 +175,53 @@ namespace Reface.AppStarter
             sacennedAssemlyNameToInfoCache[assemblyName] = scannableAttributeAndTypeInfos;
             return scannableAttributeAndTypeInfos;
         }
+
+
+        /// <summary>
+        /// 应用一个模块，当 A 使用 B 时， A 就是 target ，B 就是 appModule
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="appModule"></param>
+        private void Use(IAppModule target, IAppModule appModule)
+        {
+            IEnumerable<AttributeAndTypeInfo> attributeAndTypeInfos = this.ScanAppModule(appModule);
+
+            this.appModuleToScannableAttributeAndTypeInfoMap[appModule] = new AppModuleScanResult(appModule, attributeAndTypeInfos);
+
+            AppModuleUsingArguments arguments = this.InvokePlugins(
+                    () => new AppModuleUsingArguments(this, appModule, target, this.GetScanResult(target).ScannableAttributeAndTypeInfos),
+                    (para, plug) => plug.OnAppModuleBeforeUsing(this, para)
+                );
+
+            appModule.OnUsing(arguments);
+            this.InvokePlugins(
+                () => new OnAppModuleUsedArguments(appModule),
+                (para, plug) => plug.OnAppModuleUsed(this, para)
+                );
+
+            IEnumerable<IAppModule> dependentModules = appModule.DependentModules;
+            if (dependentModules == null || !dependentModules.Any()) return;
+            foreach (IAppModule subAppModule in dependentModules)
+            {
+                this.Use(appModule, subAppModule);
+            }
+        }
+
+
+
+        /// <summary>
+        /// 获取指定模块的扫描结果
+        /// </summary>
+        /// <param name="appModule"></param>
+        /// <returns></returns>
+        private AppModuleScanResult GetScanResult(IAppModule appModule)
+        {
+            if (appModule != null)
+                return this.appModuleToScannableAttributeAndTypeInfoMap[appModule];
+            return AppModuleScanResult.Empty;
+        }
+
+        #endregion
+
     }
 }
