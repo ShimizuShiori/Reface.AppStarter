@@ -29,5 +29,12 @@ namespace Reface.AppStarter.AppSetupPlugins
         /// <param name="setup"></param>
         /// <param name="arguments"></param>
         void OnAppModuleUsed(AppSetup setup, OnAppModuleUsedArguments arguments);
+
+        /// <summary>
+        /// 当 <see cref="AppSetup.ScanAppModule(IAppModule)"/> 完成后的事件
+        /// </summary>
+        /// <param name="setup"></param>
+        /// <param name="arguments"></param>
+        void OnAppModuleScanned(AppSetup setup, OnAppModuleScannedArguments arguments);
     }
 }

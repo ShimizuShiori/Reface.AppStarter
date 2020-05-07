@@ -129,6 +129,7 @@
     <Compile Include="JsonSchema\JsonPropertiesBuilder.cs" />
     <Compile Include="JsonSchema\JsonPropertyBuilder.cs" />
     <Compile Include="JsonSchema\JsonTypeHelper.cs" />
+    <Compile Include="PluginInvoker.cs" />
     <Compile Include="Predicates\AndPredicate.cs" />
     <Compile Include="Predicates\FuncPredicate.cs" />
     <Compile Include="Predicates\NotPredicate.cs" />

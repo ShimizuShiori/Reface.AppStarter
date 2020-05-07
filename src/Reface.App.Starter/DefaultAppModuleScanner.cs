@@ -16,6 +16,9 @@ namespace Reface.AppStarter
 
         public IEnumerable<AttributeAndTypeInfo> Scan(IAppModule appModule)
         {
+            if (appModule == null)
+                return new AttributeAndTypeInfo[] { };
+
             var assembly = appModule.GetType().Assembly;
             var assemblyName = assembly.FullName;
             IEnumerable<AttributeAndTypeInfo> result;

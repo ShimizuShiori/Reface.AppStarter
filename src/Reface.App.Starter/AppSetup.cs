@@ -21,8 +21,6 @@ namespace Reface.AppStarter
 
         private readonly IList<IAppContainerBuilder> appContainerBuilders
             = new List<IAppContainerBuilder>();
-        private readonly Dictionary<IAppModule, AppModuleScanResult> appModuleToScannableAttributeAndTypeInfoMap
-            = new Dictionary<IAppModule, AppModuleScanResult>();
         private readonly Dictionary<Type, IAppSetupPlugin> plugins = new Dictionary<Type, IAppSetupPlugin>();
 
         private readonly IAllAppModuleTypeCollector allAppModuleTypeCollector;
@@ -98,18 +96,6 @@ namespace Reface.AppStarter
         }
 
         /// <summary>
-        /// 调用所有的插件
-        /// </summary>
-        /// <param name="parameterBuilder"></param>
-        /// <param name="action"></param>
-        public TParameter InvokePlugins<TParameter>(Func<TParameter> parameterBuilder, Action<TParameter, IAppSetupPlugin> action)
-        {
-            TParameter parameter = parameterBuilder();
-            this.Plugins.ForEach(p => action(parameter, p));
-            return parameter;
-        }
-
-        /// <summary>
         /// 获取指定类型的应用程序构建器
         /// </summary>
         /// <typeparam name="T">必须实现 <see cref="IAppContainerBuilder"/> 接口</typeparam>
@@ -125,10 +111,12 @@ namespace Reface.AppStarter
             if (builder == null)
             {
                 builder = new T();
-                this.InvokePlugins(
-                    () => new OnAppContainerBuilderCreatedArguments(builder),
-                    (para, plug) => plug.OnAppContainerBuilderCreated(this, para)
-                );
+
+                PluginInvoker<OnAppContainerBuilderCreatedArguments>
+                    .SetArgument(new OnAppContainerBuilderCreatedArguments(builder))
+                    .SetPlugins(this.Plugins)
+                    .Invoke((t, args) => t.OnAppContainerBuilderCreated(this, args));
+
                 this.appContainerBuilders.Add(builder);
             }
             return (T)builder;
@@ -181,7 +169,14 @@ namespace Reface.AppStarter
         /// <returns></returns>
         private IEnumerable<AttributeAndTypeInfo> ScanAppModule(IAppModule appModule)
         {
-            return this.scanner.Scan(appModule);
+            IEnumerable<AttributeAndTypeInfo> result = this.scanner.Scan(appModule);
+
+            PluginInvoker<OnAppModuleScannedArguments>
+                .SetArgument(new OnAppModuleScannedArguments(appModule, result))
+                .SetPlugins(this.Plugins)
+                .Invoke((p, args) => p.OnAppModuleScanned(this, args));
+
+            return result;
         }
 
 
@@ -192,41 +187,28 @@ namespace Reface.AppStarter
         /// <param name="appModule"></param>
         private void Use(IAppModule target, IAppModule appModule)
         {
-            IEnumerable<AttributeAndTypeInfo> attributeAndTypeInfos = this.ScanAppModule(appModule);
+            IEnumerable<AttributeAndTypeInfo> targetInfos = this.scanner.Scan(target);
 
-            this.appModuleToScannableAttributeAndTypeInfoMap[appModule] = new AppModuleScanResult(appModule, attributeAndTypeInfos);
-
-            AppModuleUsingArguments arguments = this.InvokePlugins(
-                    () => new AppModuleUsingArguments(this, appModule, target, this.GetScanResult(target).ScannableAttributeAndTypeInfos),
-                    (para, plug) => plug.OnAppModuleBeforeUsing(this, para)
-                );
+            var arguments = PluginInvoker<AppModuleUsingArguments>
+                .SetArgument(new AppModuleUsingArguments(this, appModule, target, targetInfos))
+                .SetPlugins(this.Plugins)
+                .Invoke((p, args) => p.OnAppModuleBeforeUsing(this, args));
 
             appModule.OnUsing(arguments);
-            this.InvokePlugins(
-                () => new OnAppModuleUsedArguments(appModule),
-                (para, plug) => plug.OnAppModuleUsed(this, para)
-                );
+
+            PluginInvoker<OnAppModuleUsedArguments>
+                .SetArgument(new OnAppModuleUsedArguments(appModule))
+                .SetPlugins(this.Plugins)
+                .Invoke((p, args) => p.OnAppModuleUsed(this, args));
 
             IEnumerable<IAppModule> dependentModules = appModule.DependentModules;
+
             if (dependentModules == null || !dependentModules.Any()) return;
+
             foreach (IAppModule subAppModule in dependentModules)
             {
                 this.Use(appModule, subAppModule);
             }
-        }
-
-
-
-        /// <summary>
-        /// 获取指定模块的扫描结果
-        /// </summary>
-        /// <param name="appModule"></param>
-        /// <returns></returns>
-        private AppModuleScanResult GetScanResult(IAppModule appModule)
-        {
-            if (appModule != null)
-                return this.appModuleToScannableAttributeAndTypeInfoMap[appModule];
-            return AppModuleScanResult.Empty;
         }
 
         #endregion

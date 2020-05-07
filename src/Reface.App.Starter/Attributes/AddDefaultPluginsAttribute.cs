@@ -10,7 +10,7 @@ namespace Reface.AppStarter.Attributes
     /// 用于向 <see cref="AppSetup"/> 添加一些默认的 <see cref="IAppSetupPlugin"/> 。
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    partial class AddDefaultPluginsAttribute : CustomAddPluginsAttribute
+    class AddDefaultPluginsAttribute : CustomAddPluginsAttribute
     {
         protected override IEnumerable<IAppSetupPlugin> CreatePlugins()
         {
