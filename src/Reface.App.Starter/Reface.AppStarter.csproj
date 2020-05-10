@@ -65,6 +65,7 @@
     <Compile Include="AppSetup.cs" />
     <Compile Include="AppSetupPlugins\AppModuleMethodPlugin.cs" />
     <Compile Include="AppSetupPlugins\AppSetupPlugin.cs" />
+    <Compile Include="AppSetupPlugins\Arguments\OnAllAppModuleTypeCollectedArguments.cs" />
     <Compile Include="AppSetupPlugins\Arguments\OnAppContainerBuilderCreatedArguments.cs" />
     <Compile Include="AppSetupPlugins\Arguments\OnAppModuleScannedArguments.cs" />
     <Compile Include="AppSetupPlugins\Arguments\OnAppModuleUsedArguments.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="ConfigRegistions\CreatorConfigRegistion.cs" />
     <Compile Include="ConfigRegistions\ScannedConfigRegistion.cs" />
     <Compile Include="Configs\AppConfig.cs" />
+    <Compile Include="DefaultWork.cs" />
     <Compile Include="DefaultAllAppModuleTypeCollectionor.cs" />
     <Compile Include="DefaultAppModuleScanner.cs" />
     <Compile Include="Errors\CanNotConvertToJsonTypeException.cs" />
@@ -121,6 +123,7 @@
     <Compile Include="IAppModuleScanner.cs" />
     <Compile Include="IAutofacComponentRegistion.cs" />
     <Compile Include="IConfigRegistion.cs" />
+    <Compile Include="IWork.cs" />
     <Compile Include="JsonSchema\Constant.cs" />
     <Compile Include="JsonSchema\DefaultJsonSchemaGenerator.cs" />
     <Compile Include="JsonSchema\IJsonSchemaGenerator.cs" />

@@ -93,7 +93,7 @@ var app = setup.Start(myApp); // 这样便启用了所有功能
 
 ## 5 基本模块及使用方法
 
-### 5.1 ComponentScanAppModule
+### 5.1 <span id="ComponentScanAppModule" />[ComponentScanAppModule](docs/ComponentScanAppModule.md)
 
 将扫描得到的 **ComponentAttribute** 注册到 autofac 的容器中去。
 申明该模块时，需要指定需要扫描的模块。

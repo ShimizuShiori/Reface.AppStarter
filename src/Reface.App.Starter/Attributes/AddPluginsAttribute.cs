@@ -21,10 +21,6 @@ namespace Reface.AppStarter.Attributes
             PluginTypes = pluginTypes;
         }
 
-        public override void Prepair(AppModulePrepareArguments args)
-        {
-        }
-
         protected override IEnumerable<IAppSetupPlugin> CreatePlugins()
         {
             if (this.PluginTypes == null) return new IAppSetupPlugin[] { };

@@ -36,5 +36,12 @@ namespace Reface.AppStarter.AppSetupPlugins
         /// <param name="setup"></param>
         /// <param name="arguments"></param>
         void OnAppModuleScanned(AppSetup setup, OnAppModuleScannedArguments arguments);
+
+        /// <summary>
+        /// 当收集到了系统中所有的 <see cref="IAppModule"/> 类型后的事件
+        /// </summary>
+        /// <param name="setup"></param>
+        /// <param name="arguments"></param>
+        void OnAllAppModuleTypeCollected(AppSetup setup, OnAllAppModuleTypeCollectedArguments arguments);
     }
 }

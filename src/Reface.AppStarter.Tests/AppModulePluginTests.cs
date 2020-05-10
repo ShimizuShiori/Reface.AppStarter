@@ -21,6 +21,10 @@ namespace Reface.AppStarter.Tests
 
         private class TestPlugs : IAppSetupPlugin
         {
+            public void OnAllAppModuleTypeCollected(AppSetup setup, OnAllAppModuleTypeCollectedArguments arguments)
+            {
+            }
+
             public void OnAppContainerBuilderCreated(AppSetup setup, OnAppContainerBuilderCreatedArguments arguments)
             {
                 List<Type> builderTypeList = setup.Context.GetOrCreate(CONTEXT_KEY_BUILDER_TYPES, key => new List<Type>());
@@ -57,6 +61,10 @@ namespace Reface.AppStarter.Tests
 
         private class Test2Plugs : IAppSetupPlugin
         {
+            public void OnAllAppModuleTypeCollected(AppSetup setup, OnAllAppModuleTypeCollectedArguments arguments)
+            {
+            }
+
             public void OnAppContainerBuilderCreated(AppSetup setup, OnAppContainerBuilderCreatedArguments arguments)
             {
                 List<Type> builderTypeList = setup.Context.GetOrCreate(CONTEXT_KEY_BUILDER_TYPES, key => new List<Type>());

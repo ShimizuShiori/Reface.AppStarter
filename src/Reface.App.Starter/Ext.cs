@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Reface.AppStarter.AppContainers;
+using Reface.EventBus;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
@@ -39,6 +41,24 @@ namespace Reface.AppStarter
         {
             var attr = memberInfo.GetCustomAttribute<DescriptionAttribute>();
             return attr != null ? attr.Description : memberInfo.Name;
+        }
+
+        #endregion
+
+        #region Work
+
+        public static IWork BeginWork(this App app, string workName)
+        {
+            var container = app.GetAppContainer<IComponentContainer>();
+            var scope = container.BeginScope(workName);
+            return scope.CreateComponent<IWork>();
+
+        }
+
+        public static void PublishEvent(this IWork work, Event @event)
+        {
+            IEventBus eventBus = work.CreateComponent<IEventBus>();
+            eventBus.Publish(@event);
         }
 
         #endregion

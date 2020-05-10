@@ -8,6 +8,11 @@ namespace Reface.AppStarter.AppSetupPlugins
     /// </summary>
     public abstract class AppSetupPlugin : IAppSetupPlugin
     {
+        public virtual void OnAllAppModuleTypeCollected(AppSetup setup, OnAllAppModuleTypeCollectedArguments arguments)
+        {
+            
+        }
+
         public virtual void OnAppContainerBuilderCreated(AppSetup setup, OnAppContainerBuilderCreatedArguments arguments)
         {
         }

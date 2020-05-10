@@ -44,10 +44,15 @@ namespace Reface.AppStarter
         }
 
         /// <summary>
-        /// 可以存储自定义数据的上下文
+        /// 可以存储自定义数据的上下文，该属性不会被 <see cref="App"/> 继承。
+        /// 如果你希望向 <see cref="App"/> 的上下文中添加一些内容，请使用 <see cref="AppContext"/> 属性
         /// </summary>
         public Dictionary<string, object> Context { get; private set; } = new Dictionary<string, object>();
 
+        /// <summary>
+        /// 与 <see cref="Context"/> 属性不同，该上下文对象会被 <see cref="App"/> 继承。
+        /// </summary>
+        public Dictionary<string, object> AppContext { get; private set; } = new Dictionary<string, object>();
 
         /// <summary>
         /// 配置文件路径
@@ -138,10 +143,15 @@ namespace Reface.AppStarter
             AppModulePrepareArguments appModulePrepareArguments = new AppModulePrepareArguments(this);
             foreach (var type in allAppModuleTypes)
             {
-                AppModulePrepairAttribute attr = type.GetCustomAttribute<AppModulePrepairAttribute>();
-                if (attr == null) continue;
-                attr.Prepair(appModulePrepareArguments);
+                IEnumerable<AppModulePrepairAttribute> attrs = type.GetCustomAttributes<AppModulePrepairAttribute>();
+                if (!attrs.Any()) continue;
+                attrs.ForEach(attr => attr.Prepair(appModulePrepareArguments));
             }
+
+            PluginInvoker<OnAllAppModuleTypeCollectedArguments>
+                .SetArgument(new OnAllAppModuleTypeCollectedArguments(allAppModuleTypes))
+                .SetPlugins(this.Plugins)
+                .Invoke((p, args) => p.OnAllAppModuleTypeCollected(this, args));
 
             CoreAppModule coreAppModule = new CoreAppModule();
             this.Use(null, coreAppModule);
@@ -152,7 +162,7 @@ namespace Reface.AppStarter
                    .ForEach(x => x.Prepare(this))
                    .Select(x => x.Build(this))
                    .ToList();
-            App app = new App(appContainers);
+            App app = new App(appContainers, this.AppContext);
             appContainers.ForEach(x => x.OnAppStarted(app));
             return app;
         }

@@ -13,12 +13,13 @@ namespace Reface.AppStarter
     {
         private readonly IEnumerable<IAppContainer> appContainers;
 
-        public Dictionary<string, object> Context { get; private set; } = new Dictionary<string, object>();
+        public Dictionary<string, object> Context { get; private set; }
 
-        internal App(IEnumerable<IAppContainer> appContainers)
+        internal App(IEnumerable<IAppContainer> appContainers, Dictionary<string, object> context)
         {
             this.appContainers = appContainers.Where(x => !(x is IEmptyAppContainer));
             this.appContainers.ForEach(x => x.OnAppPrepair(this));
+            this.Context = context;
         }
 
         /// <summary>
