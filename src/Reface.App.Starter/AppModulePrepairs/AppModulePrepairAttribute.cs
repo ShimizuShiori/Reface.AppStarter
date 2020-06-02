@@ -1,7 +1,7 @@
 ﻿using System;
 using Reface.AppStarter.AppModules;
 
-namespace Reface.AppStarter.Attributes
+namespace Reface.AppStarter.AppModulePrepairs
 {
     /// <summary>
     /// 模块准备组件。<br />

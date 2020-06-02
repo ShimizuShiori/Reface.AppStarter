@@ -127,3 +127,27 @@
 * 新增 *ComponentCreatorHandler , ConfigCreatorHandler , ComponentReplaceHandler* 用于实现 *ComponentCreator* , *ConfigCreator* , *ReplaceCreator* 的功能
 * 重新定义了 *OnUsing* 的参数为 *AppModuleUsingArguments*
 * AppModule 中不允许使用 appSetup.GetScanResult，而是直接将结果放在 *AppModuleUsingArguments* 中
+
+# 2.1.0
+## 
+* 新增 *AppModulePrepairAttribute* 特征，允许开发者自定义模块准备阶段的行为
+* 为 *AppSetup* 添加新的逻辑
+    * 在扫描类型前，先扫描出所有的 *IAppModule* 类型
+    * 对每一个 *IAppModule* 类型，执行其上的 *AppModulePrepairAttribute.Prepair* 方法
+    * 相同类型的 *IAppModule* 只执行一次该方法
+* 新增抽象类 *CustomAddPluginsAttribute* ，继承 *AppModulePrepairAttribute* ，允许用户在继承时指定 *IAppSetupPlugin*
+* 新增类 *AddPluginsAttribute* 和 *AddDefaultPluginsAttribute* 分别用于让开发者以 Type 指定插件 和 指定默认的插件
+* 将原来的组件事件参数命令空间从 AutofacExt 移到 Reface.AppStarter 下
+* 新增事件 *ComponentCreated* 
+* 添加组件生命周期监听功能，开发者可以在实现类中监听自身的生命周期，目前只设计了以下生命周期节点
+    * IOnCreating
+    * IOnCreated
+* 新增异常 *AppContainerExistsException* ，不允许在 *App* 中存在两个或以上的相同 *IAppContainer* 实例
+* 新增 *IWork* 组件，用于表示一个工作单元
+    * 可以从 *App* 实例上开启工作单元
+    * 每个工作单元内的组件都是同一实例
+    * 每个工作单元拥有各个的上下文
+    * 每个工作单元可以创建组件和属性注入
+    * 每个工作单元可以开启新的工作单元
+    * 可以直接利用工作单元发布事件 ( 扩展方法 )
+* 允许在 *AppSetup* 阶段预设 *App* 中的 Context 键值对

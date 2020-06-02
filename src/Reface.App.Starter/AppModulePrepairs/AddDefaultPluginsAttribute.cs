@@ -3,7 +3,7 @@ using System;
 using Reface.AppStarter.AppModules;
 using System.Collections.Generic;
 
-namespace Reface.AppStarter.Attributes
+namespace Reface.AppStarter.AppModulePrepairs
 {
     /// <summary>
     /// 向 <see cref="CoreAppModule"/> 添加的准备方法。

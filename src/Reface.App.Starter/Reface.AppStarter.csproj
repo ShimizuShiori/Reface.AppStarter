@@ -78,9 +78,9 @@
     <Compile Include="AppModules\AutoConfigAppModule.cs" />
     <Compile Include="AppContainers\AutofacContainerComponentContainer.cs" />
     <Compile Include="AppContainerBuilders\AutofacContainerBuilder.cs" />
-    <Compile Include="Attributes\AddDefaultPluginsAttribute.cs" />
-    <Compile Include="Attributes\AddPluginsAttribute.cs" />
-    <Compile Include="Attributes\AppModulePrepairAttribute.cs" />
+    <Compile Include="AppModulePrepairs\AddDefaultPluginsAttribute.cs" />
+    <Compile Include="AppModulePrepairs\AddPluginsAttribute.cs" />
+    <Compile Include="AppModulePrepairs\AppModulePrepairAttribute.cs" />
     <Compile Include="Attributes\AutoSetAttribute.cs" />
     <Compile Include="Attributes\CommandHandlerAttribute.cs" />
     <Compile Include="Attributes\ComponentAttribute.cs" />
@@ -92,7 +92,7 @@
     <Compile Include="AppContainers\EmptyAppContainer.cs" />
     <Compile Include="Attributes\ConfigCreatorAttribute.cs" />
     <Compile Include="Attributes\AppModuleMethodAttribute.cs" />
-    <Compile Include="Attributes\CustomAddPluginsAttribute.cs" />
+    <Compile Include="AppModulePrepairs\CustomAddPluginsAttribute.cs" />
     <Compile Include="Attributes\ListenerAttribute.cs" />
     <Compile Include="Attributes\ReplaceCreatorAttribute.cs" />
     <Compile Include="Attributes\RegisterAsAttribute.cs" />

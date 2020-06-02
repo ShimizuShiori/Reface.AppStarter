@@ -1,4 +1,5 @@
-﻿using Reface.AppStarter.Attributes;
+﻿using Reface.AppStarter.AppModulePrepairs;
+using Reface.AppStarter.Attributes;
 using Reface.CommandBus;
 using Reface.EventBus;
 

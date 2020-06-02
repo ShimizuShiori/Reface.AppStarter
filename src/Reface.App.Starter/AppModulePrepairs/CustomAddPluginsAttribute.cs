@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Reface.AppStarter.Attributes
+namespace Reface.AppStarter.AppModulePrepairs
 {
     /// <summary>
     /// 以自定义的方式向 <see cref="AppSetup"/> 添加插件
