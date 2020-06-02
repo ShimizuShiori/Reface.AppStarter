@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Core.Registration;
 using Reface.AppStarter.AutofacExt;
+using Reface.AppStarter.ComponentLifetimeListeners;
 using Reface.AppStarter.Errors;
 using Reface.AppStarter.Events;
 using Reface.EventBus;
@@ -19,6 +20,7 @@ namespace Reface.AppStarter.AppContainers
 
         public event EventHandler<ComponentCreatingEventArgs> ComponentCreating;
         public event EventHandler<NoComponentRegistedEventArgs> NoComponentRegisted;
+        public event EventHandler<ComponentCreatedEventArgs> ComponentCreated;
 
         public AutofacContainerComponentContainer(ContainerBuilder containerBuilder, TriggerComponentCreatingEventAutofacSource triggerComponentCreatingEventAutofacSource)
         {
@@ -32,6 +34,24 @@ namespace Reface.AppStarter.AppContainers
             {
                 this.NoComponentRegisted?.Invoke(this, e);
             };
+            this.triggerComponentCreatingEventAutofacSource.ComponentCreated += (sender, e) =>
+            {
+                this.ComponentCreated?.Invoke(this, e);
+            };
+            this.ComponentCreating += TriggerOnCreating;
+            this.ComponentCreated += TriggerOnCreated;
+        }
+
+        private void TriggerOnCreated(object sender, ComponentCreatedEventArgs e)
+        {
+            if (e.CreatedObject is IOnCreated listener)
+                listener.OnCreated(new CreateArguments(e.ComponentManager, e.RequiredType));
+        }
+
+        private void TriggerOnCreating(object sender, ComponentCreatingEventArgs e)
+        {
+            if (e.CreatedObject is IOnCreating listener)
+                listener.OnCreating(new CreateArguments(e.ComponentManager, e.RequiredType));
         }
 
         public IComponentContainer BeginScope(string scopeName)

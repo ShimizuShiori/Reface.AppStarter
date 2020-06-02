@@ -128,7 +128,16 @@ namespace Reface.AppStarter
         }
 
         /// <summary>
-        /// 启动应用程序，并返回 <see cref="App"/> 的一个实例
+        /// 启动应用程序，并返回 <see cref="App"/> 的一个实例。<br />
+        /// 执行该方法的流程：<br />
+        /// 1. <see cref="AppSetup"/> 将 <see cref="CoreAppModule"/> 和 参数提供的 <see cref="IAppModule"/> 作为根模块扫描所有参与启动的 <see cref="IAppModule"/> 类型，并调用所有 <see cref="IAppModule"/> 上的 <see cref="AppModulePrepairAttribute.Prepair(AppModulePrepareArguments)"/> 方法。<br />
+        /// 2. 触发 <see cref="IAppSetupPlugin.OnAllAppModuleTypeCollected(AppSetup, OnAllAppModuleTypeCollectedArguments)"/> 事件 <br />
+        /// 3. 调用 <see cref="Use(IAppModule, IAppModule)"/>，参数是 null 和 <see cref="CoreAppModule"/> 用于加载 AppStarter 库中的各种组件 <br />
+        /// 4. 调用 <see cref="Use(IAppModule, IAppModule)"/>，参数是 null 和 appModule 用于加载指定的 <see cref="IAppModule"/> 中的各种组件 <br />
+        /// 5. 触发 <see cref="AllModulesLoaded"/> 事件 <br />
+        /// 6. 遍历所有 <see cref="IAppContainerBuilder"/> 分别调用 <see cref="IAppContainerBuilder.Prepare(AppSetup)"/> 和 <see cref="IAppContainerBuilder.Build(AppSetup)"/> 方法 <br />
+        /// 7. 生成 <see cref="App"/> 实例 <br />
+        /// 8. 调用所有 <see cref="IAppContainer.OnAppStarted(App)"/> 方法
         /// </summary>
         /// <param name="appModule"></param>
         /// <returns></returns>
@@ -139,23 +148,14 @@ namespace Reface.AppStarter
                 new CoreAppModule(),
                 appModule
             };
-            IEnumerable<Type> allAppModuleTypes = this.allAppModuleTypeCollector.Collect(rootModules);
-            AppModulePrepareArguments appModulePrepareArguments = new AppModulePrepareArguments(this);
-            foreach (var type in allAppModuleTypes)
+
+            this.CollectAllAppModuleType(rootModules);
+
+            rootModules.ForEach(module =>
             {
-                IEnumerable<AppModulePrepairAttribute> attrs = type.GetCustomAttributes<AppModulePrepairAttribute>();
-                if (!attrs.Any()) continue;
-                attrs.ForEach(attr => attr.Prepair(appModulePrepareArguments));
-            }
+                this.Use(null, module);
+            });
 
-            PluginInvoker<OnAllAppModuleTypeCollectedArguments>
-                .SetArgument(new OnAllAppModuleTypeCollectedArguments(allAppModuleTypes))
-                .SetPlugins(this.Plugins)
-                .Invoke((p, args) => p.OnAllAppModuleTypeCollected(this, args));
-
-            CoreAppModule coreAppModule = new CoreAppModule();
-            this.Use(null, coreAppModule);
-            this.Use(null, appModule);
             this.AllModulesLoaded?.Invoke(this, EventArgs.Empty);
             IEnumerable<IAppContainer> appContainers
                 = this.appContainerBuilders
@@ -219,6 +219,37 @@ namespace Reface.AppStarter
             {
                 this.Use(appModule, subAppModule);
             }
+        }
+
+        /// <summary>
+        /// 收集所有模块的类型并触发所有的插件
+        /// </summary>
+        /// <param name="rootModules"></param>
+        private void CollectAllAppModuleType(IEnumerable<IAppModule> rootModules)
+        {
+            IEnumerable<Type> allAppModuleTypes = this.allAppModuleTypeCollector.Collect(rootModules);
+            AppModulePrepareArguments appModulePrepareArguments = new AppModulePrepareArguments(this);
+
+            allAppModuleTypes.ForEach(type => InvokePrepairWhenTypeHasAppModulePrepairAttribute(type, appModulePrepareArguments));
+
+            PluginInvoker<OnAllAppModuleTypeCollectedArguments>
+                .SetArgument(new OnAllAppModuleTypeCollectedArguments(allAppModuleTypes))
+                .SetPlugins(this.Plugins)
+                .Invoke((p, args) => p.OnAllAppModuleTypeCollected(this, args));
+        }
+
+        /// <summary>
+        /// 当模块类型上标有 <see cref="AppModulePrepareArguments"/> 时，调用 <see cref="AppModulePrepairAttribute.Prepair(AppModulePrepareArguments)"/>
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="arguments"></param>
+        private void InvokePrepairWhenTypeHasAppModulePrepairAttribute(Type type, AppModulePrepareArguments arguments)
+        {
+            IEnumerable<AppModulePrepairAttribute> attrs = type.GetCustomAttributes<AppModulePrepairAttribute>();
+            if (!attrs.Any())
+                return;
+
+            attrs.ForEach(attr => attr.Prepair(arguments));
         }
 
         #endregion

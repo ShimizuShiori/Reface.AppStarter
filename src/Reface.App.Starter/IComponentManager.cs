@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Reface.AppStarter.AutofacExt
+namespace Reface.AppStarter
 {
     /// <summary>
     /// 组件管理器

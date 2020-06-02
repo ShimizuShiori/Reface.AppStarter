@@ -1,7 +1,6 @@
 ﻿using System;
 
-// todo : remove [AutofacExt] from namespace
-namespace Reface.AppStarter.AutofacExt
+namespace Reface.AppStarter
 {
     public class ComponentCreatingEventArgs : EventArgs
     {

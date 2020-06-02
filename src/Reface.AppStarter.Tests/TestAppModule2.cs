@@ -21,7 +21,7 @@ namespace Reface.AppStarter.Tests
         }
 
         [ComponentCreator]
-        public IServiceRegistedByAppModule GetServiceRegistedByAppModule()
+        public ServiceRegistedByAppModule GetServiceRegistedByAppModule()
         {
             return new DefaultServiceRegistedByAppModule();
         }

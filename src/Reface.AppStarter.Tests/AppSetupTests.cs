@@ -1,8 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Reface.AppStarter.AppContainers;
 using Reface.AppStarter.AppModules;
+using Reface.AppStarter.Errors;
 using Reface.AppStarter.Tests.Configs;
 using Reface.AppStarter.Tests.Services;
+using System;
 
 namespace Reface.AppStarter.Tests
 {
@@ -68,10 +70,24 @@ namespace Reface.AppStarter.Tests
             IComponentContainer componentContainer = app.GetAppContainer<IComponentContainer>();
             using (var scope = componentContainer.BeginScope("test"))
             {
-                IServiceRegistedByAppModule service
-                    = scope.CreateComponent<IServiceRegistedByAppModule>();
+                ServiceRegistedByAppModule service
+                    = scope.CreateComponent<ServiceRegistedByAppModule>();
                 Assert.IsNotNull(service);
                 Assert.IsInstanceOfType(service, typeof(DefaultServiceRegistedByAppModule));
+            }
+        }
+
+        [TestMethod]
+        public void TwoSameContainer()
+        {
+            try
+            {
+                var app = new AppSetup().Start(new AppModuleThatWillBuildTwoTestAppContainer());
+                Assert.Fail("show throw error");
+            }
+            catch (System.Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(AppContainerExistsException));
             }
         }
     }

@@ -2,6 +2,9 @@
 
 namespace Reface.AppStarter
 {
+    /// <summary>
+    /// 创建 Reface 内部服务的组件
+    /// </summary>
     public class ServiceCreator
     {
         public Type ImplementServiceType { get; private set; }

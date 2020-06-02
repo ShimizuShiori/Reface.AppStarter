@@ -64,11 +64,14 @@
   <ItemGroup>
     <Compile Include="APlusBAppModule.cs" />
     <Compile Include="APlusBTests.cs" />
+    <Compile Include="AppContainerBuilders\TestContainerBuilder2.cs" />
     <Compile Include="AppContainerBuilders\TestContainerBuilder.cs" />
     <Compile Include="AppContainers\TestContainer.cs" />
     <Compile Include="AppModulePluginTests.cs" />
+    <Compile Include="AppModuleThatWillBuildTwoTestAppContainer.cs" />
     <Compile Include="AppSetupTests.cs" />
     <Compile Include="AppTests.cs" />
+    <Compile Include="ComponentLifetimeTests.cs" />
     <Compile Include="ConfigCreatorTests.cs" />
     <Compile Include="Configs\Modes.cs" />
     <Compile Include="Configs\Printer.cs" />
@@ -103,10 +106,11 @@
     <Compile Include="NoComponentRegistedTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisteAsFunTest.cs" />
+    <Compile Include="Services\ComponentListenerToLifetime.cs" />
     <Compile Include="Services\IIdService.cs" />
     <Compile Include="Services\MyDefaultCL1Service.cs" />
     <Compile Include="Services\IService.cs" />
-    <Compile Include="Services\IServiceRegistedByAppModule.cs" />
+    <Compile Include="Services\ServiceRegistedByAppModule.cs" />
     <Compile Include="Services\ServiceRegistedInTestContainerBuilder.cs" />
     <Compile Include="TestAppModule2.cs" />
     <Compile Include="TestAppModule.cs" />

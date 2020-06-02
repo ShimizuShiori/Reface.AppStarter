@@ -52,7 +52,11 @@
     <Compile Include="AppContainers\BaseAppContainer.cs" />
     <Compile Include="AppContainers\ConfigAppContainer.cs" />
     <Compile Include="AppContainers\IEmptyAppContainer.cs" />
-    <Compile Include="AppContainers\NoComponentRegistedEventArgs.cs" />
+    <Compile Include="ComponentCreatedEventArgs.cs" />
+    <Compile Include="ComponentLifetimeListeners\IOnCreated.cs" />
+    <Compile Include="ComponentLifetimeListeners\IOnCreating.cs" />
+    <Compile Include="ComponentLifetimeListeners\CreateArguments.cs" />
+    <Compile Include="NoComponentRegistedEventArgs.cs" />
     <Compile Include="AppModuleMethodHandlers\ComponentCreatorHandler.cs" />
     <Compile Include="AppModuleMethodHandlers\ComponentReplaceHandler.cs" />
     <Compile Include="AppModuleMethodHandlers\ConfigCreatorHandler.cs" />
@@ -96,7 +100,7 @@
     <Compile Include="AutofacComponentRegistions\InstanceComponentRegistion.cs" />
     <Compile Include="AutofacComponentRegistions\ScannedComponentRegistion.cs" />
     <Compile Include="AutofacExt\ComponentContextComponentManager.cs" />
-    <Compile Include="AutofacExt\IComponentManager.cs" />
+    <Compile Include="IComponentManager.cs" />
     <Compile Include="CommandHandlerFactory.cs" />
     <Compile Include="ConfigRegistions\CreatorConfigRegistion.cs" />
     <Compile Include="ConfigRegistions\ScannedConfigRegistion.cs" />
@@ -104,6 +108,7 @@
     <Compile Include="DefaultWork.cs" />
     <Compile Include="DefaultAllAppModuleTypeCollectionor.cs" />
     <Compile Include="DefaultAppModuleScanner.cs" />
+    <Compile Include="Errors\AppContainerExistsException.cs" />
     <Compile Include="Errors\CanNotConvertToJsonTypeException.cs" />
     <Compile Include="Errors\ComponentNotRegistedException.cs" />
     <Compile Include="Errors\ServiceHasBeenReplacedException.cs" />
@@ -116,7 +121,7 @@
     <Compile Include="AppModules\IAppModule.cs" />
     <Compile Include="AppContainers\IComponentContainer.cs" />
     <Compile Include="AppContainers\LifetimescopeComponentContainer.cs" />
-    <Compile Include="AppContainers\ComponentCreatingEventArgs.cs" />
+    <Compile Include="ComponentCreatingEventArgs.cs" />
     <Compile Include="AppModuleMethodHandlers\IAppModuleMethodHandler.cs" />
     <Compile Include="AppSetupPlugins\IAppSetupPlugin.cs" />
     <Compile Include="IAllAppModuleTypeCollector.cs" />

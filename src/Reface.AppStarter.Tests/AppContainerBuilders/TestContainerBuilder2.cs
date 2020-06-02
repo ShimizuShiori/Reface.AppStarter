@@ -5,7 +5,7 @@ using Reface.AppStarter.Tests.Services;
 
 namespace Reface.AppStarter.Tests.AppContainerBuilders
 {
-    public class TestContainerBuilder : IAppContainerBuilder
+    public class TestContainerBuilder2 : IAppContainerBuilder
     {
         public void DoNothing() { }
 

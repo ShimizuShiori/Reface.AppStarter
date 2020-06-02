@@ -1,4 +1,6 @@
 ﻿using Reface.AppStarter.AppContainers;
+using Reface.AppStarter.Errors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,6 +20,17 @@ namespace Reface.AppStarter
         internal App(IEnumerable<IAppContainer> appContainers, Dictionary<string, object> context)
         {
             this.appContainers = appContainers.Where(x => !(x is IEmptyAppContainer));
+
+            HashSet<Type> appContainerTypes = new HashSet<Type>();
+            this.appContainers.Select(x => x.GetType())
+                .ForEach(type =>
+                {
+                    if (appContainerTypes.Contains(type))
+                        throw new AppContainerExistsException($"容器 [{type}] 已存在");
+
+                    appContainerTypes.Add(type);
+                });
+
             this.appContainers.ForEach(x => x.OnAppPrepair(this));
             this.Context = context;
         }

@@ -16,7 +16,7 @@ namespace Reface.AppStarter.Tests.Listeners
             Console.WriteLine(this.GetType().FullName);
         }
 
-        private void ComponentContainer_ComponentCreating(object sender, AutofacExt.ComponentCreatingEventArgs e)
+        private void ComponentContainer_ComponentCreating(object sender, ComponentCreatingEventArgs e)
         {
         }
     }

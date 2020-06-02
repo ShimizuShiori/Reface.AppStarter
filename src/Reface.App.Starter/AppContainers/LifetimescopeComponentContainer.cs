@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using Autofac.Core.Registration;
-using Reface.AppStarter.AutofacExt;
 using Reface.AppStarter.Errors;
 using System;
 
@@ -15,16 +14,21 @@ namespace Reface.AppStarter.AppContainers
         public LifetimescopeComponentContainer(IComponentContainer parent, ILifetimeScope lifetimeScope)
         {
             this.parent = parent;
+
             this.parent.ComponentCreating += (sender, e) =>
-            {
                 this.ComponentCreating?.Invoke(this, e);
-            };
+
             this.parent.NoComponentRegisted += (sender, e) => this.NoComponentRegisted?.Invoke(this, e);
+
+            this.parent.ComponentCreated += (sender, e) =>
+              this.ComponentCreated?.Invoke(this, e);
+
             LifetimeScope = lifetimeScope;
         }
 
         public event EventHandler<ComponentCreatingEventArgs> ComponentCreating;
         public event EventHandler<NoComponentRegistedEventArgs> NoComponentRegisted;
+        public event EventHandler<ComponentCreatedEventArgs> ComponentCreated;
 
         public IComponentContainer BeginScope(string scopeName)
         {

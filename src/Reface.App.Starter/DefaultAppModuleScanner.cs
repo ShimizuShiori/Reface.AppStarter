@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace Reface.AppStarter
 {
+    /// <summary>
+    /// 默认的程序集扫描器
+    /// </summary>
     [RegisterAs(typeof(IAppModuleScanner))]
     public class DefaultAppModuleScanner : IAppModuleScanner
     {

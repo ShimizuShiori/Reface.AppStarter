@@ -18,6 +18,7 @@ namespace Reface.AppStarter.AppContainers
         /// </summary>
         /// <param name="app"></param>
         void OnAppPrepair(App app);
+
         /// <summary>
         /// 当 <see cref="App"/> 生成的事件点。
         /// </summary>

@@ -31,6 +31,11 @@ namespace Reface.AppStarter
             }
         }
 
+        /// <summary>
+        /// 注册一个服务
+        /// </summary>
+        /// <param name="serviceType"></param>
+        /// <param name="creator"></param>
         public static void RegisterService(Type serviceType, ServiceCreator creator)
         {
             List<ServiceCreator> creators;
@@ -42,6 +47,11 @@ namespace Reface.AppStarter
             creators.Add(creator);
         }
 
+        /// <summary>
+        /// 注册一个服务
+        /// </summary>
+        /// <param name="serviceType"></param>
+        /// <param name="implementType"></param>
         public static void RegisterService(Type serviceType, Type implementType)
         {
             ServiceFactory.RegisterService(serviceType, ServiceCreator.Create(implementType));

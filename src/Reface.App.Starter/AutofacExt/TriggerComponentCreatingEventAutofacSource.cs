@@ -2,17 +2,31 @@
 using Autofac.Core.Activators.Delegate;
 using Autofac.Core.Lifetime;
 using Autofac.Core.Registration;
-using Reface.AppStarter.AppContainers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Reface.AppStarter.AutofacExt
 {
+    /// <summary>
+    /// 注册在 autofac 上的一个扩展源
+    /// </summary>
     public class TriggerComponentCreatingEventAutofacSource : IRegistrationSource
     {
+        /// <summary>
+        /// 当组件创建时的事件
+        /// </summary>
         public event EventHandler<ComponentCreatingEventArgs> ComponentCreating;
+
+        /// <summary>
+        /// 当组件未注册时的事件
+        /// </summary>
         public event EventHandler<NoComponentRegistedEventArgs> NoComponentRegisted;
+
+        /// <summary>
+        /// 组件创建后的事件
+        /// </summary>
+        public event EventHandler<ComponentCreatedEventArgs> ComponentCreated;
 
         public bool IsAdapterForIndividualComponents => false;
 
@@ -30,6 +44,7 @@ namespace Reface.AppStarter.AutofacExt
                 {
                     registration.Metadata["ServiceType"] = swt.ServiceType;
                     registration.Activating += Registration_Activating;
+                    registration.Activated += Registration_Activated;
                 }
                 return Enumerable.Empty<IComponentRegistration>();
             }
@@ -37,6 +52,7 @@ namespace Reface.AppStarter.AutofacExt
             this.NoComponentRegisted?.Invoke(this, noComponentRegistedEventArgs);
             if (noComponentRegistedEventArgs.ComponentProvider == null)
                 return Enumerable.Empty<IComponentRegistration>();
+
             var newRegistration = new ComponentRegistration(
                Guid.NewGuid(),
                new DelegateActivator(swt.ServiceType, (c, p) =>
@@ -49,7 +65,13 @@ namespace Reface.AppStarter.AutofacExt
                 new[] { service },
                 new Dictionary<string, object>()
           );
-            return new IComponentRegistration[] { newRegistration }; 
+            return new IComponentRegistration[] { newRegistration };
+        }
+
+        private void Registration_Activated(object sender, ActivatedEventArgs<object> e)
+        {
+            Type serviceType = (sender as IComponentRegistration).Metadata["ServiceType"] as Type;
+            this.ComponentCreated?.Invoke(this, new ComponentCreatedEventArgs(new ComponentContextComponentManager(e.Context), serviceType, e.Instance));
         }
 
         private void Registration_Activating(object sender, ActivatingEventArgs<object> e)
