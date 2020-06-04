@@ -1,4 +1,4 @@
-﻿using Reface.AppStarter.Attributes;
+﻿using Reface.AppStarter.AppModulePrepairs;
 
 namespace Reface.AppStarter
 {

@@ -39,8 +39,8 @@ var app = setup.Start(myApp); // 这样便启用了所有功能
 
 * 依赖的其它模块
 * 加载时的自定义行为
-* 额外定义参与 IOC / DI 的组件，[查看详情](docs/ComponentCreator.md)
-* 重新指定某个服务的实现类，[查看详情](docs/ReplaceCreator.md)
+* 额外定义参与 IOC / DI 的组件，<span id="s3-3-3" />[查看详情](docs/ComponentCreator.md)
+* 重新指定某个服务的实现类，<span id="s3-3-4" />[查看详情](docs/ReplaceCreator.md)
 * 额外定义一个 Config 组合，[查看详情](docs/ConfigCreator.md)
 
 使用 **Reface.AppStarter** 进行模块化加载就意味着，你需要对你的每一个模块都要创建一个 **IAppModule** 用于定义依赖关系。
@@ -123,13 +123,19 @@ class MyAppModule : AppModule
 }
 ```
 
+### 5.3 IAppSetupPlugin
+
+从 2.0.3 版本开始，允许开发者自定义 *IAppSetupPlugin* 以增加 *AppSetup* 的功能。
+
+<span id="s5-3" />点击 [此处](docs/AppSetupPlugin.md) 阅读有关该功能的具体内容。
+
 ## 6 示例项目地址
 
 ```shell
 git clone https://github.com/ShimizuShiori/Reface.AppStarter.Demo.git
 ```
 
-## 7 其它 *AppModule*
+# 附. 其它 *AppModule*
 
 * [单元测试](https://github.com/ShimizuShiori/Reface.AppStarter.UnitTest)
 * [AOP 以及动态实现接口](https://github.com/ShimizuShiori/Reface.AppStarter.Proxy)
