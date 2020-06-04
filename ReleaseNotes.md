@@ -128,8 +128,8 @@
 * 重新定义了 *OnUsing* 的参数为 *AppModuleUsingArguments*
 * AppModule 中不允许使用 appSetup.GetScanResult，而是直接将结果放在 *AppModuleUsingArguments* 中
 
-# 2.1.0
-## 
+# 2.1.6
+## 2020-06-04
 * 新增 *AppModulePrepairAttribute* 特征，允许开发者自定义模块准备阶段的行为
 * 为 *AppSetup* 添加新的逻辑
     * 在扫描类型前，先扫描出所有的 *IAppModule* 类型
