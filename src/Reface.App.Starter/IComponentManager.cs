@@ -22,6 +22,23 @@ namespace Reface.AppStarter
         object CreateComponent(Type type);
 
         /// <summary>
+        /// 尝试创建一个组件
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        bool TryCreateComponent(Type type, out object result);
+
+        /// <summary>
+        /// 尝试创建一个组件
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        bool TryCreateComponent<T>(out T result)
+            where T : class;
+
+        /// <summary>
         /// 对指定的类型中的所有属性进行注入
         /// </summary>
         /// <param name="value"></param>

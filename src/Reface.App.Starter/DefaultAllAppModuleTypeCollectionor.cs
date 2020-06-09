@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace Reface.AppStarter
 {
-    [RegisterAs(typeof(IAllAppModuleTypeCollector))]
     public class DefaultAllAppModuleTypeCollectionor : IAllAppModuleTypeCollector
     {
         public IEnumerable<Type> Collect(IEnumerable<IAppModule> rootAppModules)

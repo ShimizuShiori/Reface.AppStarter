@@ -19,28 +19,16 @@ namespace Reface.AppStarter.Tests
 
         #region 辅助组件
 
-        private class TestPlugs : IAppSetupPlugin
+        private class TestPlugs : AppSetupPlugin
         {
-            public void OnAllAppModuleTypeCollected(AppSetup setup, OnAllAppModuleTypeCollectedArguments arguments)
-            {
-            }
-
-            public void OnAppContainerBuilderCreated(AppSetup setup, OnAppContainerBuilderCreatedArguments arguments)
+            public override void OnAppContainerBuilderCreated(AppSetup setup, OnAppContainerBuilderCreatedArguments arguments)
             {
                 List<Type> builderTypeList = setup.Context.GetOrCreate(CONTEXT_KEY_BUILDER_TYPES, key => new List<Type>());
                 builderTypeList.Add(arguments.AppContainerBuilder.GetType());
             }
 
-            public void OnAppModuleBeforeUsing(AppSetup setup, AppModuleUsingArguments arguments)
-            {
-            }
 
-            public void OnAppModuleScanned(AppSetup setup, OnAppModuleScannedArguments arguments)
-            {
-
-            }
-
-            public void OnAppModuleUsed(AppSetup setup, OnAppModuleUsedArguments arguments)
+            public override void OnAppModuleUsed(AppSetup setup, OnAppModuleUsedArguments arguments)
             {
                 List<Type> list = setup.Context.GetOrCreate(CONTEXT_KEY_MODULE_TYPES, key => new List<Type>());
                 list.Add(arguments.AppModule.GetType());
@@ -59,28 +47,17 @@ namespace Reface.AppStarter.Tests
             }
         }
 
-        private class Test2Plugs : IAppSetupPlugin
+        private class Test2Plugs : AppSetupPlugin
         {
-            public void OnAllAppModuleTypeCollected(AppSetup setup, OnAllAppModuleTypeCollectedArguments arguments)
-            {
-            }
 
-            public void OnAppContainerBuilderCreated(AppSetup setup, OnAppContainerBuilderCreatedArguments arguments)
+            public override void OnAppContainerBuilderCreated(AppSetup setup, OnAppContainerBuilderCreatedArguments arguments)
             {
                 List<Type> builderTypeList = setup.Context.GetOrCreate(CONTEXT_KEY_BUILDER_TYPES, key => new List<Type>());
                 builderTypeList.Add(arguments.AppContainerBuilder.GetType());
             }
 
-            public void OnAppModuleBeforeUsing(AppSetup setup, AppModuleUsingArguments arguments)
-            {
-            }
 
-            public void OnAppModuleScanned(AppSetup setup, OnAppModuleScannedArguments arguments)
-            {
-
-            }
-
-            public void OnAppModuleUsed(AppSetup setup, OnAppModuleUsedArguments arguments)
+            public override void OnAppModuleUsed(AppSetup setup, OnAppModuleUsedArguments arguments)
             {
                 List<Type> list = setup.Context.GetOrCreate(CONTEXT_KEY_MODULE_TYPES, key => new List<Type>());
                 list.Add(arguments.AppModule.GetType());

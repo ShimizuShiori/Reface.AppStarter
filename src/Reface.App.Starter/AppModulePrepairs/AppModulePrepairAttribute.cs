@@ -10,6 +10,10 @@ namespace Reface.AppStarter.AppModulePrepairs
     [AttributeUsage(AttributeTargets.Class)]
     public abstract class AppModulePrepairAttribute : Attribute
     {
+        /// <summary>
+        /// 准备阶段的事件点。
+        /// </summary>
+        /// <param name="args"></param>
         public abstract void Prepair(AppModulePrepareArguments args);
     }
 }

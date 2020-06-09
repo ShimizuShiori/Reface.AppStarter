@@ -26,5 +26,15 @@ namespace Reface.AppStarter.AutofacExt
         {
             this.componentContext.InjectProperties(value);
         }
+
+        public bool TryCreateComponent(Type type, out object result)
+        {
+            return this.componentContext.TryResolve(type, out result);
+        }
+
+        public bool TryCreateComponent<T>(out T result) where T : class
+        {
+            return this.componentContext.TryResolve<T>(out result);
+        }
     }
 }

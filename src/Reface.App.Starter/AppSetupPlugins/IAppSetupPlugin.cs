@@ -43,5 +43,12 @@ namespace Reface.AppStarter.AppSetupPlugins
         /// <param name="setup"></param>
         /// <param name="arguments"></param>
         void OnAllAppModuleTypeCollected(AppSetup setup, OnAllAppModuleTypeCollectedArguments arguments);
+
+        /// <summary>
+        /// 当 <see cref="AppSetup.Tools"/> 被创建后的事件
+        /// </summary>
+        /// <param name="setup"></param>
+        /// <param name="arguments"></param>
+        void OnToolsCreated(AppSetup setup, OnToolsCreatedArguments arguments);
     }
 }

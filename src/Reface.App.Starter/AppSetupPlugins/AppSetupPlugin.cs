@@ -28,5 +28,9 @@ namespace Reface.AppStarter.AppSetupPlugins
         public virtual void OnAppModuleUsed(AppSetup setup, OnAppModuleUsedArguments arguments)
         {
         }
+
+        public virtual void OnToolsCreated(AppSetup setup, OnToolsCreatedArguments arguments)
+        {
+        }
     }
 }

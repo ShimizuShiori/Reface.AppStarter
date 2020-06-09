@@ -1,4 +1,5 @@
 ﻿using Reface.AppStarter.AppContainers;
+using Reface.AppStarter.Attributes;
 using Reface.EventBus;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,9 @@ using System.Reflection;
 
 namespace Reface.AppStarter
 {
+    /// <summary>
+    /// 提供各种扩展方法
+    /// </summary>
     public static class Ext
     {
         #region IEnumerable
@@ -74,5 +78,31 @@ namespace Reface.AppStarter
 
         #endregion
 
+        #region Tools
+
+        internal static bool IsTool(this Type type)
+        {
+            return type.GetCustomAttribute<ToolAttribute>() != null;
+        }
+
+        /// <summary>
+        /// 对字段进行注入
+        /// </summary>
+        /// <param name="componentManager"></param>
+        /// <param name="value"></param>
+        public static void InjectFields(this IComponentManager componentManager, object value)
+        {
+            value.GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+                .ForEach(field =>
+                {
+                    object result;
+                    if (!componentManager.TryCreateComponent(field.FieldType, out result))
+                        return;
+
+                    field.SetValue(value, result);
+                });
+        }
+
+        #endregion
     }
 }

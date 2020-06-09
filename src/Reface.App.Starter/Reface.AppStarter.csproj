@@ -52,6 +52,10 @@
     <Compile Include="AppContainers\BaseAppContainer.cs" />
     <Compile Include="AppContainers\ConfigAppContainer.cs" />
     <Compile Include="AppContainers\IEmptyAppContainer.cs" />
+    <Compile Include="AppSetupOptions.cs" />
+    <Compile Include="AppSetupPlugins\Arguments\OnToolsCreatedArguments.cs" />
+    <Compile Include="Attributes\AutoSetAttribute.cs" />
+    <Compile Include="AutofacExt\ContainerComponentManager.cs" />
     <Compile Include="ComponentCreatedEventArgs.cs" />
     <Compile Include="ComponentLifetimeListeners\IOnCreated.cs" />
     <Compile Include="ComponentLifetimeListeners\IOnCreating.cs" />
@@ -81,7 +85,6 @@
     <Compile Include="AppModulePrepairs\AddDefaultPluginsAttribute.cs" />
     <Compile Include="AppModulePrepairs\AddPluginsAttribute.cs" />
     <Compile Include="AppModulePrepairs\AppModulePrepairAttribute.cs" />
-    <Compile Include="Attributes\AutoSetAttribute.cs" />
     <Compile Include="Attributes\CommandHandlerAttribute.cs" />
     <Compile Include="Attributes\ComponentAttribute.cs" />
     <Compile Include="AppModules\ComponentScanAppModule.cs" />
@@ -147,8 +150,7 @@
     <Compile Include="Attributes\RegistionMode.cs" />
     <Compile Include="Attributes\ScannableAttribute.cs" />
     <Compile Include="AutofacExt\TriggerComponentCreatingEventAutofacSource.cs" />
-    <Compile Include="ServiceCreator.cs" />
-    <Compile Include="ServiceFactory.cs" />
+    <Compile Include="Attributes\ToolAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Reface.AppStarter.nuspec" />

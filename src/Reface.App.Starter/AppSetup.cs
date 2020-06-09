@@ -1,10 +1,12 @@
-﻿using Reface.AppStarter.AppContainerBuilders;
+﻿using Autofac;
+using Reface.AppStarter.AppContainerBuilders;
 using Reface.AppStarter.AppContainers;
 using Reface.AppStarter.AppModulePrepairs;
 using Reface.AppStarter.AppModules;
 using Reface.AppStarter.AppSetupPlugins;
 using Reface.AppStarter.AppSetupPlugins.Arguments;
 using Reface.AppStarter.Attributes;
+using Reface.AppStarter.AutofacExt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +27,8 @@ namespace Reface.AppStarter
         private readonly Dictionary<Type, IAppSetupPlugin> plugins = new Dictionary<Type, IAppSetupPlugin>();
 
         private readonly IAllAppModuleTypeCollector allAppModuleTypeCollector;
-        private readonly IAppModuleScanner scanner;
 
+        private IAppModuleScanner scanner;
 
         #endregion
 
@@ -60,6 +62,15 @@ namespace Reface.AppStarter
         /// </summary>
         public string ConfigFilePath { get; private set; }
 
+        /// <summary>
+        /// 工具管理器。<br />
+        /// 开发者通过在类型上定义 <see cref="ToolAttribute"/> 特征，<see cref="AppSetup"/> 在启动的过程中，会将标有这些特征的类型注册到一个临时的 IOC 容器中。<br />
+        /// 开发者可以使用 <see cref="Tools"/> 以接口的形式创建这些类型的具体实现。<br />
+        /// 这些组件不会被带到 <see cref="App"/> 中，仅仅作为一个启动时的工具使用。<br />
+        /// 注意：所有标记了 <see cref="ToolAttribute"/> 的类型都会以单例的模式注入到容器中。
+        /// </summary>
+        public IComponentManager Tools { get; private set; }
+
         #endregion
 
         #region Public Events
@@ -75,14 +86,27 @@ namespace Reface.AppStarter
         #region 构造函数
 
         /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="options"></param>
+        public AppSetup(AppSetupOptions options)
+        {
+            this.ConfigFilePath = options.ConfigFilePath;
+            this.allAppModuleTypeCollector = options.AllAppModuleTypeCollector;
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="configFilePath">配置文件路径，默认是 ./app.json </param>
-        public AppSetup(string configFilePath = "./app.json")
+        public AppSetup(string configFilePath)
+            : this(new AppSetupOptions() { ConfigFilePath = configFilePath })
         {
-            this.ConfigFilePath = configFilePath;
-            this.allAppModuleTypeCollector = ServiceFactory.GetService<IAllAppModuleTypeCollector>();
-            this.scanner = ServiceFactory.GetService<IAppModuleScanner>();
+        }
+
+        public AppSetup() : this(new AppSetupOptions())
+        {
+
         }
 
         #endregion
@@ -131,14 +155,16 @@ namespace Reface.AppStarter
         /// <summary>
         /// 启动应用程序，并返回 <see cref="App"/> 的一个实例。<br />
         /// 执行该方法的流程：<br />
-        /// 1. <see cref="AppSetup"/> 将 <see cref="CoreAppModule"/> 和 参数提供的 <see cref="IAppModule"/> 作为根模块扫描所有参与启动的 <see cref="IAppModule"/> 类型，并调用所有 <see cref="IAppModule"/> 上的 <see cref="AppModulePrepairAttribute.Prepair(AppModulePrepareArguments)"/> 方法。<br />
-        /// 2. 触发 <see cref="IAppSetupPlugin.OnAllAppModuleTypeCollected(AppSetup, OnAllAppModuleTypeCollectedArguments)"/> 事件 <br />
-        /// 3. 调用 <see cref="Use(IAppModule, IAppModule)"/>，参数是 null 和 <see cref="CoreAppModule"/> 用于加载 AppStarter 库中的各种组件 <br />
-        /// 4. 调用 <see cref="Use(IAppModule, IAppModule)"/>，参数是 null 和 appModule 用于加载指定的 <see cref="IAppModule"/> 中的各种组件 <br />
-        /// 5. 触发 <see cref="AllModulesLoaded"/> 事件 <br />
-        /// 6. 遍历所有 <see cref="IAppContainerBuilder"/> 分别调用 <see cref="IAppContainerBuilder.Prepare(AppSetup)"/> 和 <see cref="IAppContainerBuilder.Build(AppSetup)"/> 方法 <br />
-        /// 7. 生成 <see cref="App"/> 实例 <br />
-        /// 8. 调用所有 <see cref="IAppContainer.OnAppStarted(App)"/> 方法
+        /// 10. <see cref="AppSetup"/> 将 <see cref="CoreAppModule"/> 和 参数提供的 <see cref="IAppModule"/> 作为根模块扫描所有参与启动的 <see cref="IAppModule"/> 类型 <br />
+        /// 11. 根据收集到的类型所在的程序集，注册所有标记了 <see cref="ToolAttribute"/> 的类型到 <see cref="Tools"/> 属性中 <br />
+        /// 15. 调用所有 <see cref="IAppModule"/> 上的 <see cref="AppModulePrepairAttribute.Prepair(AppModulePrepareArguments)"/> 方法。<br />
+        /// 20. 触发 <see cref="IAppSetupPlugin.OnAllAppModuleTypeCollected(AppSetup, OnAllAppModuleTypeCollectedArguments)"/> 事件 <br />
+        /// 30. 调用 <see cref="Use(IAppModule, IAppModule)"/>，参数是 null 和 <see cref="CoreAppModule"/> 用于加载 AppStarter 库中的各种组件 <br />
+        /// 40. 调用 <see cref="Use(IAppModule, IAppModule)"/>，参数是 null 和 appModule 用于加载指定的 <see cref="IAppModule"/> 中的各种组件 <br />
+        /// 50. 触发 <see cref="AllModulesLoaded"/> 事件 <br />
+        /// 60. 遍历所有 <see cref="IAppContainerBuilder"/> 分别调用 <see cref="IAppContainerBuilder.Prepare(AppSetup)"/> 和 <see cref="IAppContainerBuilder.Build(AppSetup)"/> 方法 <br />
+        /// 70. 生成 <see cref="App"/> 实例 <br />
+        /// 80. 调用所有 <see cref="IAppContainer.OnAppStarted(App)"/> 方法
         /// </summary>
         /// <param name="appModule"></param>
         /// <returns></returns>
@@ -151,6 +177,7 @@ namespace Reface.AppStarter
             };
 
             this.CollectAllAppModuleType(rootModules);
+            this.Tools.InjectFields(this);
 
             rootModules.ForEach(module =>
             {
@@ -229,6 +256,9 @@ namespace Reface.AppStarter
         private void CollectAllAppModuleType(IEnumerable<IAppModule> rootModules)
         {
             IEnumerable<Type> allAppModuleTypes = this.allAppModuleTypeCollector.Collect(rootModules);
+
+            CreateTools(allAppModuleTypes);
+
             AppModulePrepareArguments appModulePrepareArguments = new AppModulePrepareArguments(this);
 
             allAppModuleTypes.ForEach(type => InvokePrepairWhenTypeHasAppModulePrepairAttribute(type, appModulePrepareArguments));
@@ -237,6 +267,31 @@ namespace Reface.AppStarter
                 .SetArgument(new OnAllAppModuleTypeCollectedArguments(allAppModuleTypes))
                 .SetPlugins(this.Plugins)
                 .Invoke((p, args) => p.OnAllAppModuleTypeCollected(this, args));
+        }
+
+        /// <summary>
+        /// 初始化工具管理器
+        /// </summary>
+        /// <param name="allAppModuleTypes"></param>
+        private void CreateTools(IEnumerable<Type> allAppModuleTypes)
+        {
+            ContainerBuilder builder = new ContainerBuilder();
+            foreach (var module in allAppModuleTypes)
+            {
+                foreach (var type in module.Assembly.GetExportedTypes())
+                {
+                    if (!type.IsTool()) continue;
+                    builder.RegisterType(type)
+                        .AsImplementedInterfaces()
+                        .SingleInstance();
+                }
+            }
+            this.Tools = new ContainerComponentManager(builder.Build());
+
+            PluginInvoker<OnToolsCreatedArguments>
+                .SetArgument(new OnToolsCreatedArguments())
+                .SetPlugins(this.Plugins)
+                .Invoke((p, e) => p.OnToolsCreated(this, e));
         }
 
         /// <summary>
