@@ -1,5 +1,4 @@
-﻿using Reface.AppStarter.AutofacExt;
-using System;
+﻿using System;
 
 namespace Reface.AppStarter.AppContainers
 {
@@ -18,21 +17,10 @@ namespace Reface.AppStarter.AppContainers
         /// </summary>
         event EventHandler<NoComponentRegistedEventArgs> NoComponentRegisted;
 
+        /// <summary>
+        /// 当组件创建后的事件
+        /// </summary>
         event EventHandler<ComponentCreatedEventArgs> ComponentCreated;
-
-        /// <summary>
-        /// 创建一个组件
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        //T CreateComponent<T>();
-
-        /// <summary>
-        /// 创建一个组件
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        //object CreateComponent(Type type);
 
         /// <summary>
         /// 创建一个具有独立生命周期的子容器
@@ -40,11 +28,5 @@ namespace Reface.AppStarter.AppContainers
         /// <param name="scopeName"></param>
         /// <returns></returns>
         IComponentContainer BeginScope(string scopeName);
-
-        /// <summary>
-        /// 对某个组件的属性进行注入
-        /// </summary>
-        /// <param name="value"></param>
-        //void InjectProperties(object value);
     }
 }
