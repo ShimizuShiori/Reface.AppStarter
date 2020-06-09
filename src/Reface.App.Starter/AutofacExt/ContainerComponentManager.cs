@@ -25,7 +25,7 @@ namespace Reface.AppStarter.AutofacExt
             return this.container.Resolve(type);
         }
 
-        public void InjectPropeties(object value)
+        public void InjectProperties(object value)
         {
             this.container.InjectProperties(value);
         }

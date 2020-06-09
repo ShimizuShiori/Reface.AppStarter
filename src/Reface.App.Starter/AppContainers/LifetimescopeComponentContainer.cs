@@ -76,5 +76,15 @@ namespace Reface.AppStarter.AppContainers
         public void OnAppPrepair(App app)
         {
         }
+
+        public bool TryCreateComponent(Type type, out object result)
+        {
+            return this.LifetimeScope.TryResolve(type, out result);
+        }
+
+        public bool TryCreateComponent<T>(out T result) where T : class
+        {
+            return this.LifetimeScope.TryResolve<T>(out result);
+        }
     }
 }

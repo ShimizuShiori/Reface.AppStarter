@@ -42,6 +42,6 @@ namespace Reface.AppStarter
         /// 对指定的类型中的所有属性进行注入
         /// </summary>
         /// <param name="value"></param>
-        void InjectPropeties(object value);
+        void InjectProperties(object value);
     }
 }

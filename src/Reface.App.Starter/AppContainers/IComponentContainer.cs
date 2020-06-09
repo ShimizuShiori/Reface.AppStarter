@@ -6,7 +6,7 @@ namespace Reface.AppStarter.AppContainers
     /// <summary>
     /// DI容器的容器的接口类型
     /// </summary>
-    public interface IComponentContainer : IAppContainer
+    public interface IComponentContainer : IAppContainer, IComponentManager
     {
         /// <summary>
         /// 当组件被创建时的事件
@@ -25,14 +25,14 @@ namespace Reface.AppStarter.AppContainers
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        T CreateComponent<T>();
+        //T CreateComponent<T>();
 
         /// <summary>
         /// 创建一个组件
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        object CreateComponent(Type type);
+        //object CreateComponent(Type type);
 
         /// <summary>
         /// 创建一个具有独立生命周期的子容器
@@ -45,6 +45,6 @@ namespace Reface.AppStarter.AppContainers
         /// 对某个组件的属性进行注入
         /// </summary>
         /// <param name="value"></param>
-        void InjectProperties(object value);
+        //void InjectProperties(object value);
     }
 }

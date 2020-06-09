@@ -108,5 +108,15 @@ namespace Reface.AppStarter.AppContainers
                 .SingleInstance();
             this.Container = containerBuilder.Build();
         }
+
+        public bool TryCreateComponent(Type type, out object result)
+        {
+            return this.Container.TryResolve(type, out result);
+        }
+
+        public bool TryCreateComponent<T>(out T result) where T : class
+        {
+            return this.Container.TryResolve<T>(out result);
+        }
     }
 }

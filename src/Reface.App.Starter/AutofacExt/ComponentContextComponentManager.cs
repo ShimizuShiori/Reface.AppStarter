@@ -22,7 +22,7 @@ namespace Reface.AppStarter.AutofacExt
             return this.componentContext.Resolve(type);
         }
 
-        public void InjectPropeties(object value)
+        public void InjectProperties(object value)
         {
             this.componentContext.InjectProperties(value);
         }
