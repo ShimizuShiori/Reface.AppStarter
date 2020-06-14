@@ -21,6 +21,7 @@ namespace Reface.AppStarter.Tests
         [TestMethod]
         [DataRow(new string[] { "a", "b", "c" }, ",", "a,b,c")]
         [DataRow(null, ",", "")]
+        [DataRow(new string[] { }, ",", "")]
         [DataRow(new string[] { "a" }, ",", "a")]
         [DataRow(new string[] { "a", "b", "c" }, null, "abc")]
         public void JoinTest(string[] list, string joiner, string result)

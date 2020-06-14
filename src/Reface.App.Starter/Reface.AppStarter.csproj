@@ -142,10 +142,16 @@
     <Compile Include="JsonSchema\JsonTypeHelper.cs" />
     <Compile Include="PluginInvoker.cs" />
     <Compile Include="Predicates\AndPredicate.cs" />
+    <Compile Include="Predicates\AndPredicateTemplate.cs" />
     <Compile Include="Predicates\FuncPredicate.cs" />
+    <Compile Include="Predicates\FuncPredicateTemplate.cs" />
     <Compile Include="Predicates\NotPredicate.cs" />
+    <Compile Include="Predicates\NotPredicateTemplate.cs" />
     <Compile Include="Predicates\OrPredicate.cs" />
+    <Compile Include="Predicates\OrPredicateTemplate.cs" />
     <Compile Include="Predicates\Predicate.cs" />
+    <Compile Include="Predicates\PredicateTemplate.cs" />
+    <Compile Include="Predicates\PredicateTemplateBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Attributes\RegistionMode.cs" />
     <Compile Include="Attributes\ScannableAttribute.cs" />

@@ -28,7 +28,9 @@ namespace Reface.AppStarter
         {
             if (joiner == null) joiner = "";
             if (list == null) return "";
-            if (list.Count() == 1) return list.First();
+            int count = list.Count();
+            if (count == 0) return "";
+            if (count == 1) return list.First();
             return list.Aggregate((a, b) => $"{a}{joiner}{b}");
         }
 

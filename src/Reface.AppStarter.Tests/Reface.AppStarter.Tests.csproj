@@ -92,6 +92,7 @@
     <Compile Include="ModuleB\Services\ServiceB.cs" />
     <Compile Include="MyComponents\AAA.cs" />
     <Compile Include="NamespaceTests.cs" />
+    <Compile Include="PredicateTests.cs" />
     <Compile Include="RemoveComponentByComponentTypeTestAppModule.cs" />
     <Compile Include="RemoveComponentTests.cs" />
     <Compile Include="ReplaceServiceTests.cs" />
