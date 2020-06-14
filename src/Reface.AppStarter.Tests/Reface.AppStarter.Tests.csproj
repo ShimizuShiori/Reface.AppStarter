@@ -71,6 +71,7 @@
     <Compile Include="AppModuleThatWillBuildTwoTestAppContainer.cs" />
     <Compile Include="AppSetupTests.cs" />
     <Compile Include="AppTests.cs" />
+    <Compile Include="Attributes\MyComponent.cs" />
     <Compile Include="ComponentLifetimeTests.cs" />
     <Compile Include="ConfigCreatorTests.cs" />
     <Compile Include="Configs\Modes.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Configs\SomeConfigWithoutAttribute.cs" />
     <Compile Include="Events\TestEvent.cs" />
     <Compile Include="ExtTests.cs" />
+    <Compile Include="GetComponentFromMyComponentTests.cs" />
     <Compile Include="JsonSchema\DefaultJsonSchemaGeneratorTests.cs" />
     <Compile Include="Listeners\TestListener.cs" />
     <Compile Include="ModuleA\AAppModule.cs" />
@@ -88,6 +90,7 @@
     <Compile Include="ModuleB\BAppModule.cs" />
     <Compile Include="ModuleB\Configs\ConfigB.cs" />
     <Compile Include="ModuleB\Services\ServiceB.cs" />
+    <Compile Include="MyComponents\AAA.cs" />
     <Compile Include="NamespaceTests.cs" />
     <Compile Include="RemoveComponentByComponentTypeTestAppModule.cs" />
     <Compile Include="RemoveComponentTests.cs" />
