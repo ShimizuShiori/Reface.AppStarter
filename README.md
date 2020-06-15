@@ -35,18 +35,20 @@ var app = setup.Start(myApp); // 这样便启用了所有功能
 ### 3.3 IAppModule
 
 该接口用来描述一个应用程序模块。
-该接口提供三个功能
+该接口提供以下两个核心功能
 
 * 依赖的其它模块
 * 加载时的自定义行为
-* 额外定义参与 IOC / DI 的组件，<span id="s3-3-3" />[查看详情](docs/ComponentCreator.md)
-* 重新指定某个服务的实现类，<span id="s3-3-4" />[查看详情](docs/ReplaceCreator.md)
-* 额外定义一个 Config 组合，[查看详情](docs/ConfigCreator.md)
+
+~~* 额外定义参与 IOC / DI 的组件，<span id="s3-3-3" />[查看详情](docs/ComponentCreator.md)~~
+~~* 重新指定某个服务的实现类，<span id="s3-3-4" />[查看详情](docs/ReplaceCreator.md)~~
+~~* 额外定义一个 Config 类型，[查看详情](docs/ConfigCreator.md)~~
+
 
 使用 **Reface.AppStarter** 进行模块化加载就意味着，你需要对你的每一个模块都要创建一个 **IAppModule** 用于定义依赖关系。
 你还需要为你的启动项定义一个 **IAppModule** 用于 **AppSetup.Start(module)**
 
-点击 [此处](docs/AppModule.md) 阅读开发 AppModule 的方法
+点击 [此处](docs/AppModule.md) 阅读开发 IAppModule 的方法
 
 ### 3.4 可扫描组件
 
@@ -95,7 +97,7 @@ var app = setup.Start(myApp); // 这样便启用了所有功能
 
 ### 5.1 <span id="ComponentScanAppModule" />[ComponentScanAppModule](docs/ComponentScanAppModule.md)
 
-将扫描得到的 **ComponentAttribute** 注册到 autofac 的容器中去。
+将扫描得到的 **ComponentAttribute** 注册到 **IOC / DI** 的容器中去。
 申明该模块时，需要指定需要扫描的模块。
 大部分情况下，该模块是作为依赖项定义在别的 **IAppModule** 中
 ```csharp

@@ -2,55 +2,55 @@
 
 ## 2019-05-15
 
-* ¶Ô´úÂë½øÐÐÁË½á¹¹ÉÏµÄÖØ¹¹
-* ½« BaseModuleStarter ºÍ BaseApplicationStarter µÄÃû³ÆÈ¥µôÁË Base Ç°×º
-* µ÷ÕûÁËÊÂ¼þ²¿·ÖµÄ´úÂë£¬Ê¹µÃÓÃ»§ÔÚÖ±½ÓÊ¹ÓÃ ApplicationStarter ºÍ ModuleStarter Ê±£¬²»»á·ÃÎÊµ½´¥·¢ÊÂ¼þµÄ·½·¨
-* ÒÆ³ýÁË ApplicationStarter ÉÏ¿ÉÒÔÖ±½Ó¼àÌýÓ¦ÓÃ³ÌÐòÆô¶¯ÊÂ¼þ¹¦ÄÜ£¬½«ÆäÒ»²¢¹éÈëµ½ Event ÊôÐÔÖÐ
-* Ó¦ÓÃ³ÌÐò»·¾³ÖÐ¿ÉÒÔ·ÃÎÊËùÓÐ¼ÓÔØµÄ IModule ÐÅÏ¢
-* Component ¿ÉÒÔ×Ô¶¯¶Ô·ºÐÍ½øÐÐ×¢²á£¬½øÒ»²½¼õÉÙÁËÓÃ»§ÐèÒª×Ô¼ºÅäÖÃµÄ´úÂëÁ¿
-* ¿ªÊ¼Ð´ RelaseNotes
+* å¯¹ä»£ç è¿›è¡Œäº†ç»“æž„ä¸Šçš„é‡æž„
+* å°† BaseModuleStarter å’Œ BaseApplicationStarter çš„åç§°åŽ»æŽ‰äº† Base å‰ç¼€
+* è°ƒæ•´äº†äº‹ä»¶éƒ¨åˆ†çš„ä»£ç ï¼Œä½¿å¾—ç”¨æˆ·åœ¨ç›´æŽ¥ä½¿ç”¨ ApplicationStarter å’Œ ModuleStarter æ—¶ï¼Œä¸ä¼šè®¿é—®åˆ°è§¦å‘äº‹ä»¶çš„æ–¹æ³•
+* ç§»é™¤äº† ApplicationStarter ä¸Šå¯ä»¥ç›´æŽ¥ç›‘å¬åº”ç”¨ç¨‹åºå¯åŠ¨äº‹ä»¶åŠŸèƒ½ï¼Œå°†å…¶ä¸€å¹¶å½’å…¥åˆ° Event å±žæ€§ä¸­
+* åº”ç”¨ç¨‹åºçŽ¯å¢ƒä¸­å¯ä»¥è®¿é—®æ‰€æœ‰åŠ è½½çš„ IModule ä¿¡æ¯
+* Component å¯ä»¥è‡ªåŠ¨å¯¹æ³›åž‹è¿›è¡Œæ³¨å†Œï¼Œè¿›ä¸€æ­¥å‡å°‘äº†ç”¨æˆ·éœ€è¦è‡ªå·±é…ç½®çš„ä»£ç é‡
+* å¼€å§‹å†™ RelaseNotes
 
 # 0.6.1
 
 ## 2019-05-01
 
-* ÐÞ¸ÄÁË ReleaseNotes ÎÄ¼þÃû
+* ä¿®æ”¹äº† ReleaseNotes æ–‡ä»¶å
 
 # 0.6.2
 
 ## 2019-05-21
 
-* ÎªÄ£¿éÌí¼ÓÁËÐÂµÄÊÂ¼þ¹¦ÄÜ£¬Ã¿µ±Ò»¸ö×é¼þ±»·¢ÏÖÇÒ×¢ÈëÇ°Í¨ÖªÍâ²¿
+* ä¸ºæ¨¡å—æ·»åŠ äº†æ–°çš„äº‹ä»¶åŠŸèƒ½ï¼Œæ¯å½“ä¸€ä¸ªç»„ä»¶è¢«å‘çŽ°ä¸”æ³¨å…¥å‰é€šçŸ¥å¤–éƒ¨
 
 # 0.6.3
 
 ## 2019-05-21
 
-* ½«Ó¦ÓÃ³ÌÐòÆô¶¯ÊÂ¼þ·ÅÖÃÔÚ autofac ×÷ÓÃÓòÄÚ£¬²¢½«×÷ÓÃÓò´«ÈëÊÂ¼þ²ÎÊý
+* å°†åº”ç”¨ç¨‹åºå¯åŠ¨äº‹ä»¶æ”¾ç½®åœ¨ autofac ä½œç”¨åŸŸå†…ï¼Œå¹¶å°†ä½œç”¨åŸŸä¼ å…¥äº‹ä»¶å‚æ•°
 
 # 0.7.0
 
 ## 2019-05-22
 
-* ÖØÐ´µ×²ãµÄÊµÏÖ£¬ÖØÐ´Æô¶¯µÄÄ£¿éºÍÓ¦ÓÃµÄAPI
-* ·â×°ÁË¼òÒ×µÄ¶ÔÔª¼þ×¢²áµÄ·½·¨ÒÔÖÂ²»ÔÙÖ±½ÓÊ¹ÓÃ autofac
-* ·â±ÕÁË¼òÒ×µÄ¶ÔÔª¼þ»ñÈ¡µÄ·½·¨ÒÔÖÂ²»ÔÙÖ±½ÓÊ¹ÓÃ autofac
-* À©Õ¹ÁËÒ»Ð©Ä£¿é¿É¸ÉÔ¤µÄÊÂ¼þ½Úµã
+* é‡å†™åº•å±‚çš„å®žçŽ°ï¼Œé‡å†™å¯åŠ¨çš„æ¨¡å—å’Œåº”ç”¨çš„API
+* å°è£…äº†ç®€æ˜“çš„å¯¹å…ƒä»¶æ³¨å†Œçš„æ–¹æ³•ä»¥è‡´ä¸å†ç›´æŽ¥ä½¿ç”¨ autofac
+* å°é—­äº†ç®€æ˜“çš„å¯¹å…ƒä»¶èŽ·å–çš„æ–¹æ³•ä»¥è‡´ä¸å†ç›´æŽ¥ä½¿ç”¨ autofac
+* æ‰©å±•äº†ä¸€äº›æ¨¡å—å¯å¹²é¢„çš„äº‹ä»¶èŠ‚ç‚¹
 
 # 0.8.0
 
 ## 2019-05-26
 
-* µ÷ÕûÁË ComponentAttribute µÄ¹¦ÄÜ£¬È¡ÏûÁËÄ¬ÈÏ×é¼þµÄ¹¦ÄÜ
-* ÒÆ³ýÁË Setup ÖÐµÄ Properties ÊôÐÔ£¬½»ÓÉ Context À´Íê³É
-* ÒÆ³ýÁË Environment ÖÐµÄ Properties ÊôÐÔ£¬¸ÄÎªÁË Context
-* ÖØÐÂÓÅ»¯ÁË´úÂë½á¹¹
+* è°ƒæ•´äº† ComponentAttribute çš„åŠŸèƒ½ï¼Œå–æ¶ˆäº†é»˜è®¤ç»„ä»¶çš„åŠŸèƒ½
+* ç§»é™¤äº† Setup ä¸­çš„ Properties å±žæ€§ï¼Œäº¤ç”± Context æ¥å®Œæˆ
+* ç§»é™¤äº† Environment ä¸­çš„ Properties å±žæ€§ï¼Œæ”¹ä¸ºäº† Context
+* é‡æ–°ä¼˜åŒ–äº†ä»£ç ç»“æž„
 
 # 0.8.1
 
 ## 2019-05-26
 
-* ÐÞ¸´ÁË×¢²áÊ±»áÅÐ¶ÏÊÇ·ñÒÑ×¢²áµÄ BUG
+* ä¿®å¤äº†æ³¨å†Œæ—¶ä¼šåˆ¤æ–­æ˜¯å¦å·²æ³¨å†Œçš„ BUG
 
 # 0.9.0
 
@@ -58,101 +58,101 @@
 
 # 0.10.10
 
-* Ìí¼ÓÁËÐÂµÄÊÂ¼þ£¬ÓÃÓÚ¼àÌýÏò Autofac ÈÝÆ÷ÉêÇë×é¼þÊ±£¬×é¼þÈ´Ã»ÓÐ±»×¢²áµÄÇé¾°¡£
-* ÉÏÊöÊÂ¼þÔÊÐíÏò autofac ÈÝÆ÷×·¼ÓÔª¼þµÄ×¢²á¡£
-* Ïò autofac ×¢²áÔª¼þÊ±£¬Ö»ÄÜ×¢²á·Ç³éÏóÀà
-* ÒÔ Func µÄ·½Ê½Ïò AutofacContainerBuilder ×¢²áÔª¼þ
+* æ·»åŠ äº†æ–°çš„äº‹ä»¶ï¼Œç”¨äºŽç›‘å¬å‘ Autofac å®¹å™¨ç”³è¯·ç»„ä»¶æ—¶ï¼Œç»„ä»¶å´æ²¡æœ‰è¢«æ³¨å†Œçš„æƒ…æ™¯ã€‚
+* ä¸Šè¿°äº‹ä»¶å…è®¸å‘ autofac å®¹å™¨è¿½åŠ å…ƒä»¶çš„æ³¨å†Œã€‚
+* å‘ autofac æ³¨å†Œå…ƒä»¶æ—¶ï¼Œåªèƒ½æ³¨å†ŒéžæŠ½è±¡ç±»
+* ä»¥ Func çš„æ–¹å¼å‘ AutofacContainerBuilder æ³¨å†Œå…ƒä»¶
 
 # 0.13.0
 
-* ÐÞ¸ÄÁË IAppModule µÄ OnUsing ½Ó¿Ú£¬µ±Ò»¸ö Ä£¿éA ÐèÒªÊ¹ÓÃ Ä£¿éB Ê±£¬»á½« Ä£¿éA µÄÊµÀýÌá¹©¸ø Ä£¿éB µÄ OnUsing ·½·¨ÖÐ£¬´Ó¶ø¾¡¿ÉÄÜµÄ²»ÔÚ AppModule ÖÐÊ¹ÓÃÓÐ²ÎÊýµÄ¹¹Ôìº¯Êý
-* ÐÞ¸ÄÁË AppModule µÄÊµÏÖ£¬ÈÃÆä¼Ì³ÐÓÚ Attribute £¬²¢Ê¹ÓÃ AppModule ÉÏµÄ Attribute À´µÃµ½ÒÀÀµÏî£¬¼ò»¯ÁË¶¨ÒåÒÀÀµµÄ·½·¨
+* ä¿®æ”¹äº† IAppModule çš„ OnUsing æŽ¥å£ï¼Œå½“ä¸€ä¸ª æ¨¡å—A éœ€è¦ä½¿ç”¨ æ¨¡å—B æ—¶ï¼Œä¼šå°† æ¨¡å—A çš„å®žä¾‹æä¾›ç»™ æ¨¡å—B çš„ OnUsing æ–¹æ³•ä¸­ï¼Œä»Žè€Œå°½å¯èƒ½çš„ä¸åœ¨ AppModule ä¸­ä½¿ç”¨æœ‰å‚æ•°çš„æž„é€ å‡½æ•°
+* ä¿®æ”¹äº† AppModule çš„å®žçŽ°ï¼Œè®©å…¶ç»§æ‰¿äºŽ Attribute ï¼Œå¹¶ä½¿ç”¨ AppModule ä¸Šçš„ Attribute æ¥å¾—åˆ°ä¾èµ–é¡¹ï¼Œç®€åŒ–äº†å®šä¹‰ä¾èµ–çš„æ–¹æ³•
 
 # 1.0.0
 
-* Ìí¼ÓÁËÍêÕûµÄ×¢ÊÍ
+* æ·»åŠ äº†å®Œæ•´çš„æ³¨é‡Š
 
 # 1.1.0
 
 ## 2020-03-25
 
-* ÐÂÔö *Listener* ÌØÕ÷£¬ÓÃÓÚ **ÊÂ¼þ¼àÌýÆ÷** µÄÌØÕ÷
-* ¼¯³ÉÁË *CommandBus* ¹¦ÄÜ
-* ÐÂÔöÁË *ComponentCreator** ¹¦ÄÜ
-* ½« *EventBus* ºÍ *CommandBus* µÄ×¢²áÍ¨¹ý *ComponentCreator* Íê³É
+* æ–°å¢ž *Listener* ç‰¹å¾ï¼Œç”¨äºŽ **äº‹ä»¶ç›‘å¬å™¨** çš„ç‰¹å¾
+* é›†æˆäº† *CommandBus* åŠŸèƒ½
+* æ–°å¢žäº† *ComponentCreator** åŠŸèƒ½
+* å°† *EventBus* å’Œ *CommandBus* çš„æ³¨å†Œé€šè¿‡ *ComponentCreator* å®Œæˆ
 
 # 1.2.0
 
 ## 2020-03-26
 
-* ÖØÐ´ÁË *AutofacContainerBuilder* ¶Ô×é¼þ×¢²áµÄÂß¼­£¬²»ÊÇÖ±½Ó×¢²áµ½ *autofac* µÄ *builder*£¬¶øÊÇÏÈ¼ÇÂ¼£¬µ± *AutofacContainerBuilder.Build()* Ê±²Å×¢²á
-* *AutofacContainerBuilder* Ìá¹©°´ *ServiceType* É¾³ý×¢²áµÄ¹¦ÄÜ£¬ÔÊÐí×ÓÄ£¿éÖØÐÂ×¢²á *ServiceType* µÄÊµÏÖÀà
-* Îª *AppSetup* Ìí¼ÓÊÂ¼þ£¬µ±ËùÓÐµÄ *AppModule* ¶¼±»¼ÓÔØºó£¬´¥·¢ *AllModulesLoaded* ÊÂ¼þ
-* Ìí¼Ó *ReplaceCreator* ÌØÕ÷£¬ÓÃÓÚÔÚ *AppMOdule* Ìæ»»ÒÑÓÐµÄ×é¼þ
+* é‡å†™äº† *AutofacContainerBuilder* å¯¹ç»„ä»¶æ³¨å†Œçš„é€»è¾‘ï¼Œä¸æ˜¯ç›´æŽ¥æ³¨å†Œåˆ° *autofac* çš„ *builder*ï¼Œè€Œæ˜¯å…ˆè®°å½•ï¼Œå½“ *AutofacContainerBuilder.Build()* æ—¶æ‰æ³¨å†Œ
+* *AutofacContainerBuilder* æä¾›æŒ‰ *ServiceType* åˆ é™¤æ³¨å†Œçš„åŠŸèƒ½ï¼Œå…è®¸å­æ¨¡å—é‡æ–°æ³¨å†Œ *ServiceType* çš„å®žçŽ°ç±»
+* ä¸º *AppSetup* æ·»åŠ äº‹ä»¶ï¼Œå½“æ‰€æœ‰çš„ *AppModule* éƒ½è¢«åŠ è½½åŽï¼Œè§¦å‘ *AllModulesLoaded* äº‹ä»¶
+* æ·»åŠ  *ReplaceCreator* ç‰¹å¾ï¼Œç”¨äºŽåœ¨ *AppMOdule* æ›¿æ¢å·²æœ‰çš„ç»„ä»¶
 
 # 1.5.0
 
 ## 2020-03-31
 
-* ÖØÐ´ÁË *ReplaceServiceContainerBuilder* µÄÂß¼­£¬Í¨¹ý¼àÌý *AutofacContainerBuilder.Building* ÊÂ¼þ½øÐÐ×é¼þµÄÌæ»»
-* ÖØÐ´ÁË *ConfigAppContainerBuilder* µÄÂß¼­£¬Í¨¹ý¼àÌý *AutofacContainerBuilder.Building* ÊÂ¼þ½øÐÐ×é¼þµÄÌæ»»
+* é‡å†™äº† *ReplaceServiceContainerBuilder* çš„é€»è¾‘ï¼Œé€šè¿‡ç›‘å¬ *AutofacContainerBuilder.Building* äº‹ä»¶è¿›è¡Œç»„ä»¶çš„æ›¿æ¢
+* é‡å†™äº† *ConfigAppContainerBuilder* çš„é€»è¾‘ï¼Œé€šè¿‡ç›‘å¬ *AutofacContainerBuilder.Building* äº‹ä»¶è¿›è¡Œç»„ä»¶çš„æ›¿æ¢
 
 # 1.6.0
 
 ## 2020-04-07
 
-* **ÐÂ¹¦ÄÜ** ÏµÍ³Æô¶¯Ê±£¬Éú³É *Json Schema* ÎÄ¼þ£¬ÅäÖÃÎÄ¼þ¿ÉÒÔÍ¨¹ýÒýÓÃ´Ë *schema* ÊµÏÖÌáÊ¾¹¦ÄÜ¡£
-* ´´½¨ÐÂ½Ó¿Ú *IEmptyAppContainer* ±íÊ¾Ò»¸ö¿ÕµÄÈÝÆ÷£¬ÈÃ *App* ºöÂÔ¶ÔÆäµÄÍÐ¹Ü
-* ÐÞ¸Ä *AppSetup* ÖÐµÄÒ»Ð©Âß¼­£¬ÈÃÆäÏÖÔÚÖ§³ÖÔÚÍ¬Ò»¸ö *Library* ÖÐ´æÔÚ¶à¸ö *AppModule*
+* **æ–°åŠŸèƒ½** ç³»ç»Ÿå¯åŠ¨æ—¶ï¼Œç”Ÿæˆ *Json Schema* æ–‡ä»¶ï¼Œé…ç½®æ–‡ä»¶å¯ä»¥é€šè¿‡å¼•ç”¨æ­¤ *schema* å®žçŽ°æç¤ºåŠŸèƒ½ã€‚
+* åˆ›å»ºæ–°æŽ¥å£ *IEmptyAppContainer* è¡¨ç¤ºä¸€ä¸ªç©ºçš„å®¹å™¨ï¼Œè®© *App* å¿½ç•¥å¯¹å…¶çš„æ‰˜ç®¡
+* ä¿®æ”¹ *AppSetup* ä¸­çš„ä¸€äº›é€»è¾‘ï¼Œè®©å…¶çŽ°åœ¨æ”¯æŒåœ¨åŒä¸€ä¸ª *Library* ä¸­å­˜åœ¨å¤šä¸ª *AppModule*
 
 # 1.7.0
 
 ## 2020-04-10
 
-* ÐÂÔö *Predicate* ¹¦ÄÜ£¬ÓÐÀûÓÚÐ´³ö¸üÒ×ÔÄ¶ÁµÄÌõ¼þÅÐ¶Ï
-* ÐÂÔö *AutofacContainerBuilder* µÄ¹¦ÄÜ£¬ÔÊÐíÒÔ×¢²áµÄÀàÐÍÒÆ³ýÒÑ×¢²áµÄÀàÐÍ
+* æ–°å¢ž *Predicate* åŠŸèƒ½ï¼Œæœ‰åˆ©äºŽå†™å‡ºæ›´æ˜“é˜…è¯»çš„æ¡ä»¶åˆ¤æ–­
+* æ–°å¢ž *AutofacContainerBuilder* çš„åŠŸèƒ½ï¼Œå…è®¸ä»¥æ³¨å†Œçš„ç±»åž‹ç§»é™¤å·²æ³¨å†Œçš„ç±»åž‹
 
 # 1.7.1
 ## 2020-04-12
-* Éú³É *JsonSchema* ÎÄ¼þÄÜ¹»¶ÔÓ¦ *Enum* ÀàÐÍ£¬²¢ÇÒÄÜ¹»Éú³ÉÏàÓ¦µÄÃèÊöÐÅÏ¢
+* ç”Ÿæˆ *JsonSchema* æ–‡ä»¶èƒ½å¤Ÿå¯¹åº” *Enum* ç±»åž‹ï¼Œå¹¶ä¸”èƒ½å¤Ÿç”Ÿæˆç›¸åº”çš„æè¿°ä¿¡æ¯
 
 # 2.0.3
 ## 2020-04-21
-* ÐÂÔö *INamespaceFilter* ½Ó¿Ú
-* *ComponentScanAppModule*¡¢*AutoConfigAppModule* ÊµÏÖ *INamespaceFilter* ½Ó¿Ú
-* ÐÂÔö *IAppSetupPlugin* ÓÃÓÚ¶Ô *AppSetup* ÖÐµÄÒ»Ð©½Úµã½øÈë½éÈë
-* ´´½¨ *NamespaceFilterPlugin* , *AppModuleMethodPlugin* ·Ö±ðÓÃÓÚÊµÏÖ *ComponentScanAppModule* ºÍ *AutoConfigAppModule* µÄ¹¦ÄÜ
-* ÐÂÔö *AppModuleMethodAttribute* ÓÃÓÚÎªËùÓÐ±ê¼ÇÔÚ *AppModule* ÄÚµÄ·½·¨µÄÌØÕ÷Ìá¹©»ù±¾µÄ¹¦ÄÜ
-* *ComponentCreator* , *ConfigCreator* , *ReplaceCreator* ¼Ì³ÐÓÚ *AppModuleMethdoAttribute*
-* ÐÂÔö *ComponentCreatorHandler , ConfigCreatorHandler , ComponentReplaceHandler* ÓÃÓÚÊµÏÖ *ComponentCreator* , *ConfigCreator* , *ReplaceCreator* µÄ¹¦ÄÜ
-* ÖØÐÂ¶¨ÒåÁË *OnUsing* µÄ²ÎÊýÎª *AppModuleUsingArguments*
-* AppModule ÖÐ²»ÔÊÐíÊ¹ÓÃ appSetup.GetScanResult£¬¶øÊÇÖ±½Ó½«½á¹û·ÅÔÚ *AppModuleUsingArguments* ÖÐ
+* æ–°å¢ž *INamespaceFilter* æŽ¥å£
+* *ComponentScanAppModule*ã€*AutoConfigAppModule* å®žçŽ° *INamespaceFilter* æŽ¥å£
+* æ–°å¢ž *IAppSetupPlugin* ç”¨äºŽå¯¹ *AppSetup* ä¸­çš„ä¸€äº›èŠ‚ç‚¹è¿›å…¥ä»‹å…¥
+* åˆ›å»º *NamespaceFilterPlugin* , *AppModuleMethodPlugin* åˆ†åˆ«ç”¨äºŽå®žçŽ° *ComponentScanAppModule* å’Œ *AutoConfigAppModule* çš„åŠŸèƒ½
+* æ–°å¢ž *AppModuleMethodAttribute* ç”¨äºŽä¸ºæ‰€æœ‰æ ‡è®°åœ¨ *AppModule* å†…çš„æ–¹æ³•çš„ç‰¹å¾æä¾›åŸºæœ¬çš„åŠŸèƒ½
+* *ComponentCreator* , *ConfigCreator* , *ReplaceCreator* ç»§æ‰¿äºŽ *AppModuleMethdoAttribute*
+* æ–°å¢ž *ComponentCreatorHandler , ConfigCreatorHandler , ComponentReplaceHandler* ç”¨äºŽå®žçŽ° *ComponentCreator* , *ConfigCreator* , *ReplaceCreator* çš„åŠŸèƒ½
+* é‡æ–°å®šä¹‰äº† *OnUsing* çš„å‚æ•°ä¸º *AppModuleUsingArguments*
+* AppModule ä¸­ä¸å…è®¸ä½¿ç”¨ appSetup.GetScanResultï¼Œè€Œæ˜¯ç›´æŽ¥å°†ç»“æžœæ”¾åœ¨ *AppModuleUsingArguments* ä¸­
 
 # 2.1.6
 ## 2020-06-04
-* ÐÂÔö *AppModulePrepairAttribute* ÌØÕ÷£¬ÔÊÐí¿ª·¢Õß×Ô¶¨ÒåÄ£¿é×¼±¸½×¶ÎµÄÐÐÎª
-* Îª *AppSetup* Ìí¼ÓÐÂµÄÂß¼­
-    * ÔÚÉ¨ÃèÀàÐÍÇ°£¬ÏÈÉ¨Ãè³öËùÓÐµÄ *IAppModule* ÀàÐÍ
-    * ¶ÔÃ¿Ò»¸ö *IAppModule* ÀàÐÍ£¬Ö´ÐÐÆäÉÏµÄ *AppModulePrepairAttribute.Prepair* ·½·¨
-    * ÏàÍ¬ÀàÐÍµÄ *IAppModule* Ö»Ö´ÐÐÒ»´Î¸Ã·½·¨
-* ÐÂÔö³éÏóÀà *CustomAddPluginsAttribute* £¬¼Ì³Ð *AppModulePrepairAttribute* £¬ÔÊÐíÓÃ»§ÔÚ¼Ì³ÐÊ±Ö¸¶¨ *IAppSetupPlugin*
-* ÐÂÔöÀà *AddPluginsAttribute* ºÍ *AddDefaultPluginsAttribute* ·Ö±ðÓÃÓÚÈÃ¿ª·¢ÕßÒÔ Type Ö¸¶¨²å¼þ ºÍ Ö¸¶¨Ä¬ÈÏµÄ²å¼þ
-* ½«Ô­À´µÄ×é¼þÊÂ¼þ²ÎÊýÃüÁî¿Õ¼ä´Ó AutofacExt ÒÆµ½ Reface.AppStarter ÏÂ
-* ÐÂÔöÊÂ¼þ *ComponentCreated* 
-* Ìí¼Ó×é¼þÉúÃüÖÜÆÚ¼àÌý¹¦ÄÜ£¬¿ª·¢Õß¿ÉÒÔÔÚÊµÏÖÀàÖÐ¼àÌý×ÔÉíµÄÉúÃüÖÜÆÚ£¬Ä¿Ç°Ö»Éè¼ÆÁËÒÔÏÂÉúÃüÖÜÆÚ½Úµã
+* æ–°å¢ž *AppModulePrepairAttribute* ç‰¹å¾ï¼Œå…è®¸å¼€å‘è€…è‡ªå®šä¹‰æ¨¡å—å‡†å¤‡é˜¶æ®µçš„è¡Œä¸º
+* ä¸º *AppSetup* æ·»åŠ æ–°çš„é€»è¾‘
+    * åœ¨æ‰«æç±»åž‹å‰ï¼Œå…ˆæ‰«æå‡ºæ‰€æœ‰çš„ *IAppModule* ç±»åž‹
+    * å¯¹æ¯ä¸€ä¸ª *IAppModule* ç±»åž‹ï¼Œæ‰§è¡Œå…¶ä¸Šçš„ *AppModulePrepairAttribute.Prepair* æ–¹æ³•
+    * ç›¸åŒç±»åž‹çš„ *IAppModule* åªæ‰§è¡Œä¸€æ¬¡è¯¥æ–¹æ³•
+* æ–°å¢žæŠ½è±¡ç±» *CustomAddPluginsAttribute* ï¼Œç»§æ‰¿ *AppModulePrepairAttribute* ï¼Œå…è®¸ç”¨æˆ·åœ¨ç»§æ‰¿æ—¶æŒ‡å®š *IAppSetupPlugin*
+* æ–°å¢žç±» *AddPluginsAttribute* å’Œ *AddDefaultPluginsAttribute* åˆ†åˆ«ç”¨äºŽè®©å¼€å‘è€…ä»¥ Type æŒ‡å®šæ’ä»¶ å’Œ æŒ‡å®šé»˜è®¤çš„æ’ä»¶
+* å°†åŽŸæ¥çš„ç»„ä»¶äº‹ä»¶å‚æ•°å‘½ä»¤ç©ºé—´ä»Ž AutofacExt ç§»åˆ° Reface.AppStarter ä¸‹
+* æ–°å¢žäº‹ä»¶ *ComponentCreated* 
+* æ·»åŠ ç»„ä»¶ç”Ÿå‘½å‘¨æœŸç›‘å¬åŠŸèƒ½ï¼Œå¼€å‘è€…å¯ä»¥åœ¨å®žçŽ°ç±»ä¸­ç›‘å¬è‡ªèº«çš„ç”Ÿå‘½å‘¨æœŸï¼Œç›®å‰åªè®¾è®¡äº†ä»¥ä¸‹ç”Ÿå‘½å‘¨æœŸèŠ‚ç‚¹
     * IOnCreating
     * IOnCreated
-* ÐÂÔöÒì³£ *AppContainerExistsException* £¬²»ÔÊÐíÔÚ *App* ÖÐ´æÔÚÁ½¸ö»òÒÔÉÏµÄÏàÍ¬ *IAppContainer* ÊµÀý
-* ÐÂÔö *IWork* ×é¼þ£¬ÓÃÓÚ±íÊ¾Ò»¸ö¹¤×÷µ¥Ôª
-    * ¿ÉÒÔ´Ó *App* ÊµÀýÉÏ¿ªÆô¹¤×÷µ¥Ôª
-    * Ã¿¸ö¹¤×÷µ¥ÔªÄÚµÄ×é¼þ¶¼ÊÇÍ¬Ò»ÊµÀý
-    * Ã¿¸ö¹¤×÷µ¥ÔªÓµÓÐ¸÷¸öµÄÉÏÏÂÎÄ
-    * Ã¿¸ö¹¤×÷µ¥Ôª¿ÉÒÔ´´½¨×é¼þºÍÊôÐÔ×¢Èë
-    * Ã¿¸ö¹¤×÷µ¥Ôª¿ÉÒÔ¿ªÆôÐÂµÄ¹¤×÷µ¥Ôª
-    * ¿ÉÒÔÖ±½ÓÀûÓÃ¹¤×÷µ¥Ôª·¢²¼ÊÂ¼þ ( À©Õ¹·½·¨ )
-* ÔÊÐíÔÚ *AppSetup* ½×¶ÎÔ¤Éè *App* ÖÐµÄ Context ¼üÖµ¶Ô
+* æ–°å¢žå¼‚å¸¸ *AppContainerExistsException* ï¼Œä¸å…è®¸åœ¨ *App* ä¸­å­˜åœ¨ä¸¤ä¸ªæˆ–ä»¥ä¸Šçš„ç›¸åŒ *IAppContainer* å®žä¾‹
+* æ–°å¢ž *IWork* ç»„ä»¶ï¼Œç”¨äºŽè¡¨ç¤ºä¸€ä¸ªå·¥ä½œå•å…ƒ
+    * å¯ä»¥ä»Ž *App* å®žä¾‹ä¸Šå¼€å¯å·¥ä½œå•å…ƒ
+    * æ¯ä¸ªå·¥ä½œå•å…ƒå†…çš„ç»„ä»¶éƒ½æ˜¯åŒä¸€å®žä¾‹
+    * æ¯ä¸ªå·¥ä½œå•å…ƒæ‹¥æœ‰å„ä¸ªçš„ä¸Šä¸‹æ–‡
+    * æ¯ä¸ªå·¥ä½œå•å…ƒå¯ä»¥åˆ›å»ºç»„ä»¶å’Œå±žæ€§æ³¨å…¥
+    * æ¯ä¸ªå·¥ä½œå•å…ƒå¯ä»¥å¼€å¯æ–°çš„å·¥ä½œå•å…ƒ
+    * å¯ä»¥ç›´æŽ¥åˆ©ç”¨å·¥ä½œå•å…ƒå‘å¸ƒäº‹ä»¶ ( æ‰©å±•æ–¹æ³• )
+* å…è®¸åœ¨ *AppSetup* é˜¶æ®µé¢„è®¾ *App* ä¸­çš„ Context é”®å€¼å¯¹
 
 # 0.0.0
 ## 000
-* Ìí¼ÓÁËÒ»Ð©À©Õ¹·½·¨
-* Ìí¼ÓÁË PredicateTemplate
+* æ·»åŠ äº†ä¸€äº›æ‰©å±•æ–¹æ³•
+* æ·»åŠ äº† PredicateTemplate

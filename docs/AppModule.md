@@ -18,7 +18,7 @@ void OnUsing(AppModuleUsingArguments arguments);
 
 **注意**
 
-当 A 引用 B 时，B 应当出现在 A 的 DependentModules 中，而 A 会作用参数出现 B 的 OnUsing 的 targetModule 中。
+当 A 引用 B 时，B 应当出现在 A 的 DependentModules 中，而 A 会作用参数出现 B 的 OnUsing 的 TargetAppModule 中。
 
 系统中提供了更为便捷的 *AppModule* ，可以让开发者避免直接从接口进行实现。
 
@@ -34,6 +34,7 @@ public class YourAppModule : AppModule
     // 还可以 添加 [ComponentCreator]
     // 还可以 添加 [ReplaceCreator]
     // 还可以 添加 [ConfigCreator]
+    // 还可以 添加你自定义的带特征的方法
 }
 ```
 
