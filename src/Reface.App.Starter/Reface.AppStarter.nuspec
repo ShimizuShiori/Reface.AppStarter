@@ -18,7 +18,7 @@
     <tags>IOC,Autofac,Reface,Framework,DI,CommandBus,EventBus</tags>
     <dependencies>
       <dependency id="Newtonsoft.Json" version="12.0.3" />
-      <dependency id="Autofac" version="5.1.2" />
+      <dependency id="Autofac" version="[5.1.2,5.2.0]" />
       <dependency id="Reface.EventBus" version="[3.2.7,3.3.0)" />
       <dependency id="Reface.CommandBus" version="[2.0.1,2.1.0)" />
     </dependencies>
