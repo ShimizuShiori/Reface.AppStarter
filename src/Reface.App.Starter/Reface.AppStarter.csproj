@@ -60,6 +60,14 @@
     <Compile Include="ComponentLifetimeListeners\IOnCreated.cs" />
     <Compile Include="ComponentLifetimeListeners\IOnCreating.cs" />
     <Compile Include="ComponentLifetimeListeners\CreateArguments.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\ReflectionExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\ToolExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Extensions\WorkExtensions.cs" />
+    <Compile Include="Extensions\XmlExtensions.cs" />
     <Compile Include="NoComponentRegistedEventArgs.cs" />
     <Compile Include="AppModuleMethodHandlers\ComponentCreatorHandler.cs" />
     <Compile Include="AppModuleMethodHandlers\ComponentReplaceHandler.cs" />
@@ -117,7 +125,6 @@
     <Compile Include="Errors\ServiceHasBeenReplacedException.cs" />
     <Compile Include="EventListenerFinder.cs" />
     <Compile Include="Events\AppStartedEvent.cs" />
-    <Compile Include="Ext.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="AppContainers\IAppContainer.cs" />
     <Compile Include="AppContainerBuilders\IAppContainerBuilder.cs" />
