@@ -20,7 +20,12 @@ namespace Reface.AppStarter
 
         IWork BeginWork(string workName);
         T CreateComponent<T>();
+
+        bool TryCreateComponent<T>(out T result) where T : class;
+
         object CreateComponent(Type type);
+
+        bool TryCreateComponent(Type type, out object result);
 
         void InjectProperties(object value);
 

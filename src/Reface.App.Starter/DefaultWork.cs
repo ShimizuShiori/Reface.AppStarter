@@ -48,5 +48,15 @@ namespace Reface.AppStarter
         {
             this.lifetimeScope.InjectProperties(value);
         }
+
+        public bool TryCreateComponent<T>(out T result) where T : class
+        {
+            return this.lifetimeScope.TryResolve<T>(out result);
+        }
+
+        public bool TryCreateComponent(Type type, out object result)
+        {
+            return this.lifetimeScope.TryResolve(type, out result);
+        }
     }
 }
