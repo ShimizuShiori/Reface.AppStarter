@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Autofac;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Reface.AppStarter.AppContainers;
 using Reface.AppStarter.AppModules;
 using System;
@@ -48,8 +49,25 @@ namespace Reface.AppStarter.Tests
                 }
                 catch (Exception)
                 {
-                    
+
                 }
+            }
+        }
+
+        [TestMethod]
+        public void DoNotTriggerNoComponentRegisted()
+        {
+            IAppModule appModule = new TestAppModule();
+            AppSetup setup = new AppSetup();
+            var app = setup.Start(appModule);
+            var container = app.GetAppContainer<IComponentContainer>();
+            container.NoComponentRegisted += (sender, e) =>
+            {
+                Assert.Fail();
+            };
+            using (var scope = container.BeginScope("TEST"))
+            {
+                var t = scope.CreateComponent<ILifetimeScope>();
             }
         }
     }
