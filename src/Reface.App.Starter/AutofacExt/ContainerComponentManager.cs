@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Reface.AppStarter.ComponentLifetimeListeners;
 using System;
 
 namespace Reface.AppStarter.AutofacExt
@@ -28,6 +29,8 @@ namespace Reface.AppStarter.AutofacExt
         public void InjectProperties(object value)
         {
             this.container.InjectProperties(value);
+            if (value is IOnPropertiesInjected opi) 
+                opi.OnPropertiesInjected();
         }
 
         public bool TryCreateComponent(Type type, out object result)

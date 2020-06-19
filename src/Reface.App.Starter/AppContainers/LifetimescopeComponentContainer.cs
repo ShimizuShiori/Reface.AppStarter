@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Core.Registration;
+using Reface.AppStarter.ComponentLifetimeListeners;
 using Reface.AppStarter.Errors;
 using System;
 
@@ -71,6 +72,8 @@ namespace Reface.AppStarter.AppContainers
         public void InjectProperties(object value)
         {
             this.LifetimeScope.InjectProperties(value);
+            if (value is IOnPropertiesInjected opi)
+                opi.OnPropertiesInjected();
         }
 
         public void OnAppPrepair(App app)

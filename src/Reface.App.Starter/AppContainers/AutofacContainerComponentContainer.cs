@@ -100,6 +100,8 @@ namespace Reface.AppStarter.AppContainers
         public void InjectProperties(object value)
         {
             this.Container.InjectProperties(value);
+            if (value is IOnPropertiesInjected opi)
+                opi.OnPropertiesInjected();
         }
 
         public void OnAppPrepair(App app)
