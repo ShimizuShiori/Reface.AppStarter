@@ -152,7 +152,15 @@
     * 可以直接利用工作单元发布事件 ( 扩展方法 )
 * 允许在 *AppSetup* 阶段预设 *App* 中的 Context 键值对
 
-# 0.0.0
-## 000
-* 添加了一些扩展方法
-* 添加了 PredicateTemplate
+# 2.1.20
+## 2020-06-04
+* 添加了 *Tool* 功能，在 Setup 阶段会创建一个小的 IOC 容器来支持 Setup 过程，使用 Tool 注册的组件都是单例的
+* 优化了部分代码逻辑结构
+* 追加了一些新的扩展方法
+* 将对第三方的依赖关系加上了一定的约束，防止意外的不兼容情况
+* 更新 autofac 至 5.2.0
+* 为 IWork 添加了 TryCreateComponent 方法
+* 添加了 IOnPropertiesInjected 生命周期监听接口
+* 更新对 EventBus 至 3.3.0
+* 添加了 AppStartingEvent ，早于 AppStartedEvent
+* 修复了在特别的未知的情况下出现的对泛型组件注册时，ComponentCreating 事件无法得到正确的 RequiredType 的 BUG

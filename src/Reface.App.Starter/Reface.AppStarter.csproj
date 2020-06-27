@@ -55,12 +55,14 @@
     <Compile Include="AppSetupOptions.cs" />
     <Compile Include="AppSetupPlugins\Arguments\OnToolsCreatedArguments.cs" />
     <Compile Include="Attributes\AutoSetAttribute.cs" />
+    <Compile Include="AutofacExt\ComponentRegistrationActivateEventTrigger.cs" />
     <Compile Include="AutofacExt\ContainerComponentManager.cs" />
     <Compile Include="ComponentCreatedEventArgs.cs" />
     <Compile Include="ComponentLifetimeListeners\IOnCreated.cs" />
     <Compile Include="ComponentLifetimeListeners\IOnCreating.cs" />
     <Compile Include="ComponentLifetimeListeners\CreateArguments.cs" />
     <Compile Include="ComponentLifetimeListeners\IOnPropertiesInjected.cs" />
+    <Compile Include="Events\AppStartingEvent.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\ReflectionExtensions.cs" />

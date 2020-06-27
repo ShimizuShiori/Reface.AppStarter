@@ -94,9 +94,12 @@
     <Compile Include="Configs\Printer.cs" />
     <Compile Include="Configs\PropertyValue.cs" />
     <Compile Include="Configs\SomeConfigWithoutAttribute.cs" />
+    <Compile Include="Entities\EntityA.cs" />
+    <Compile Include="Entities\EntityB.cs" />
     <Compile Include="Events\TestEvent.cs" />
     <Compile Include="ExtTests.cs" />
     <Compile Include="GetComponentFromMyComponentTests.cs" />
+    <Compile Include="GetGenericComponentTests.cs" />
     <Compile Include="JsonSchema\DefaultJsonSchemaGeneratorTests.cs" />
     <Compile Include="Listeners\TestListener.cs" />
     <Compile Include="ModuleA\AAppModule.cs" />
@@ -126,6 +129,8 @@
     <Compile Include="NoComponentRegistedTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisteAsFunTest.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Services\ComponentListenerToLifetime.cs" />
     <Compile Include="Services\IIdService.cs" />
     <Compile Include="Services\MyDefaultCL1Service.cs" />
@@ -156,6 +161,7 @@
       <Name>Reface.AppStarter</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

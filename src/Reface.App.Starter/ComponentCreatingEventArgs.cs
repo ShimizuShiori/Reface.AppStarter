@@ -41,5 +41,10 @@ namespace Reface.AppStarter
             this.IsReplaced = true;
             this.ReplacedObject = newObject;
         }
+
+        public override string ToString()
+        {
+            return $"{CreatedObject.GetType()} : {RequiredType}";
+        }
     }
 }

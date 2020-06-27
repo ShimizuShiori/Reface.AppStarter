@@ -4,6 +4,7 @@ using Autofac.Core.Lifetime;
 using Autofac.Core.Registration;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Reface.AppStarter.AutofacExt
@@ -42,9 +43,13 @@ namespace Reface.AppStarter.AutofacExt
             {
                 foreach (var registration in registrationAccessor(service))
                 {
-                    registration.Metadata["ServiceType"] = swt.ServiceType;
-                    registration.Activating += Registration_Activating;
-                    registration.Activated += Registration_Activated;
+                    var trigger = new ComponentRegistrationActivateEventTrigger(registration, swt.ServiceType);
+
+                    trigger.ComponentCreated += (sender, e) => this.ComponentCreated?.Invoke(this, e);
+                    trigger.ComponentCreating += (sender, e) => this.ComponentCreating?.Invoke(this, e);
+
+                    //registration.Activating += Registration_Activating;
+                    //registration.Activated += Registration_Activated;
                 }
                 return Enumerable.Empty<IComponentRegistration>();
             }
@@ -76,9 +81,11 @@ namespace Reface.AppStarter.AutofacExt
 
         private void Registration_Activating(object sender, ActivatingEventArgs<object> e)
         {
-            Type serviceType = (sender as IComponentRegistration).Metadata["ServiceType"] as Type;
+            IComponentRegistration registration = sender as IComponentRegistration;
+            Type serviceType = registration.Metadata["ServiceType"] as Type;
             ComponentCreatingEventArgs moduleComponentCreatingEventArgs =
                 new ComponentCreatingEventArgs(new ComponentContextComponentManager(e.Context), serviceType, e.Instance);
+            Debug.WriteLine($"[{registration.Id}] ComponentCreating : {moduleComponentCreatingEventArgs}");
             this.ComponentCreating?.Invoke(this, moduleComponentCreatingEventArgs);
             if (moduleComponentCreatingEventArgs.IsReplaced)
                 e.Instance = moduleComponentCreatingEventArgs.ReplacedObject;

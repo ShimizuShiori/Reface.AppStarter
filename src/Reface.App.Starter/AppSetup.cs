@@ -20,6 +20,21 @@ namespace Reface.AppStarter
     /// </summary>
     public class AppSetup
     {
+        #region Public Static Methods
+
+        public static App Start<TAppModule>(AppSetupOptions options)
+            where TAppModule : IAppModule, new()
+        {
+            return new AppSetup(options).Start(new TAppModule());
+        }
+        public static App Start<TAppModule>()
+            where TAppModule : IAppModule, new()
+        {
+            return AppSetup.Start<TAppModule>(new AppSetupOptions());
+        }
+
+        #endregion
+
         #region Private Fields
 
         private readonly IList<IAppContainerBuilder> appContainerBuilders
