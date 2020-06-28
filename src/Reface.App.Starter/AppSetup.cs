@@ -7,6 +7,7 @@ using Reface.AppStarter.AppSetupPlugins;
 using Reface.AppStarter.AppSetupPlugins.Arguments;
 using Reface.AppStarter.Attributes;
 using Reface.AppStarter.AutofacExt;
+using Reface.AppStarter.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -207,6 +208,11 @@ namespace Reface.AppStarter
                    .ToList();
             App app = new App(appContainers, this.AppContext);
             appContainers.ForEach(x => x.OnAppStarted(app));
+            using (var work = app.BeginWork("OnAppStart"))
+            {
+                work.PublishEvent(new AppStartingEvent(this, app));
+                work.PublishEvent(new AppStartedEvent(this, app));
+            }
             return app;
         }
 

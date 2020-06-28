@@ -90,12 +90,6 @@ namespace Reface.AppStarter.AppContainers
 
         public void OnAppStarted(App app)
         {
-            using (var scope = this.Container.BeginLifetimeScope("OnAppStarted"))
-            {
-                IEventBus eventBus = scope.Resolve<IEventBus>();
-                eventBus.Publish(new AppStartingEvent(this, app));
-                eventBus.Publish(new AppStartedEvent(this, app));
-            }
         }
 
         public void InjectProperties(object value)
