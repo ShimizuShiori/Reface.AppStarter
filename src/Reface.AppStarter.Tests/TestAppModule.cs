@@ -1,5 +1,6 @@
 ﻿using ClassLibrary1;
 using ClassLibrary1.Services;
+using ClassLibrary2;
 using Reface.AppStarter.AppModules;
 using Reface.AppStarter.Attributes;
 using Reface.AppStarter.Tests.Configs;
@@ -10,6 +11,7 @@ namespace Reface.AppStarter.Tests
     [AutoConfigAppModule]
     [ComponentScanAppModule]
     [CL1AppModule]
+    [Cb2AppModule]
     public class TestAppModule : AppModule
     {
         [ComponentCreator]
