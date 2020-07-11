@@ -5,12 +5,14 @@ using Reface.AppStarter.Errors;
 using Reface.AppStarter.Tests.Configs;
 using Reface.AppStarter.Tests.Services;
 using System;
+using System.Diagnostics;
 
 namespace Reface.AppStarter.Tests
 {
     [TestClass()]
     public class AppSetupTests
     {
+        public class Human { }
 
         [TestMethod]
         public void TestStart()
@@ -18,11 +20,19 @@ namespace Reface.AppStarter.Tests
             IAppModule appModule = new TestAppModule();
             AppSetup setup = new AppSetup();
             var app = setup.Start(appModule);
+            Debug.WriteLine("AppStarted");
             IComponentContainer componentContainer = app.GetAppContainer<IComponentContainer>();
             Assert.IsNotNull(componentContainer);
+            Debug.WriteLine("Creating : {0}", typeof(Class2));
             Assert.IsNotNull(componentContainer.CreateComponent<Class2>());
+            Debug.WriteLine("Created : {0}", typeof(Class2));
+            Debug.WriteLine("Creating : {0}", typeof(Class2));
             Class2 cls2 = componentContainer.CreateComponent<Class2>();
+            Debug.WriteLine("Created : {0}", typeof(Class2));
+            Debug.WriteLine("Injecting : {0}", typeof(Class2));
             componentContainer.InjectProperties(cls2);
+            Debug.WriteLine("Injected : {0}", typeof(Class2));
+
             int i = app.Context.GetOrCreate<int>("Index", key => 0);
             Assert.AreEqual(2, i);
             Assert.IsNotNull(cls2.Class1);

@@ -33,26 +33,28 @@ namespace Reface.AppStarter.AutofacExt
 
         public IEnumerable<IComponentRegistration> RegistrationsFor(Service service, Func<Service, IEnumerable<IComponentRegistration>> registrationAccessor)
         {
-
+            if(service.Description.StartsWith("Decorator ("))
+                return Enumerable.Empty<IComponentRegistration>();
             var swt = service as IServiceWithType;
             if (swt == null)
                 return Enumerable.Empty<IComponentRegistration>();
 
             var registrations = registrationAccessor(service);
+            Debug.WriteLine("RegistrationsFor : {0}", swt.ServiceType);
             if (registrations.Any())
             {
+                Debug.WriteLine("\tRegisted : {0}", swt.ServiceType);
                 foreach (var registration in registrationAccessor(service))
                 {
                     var trigger = new ComponentRegistrationActivateEventTrigger(registration, swt.ServiceType);
 
                     trigger.ComponentCreated += (sender, e) => this.ComponentCreated?.Invoke(this, e);
                     trigger.ComponentCreating += (sender, e) => this.ComponentCreating?.Invoke(this, e);
-
-                    //registration.Activating += Registration_Activating;
-                    //registration.Activated += Registration_Activated;
                 }
                 return Enumerable.Empty<IComponentRegistration>();
             }
+
+            Debug.WriteLine("\tNo Registed : {0}", swt.ServiceType);
             NoComponentRegistedEventArgs noComponentRegistedEventArgs = new NoComponentRegistedEventArgs(swt.ServiceType);
             this.NoComponentRegisted?.Invoke(this, noComponentRegistedEventArgs);
             if (noComponentRegistedEventArgs.ComponentProvider == null)
