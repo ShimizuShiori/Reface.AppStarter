@@ -100,5 +100,24 @@ namespace Reface.AppStarter.Tests
                 Assert.IsInstanceOfType(ex, typeof(AppContainerExistsException));
             }
         }
+
+        [TestMethod]
+        public void ChangeInstance()
+        {
+            var app = AppSetup.Start<TestAppModule>();
+            IComponentContainer container = app.GetAppContainer<IComponentContainer>();
+            container.ComponentCreating += (sender, e) =>
+            {
+                if (e.CreatedObject is IIdService)
+                    e.Replace(new EmptyIdService());
+            };
+            using (IWork work = app.BeginWork("Test"))
+            {
+                IIdService service = work.CreateComponent<IIdService>();
+                Assert.IsInstanceOfType(service, typeof(EmptyIdService));
+            }
+        }
+
+
     }
 }

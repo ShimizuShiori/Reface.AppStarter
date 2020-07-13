@@ -35,7 +35,10 @@ namespace Reface.AppStarter.AutofacExt
             Debug.WriteLine($"[{registration.Id}] ComponentCreating : {moduleComponentCreatingEventArgs}");
             this.ComponentCreating?.Invoke(this, moduleComponentCreatingEventArgs);
             if (moduleComponentCreatingEventArgs.IsReplaced)
+            {
+                Debug.WriteLine($"[{registration.Id}] ComponentReplaced : {moduleComponentCreatingEventArgs.ReplacedObject.GetType()} : {moduleComponentCreatingEventArgs.RequiredType}");
                 e.Instance = moduleComponentCreatingEventArgs.ReplacedObject;
+            }
         }
     }
 }

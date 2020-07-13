@@ -16,4 +16,9 @@ namespace Reface.AppStarter.Tests.Services
 
         public Guid Id => this.id;
     }
+
+    public class EmptyIdService : IIdService
+    {
+        public Guid Id => Guid.Empty;
+    }
 }

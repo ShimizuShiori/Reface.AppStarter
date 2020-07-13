@@ -182,7 +182,7 @@
       <Version>2.0.1</Version>
     </PackageReference>
     <PackageReference Include="Reface.EventBus">
-      <Version>3.3.0</Version>
+      <Version>3.3.2.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />
