@@ -31,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Reface.AppStarter.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -63,6 +64,7 @@
     <Compile Include="ComponentLifetimeListeners\CreateArguments.cs" />
     <Compile Include="ComponentLifetimeListeners\IOnPropertiesInjected.cs" />
     <Compile Include="Events\AppStartingEvent.cs" />
+    <Compile Include="Extensions\AppExtensions.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\ReflectionExtensions.cs" />
