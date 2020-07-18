@@ -11,20 +11,7 @@ namespace Reface.AppStarter.AppModuleMethodHandlers
         {
             AutofacContainerBuilder autofacContainerBuilder
                 = appSetup.GetAppContainerBuilder<AutofacContainerBuilder>();
-            autofacContainerBuilder.RegisterByCreator(cm =>
-            {
-                ParameterInfo[] ps = method.GetParameters();
-                if (ps.Length == 0)
-                    return method.Invoke(appModule, null);
-                object[] values = new object[ps.Length];
-                for (int i = 0; i < ps.Length; i++)
-                {
-                    Type pType = ps[i].ParameterType;
-                    object value = cm.CreateComponent(pType);
-                    values[i] = value;
-                }
-                return method.Invoke(appModule, values);
-            }, method.ReturnType);
+            autofacContainerBuilder.RegisterMethodCreator(appModule, method);
         }
     }
 }

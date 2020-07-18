@@ -13,7 +13,7 @@ namespace Reface.AppStarter.Tests.Listeners
         {
             IComponentContainer componentContainer = @event.App.GetAppContainer<IComponentContainer>();
             componentContainer.ComponentCreating += ComponentContainer_ComponentCreating;
-            Console.WriteLine(this.GetType().FullName);
+            Console.WriteLine("ListenerComponentCreating : " + this.GetType().FullName);
         }
 
         private void ComponentContainer_ComponentCreating(object sender, ComponentCreatingEventArgs e)

@@ -2,6 +2,8 @@
 using Reface.AppStarter.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Reface.AppStarter.AutofacComponentRegistions
 {
@@ -9,12 +11,13 @@ namespace Reface.AppStarter.AutofacComponentRegistions
     {
         private readonly Type componentType;
         private readonly RegistionMode registionMode;
+        private readonly bool isSingleton;
 
         public ScannedComponentRegistion(Type componentType, RegistionMode registionMode)
         {
             this.componentType = componentType;
             this.registionMode = registionMode;
-
+            this.isSingleton = componentType.GetCustomAttributes<SingletonAttribute>().Any();
             var mode = this.registionMode;
             if (componentType.GetInterfaces().Length == 0)
             {
@@ -30,10 +33,11 @@ namespace Reface.AppStarter.AutofacComponentRegistions
             if (EnumHelper.HasFlag(mode, RegistionMode.AsSelf))
                 serviceTypes.Add(componentType);
             this.ServiceTypes = serviceTypes;
-
         }
 
         public IEnumerable<Type> ServiceTypes { get; private set; }
+
+        public string Key => this.componentType.FullName;
 
         public void RegisterToAutofac(ContainerBuilder builder, Type serviceType)
         {
@@ -41,15 +45,21 @@ namespace Reface.AppStarter.AutofacComponentRegistions
             {
                 var r = builder
                     .RegisterGeneric(componentType)
-                    .As(serviceType)
-                    .InstancePerLifetimeScope();
+                    .As(serviceType);
+                if (isSingleton)
+                    r.SingleInstance();
+                else
+                    r.InstancePerLifetimeScope();
             }
             else
             {
                 var r = builder
                     .RegisterType(componentType)
-                    .As(serviceType)
-                    .InstancePerLifetimeScope();
+                    .As(serviceType);
+                if (isSingleton)
+                    r.SingleInstance();
+                else
+                    r.InstancePerLifetimeScope();
             }
         }
     }

@@ -32,11 +32,11 @@ namespace Reface.AppStarter.AutofacExt
             IComponentRegistration registration = sender as IComponentRegistration;
             ComponentCreatingEventArgs moduleComponentCreatingEventArgs =
                 new ComponentCreatingEventArgs(new ComponentContextComponentManager(e.Context), serviceType, e.Instance);
-            Debug.WriteLine($"[{registration.Id}] ComponentCreating : {moduleComponentCreatingEventArgs}");
+            //Debug.WriteLine($"[{registration.Id}] ComponentCreating : {moduleComponentCreatingEventArgs}");
             this.ComponentCreating?.Invoke(this, moduleComponentCreatingEventArgs);
             if (moduleComponentCreatingEventArgs.IsReplaced)
             {
-                Debug.WriteLine($"[{registration.Id}] ComponentReplaced : {moduleComponentCreatingEventArgs.ReplacedObject.GetType()} : {moduleComponentCreatingEventArgs.RequiredType}");
+                //Debug.WriteLine($"[{registration.Id}] ComponentReplaced : {moduleComponentCreatingEventArgs.ReplacedObject.GetType()} : {moduleComponentCreatingEventArgs.RequiredType}");
                 e.Instance = moduleComponentCreatingEventArgs.ReplacedObject;
             }
         }

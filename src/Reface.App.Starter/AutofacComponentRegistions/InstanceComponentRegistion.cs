@@ -16,6 +16,8 @@ namespace Reface.AppStarter.AutofacComponentRegistions
 
         public IEnumerable<Type> ServiceTypes { get; private set; }
 
+        public string Key => this.instance.GetType().FullName;
+
         public void RegisterToAutofac(ContainerBuilder builder, Type serviceType)
         {
             builder

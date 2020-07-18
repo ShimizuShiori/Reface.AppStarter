@@ -84,6 +84,7 @@
     <Compile Include="AppContainerBuilders\TestContainerBuilder.cs" />
     <Compile Include="AppContainers\TestContainer.cs" />
     <Compile Include="AppModulePluginTests.cs" />
+    <Compile Include="AppModules\C1AndC2AppModule.cs" />
     <Compile Include="AppModuleThatWillBuildTwoTestAppContainer.cs" />
     <Compile Include="AppSetupTests.cs" />
     <Compile Include="AppTests.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Configs\Printer.cs" />
     <Compile Include="Configs\PropertyValue.cs" />
     <Compile Include="Configs\SomeConfigWithoutAttribute.cs" />
+    <Compile Include="DuplicateRegistrationTests.cs" />
     <Compile Include="Entities\EntityA.cs" />
     <Compile Include="Entities\EntityB.cs" />
     <Compile Include="Events\TestEvent.cs" />

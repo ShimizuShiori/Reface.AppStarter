@@ -1,4 +1,5 @@
 ﻿using Reface.AppStarter.Attributes;
+using Reface.AppStarter.ComponentLifetimeListeners;
 using System;
 using System.Reflection;
 
@@ -27,6 +28,8 @@ namespace Reface.AppStarter
 
                     field.SetValue(value, result);
                 });
+            if (value is IOnFieldsInjected onFieldsInjected)
+                onFieldsInjected.OnFieldsInjected();
         }
     }
 }

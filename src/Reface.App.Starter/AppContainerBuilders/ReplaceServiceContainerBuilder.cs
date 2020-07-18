@@ -78,20 +78,7 @@ namespace Reface.AppStarter.AppContainerBuilders
             foreach (var method in methods)
             {
                 autofacContainerBuilder.RemoveComponentByComponentType(method.Method.ReturnType);
-                autofacContainerBuilder.RegisterByCreator(cm =>
-                {
-                    ParameterInfo[] ps = method.Method.GetParameters();
-                    if (ps.Length == 0)
-                        return method.Method.Invoke(method.Target, null);
-                    object[] values = new object[ps.Length];
-                    for (int i = 0; i < ps.Length; i++)
-                    {
-                        Type pType = ps[i].ParameterType;
-                        object value = cm.CreateComponent(pType);
-                        values[i] = value;
-                    }
-                    return method.Method.Invoke(method.Target, values);
-                }, method.Method.ReturnType);
+                autofacContainerBuilder.RegisterMethodCreator((IAppModule)method.Target, method.Method);
             }
         }
     }

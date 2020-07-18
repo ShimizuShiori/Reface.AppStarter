@@ -44,7 +44,7 @@ namespace Reface.AppStarter
 
         private readonly IAllAppModuleTypeCollector allAppModuleTypeCollector;
 
-        private IAppModuleScanner scanner;
+        private IAppModuleScanner scanner = null;
 
         #endregion
 

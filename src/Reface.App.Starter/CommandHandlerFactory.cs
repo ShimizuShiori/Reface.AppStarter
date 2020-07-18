@@ -7,10 +7,10 @@ using System.Collections.Generic;
 
 namespace Reface.AppStarter
 {
-    [Component]
     /// <summary>
     /// 基于 autofac 的 <see cref="ICommandHandlerFactory"/>
     /// </summary>
+    [Component]
     public class CommandHandlerFactory : ICommandHandlerFactory
     {
         private readonly ILifetimeScope lifetimeScope;

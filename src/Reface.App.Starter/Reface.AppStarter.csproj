@@ -56,6 +56,11 @@
     <Compile Include="AppSetupOptions.cs" />
     <Compile Include="AppSetupPlugins\Arguments\OnToolsCreatedArguments.cs" />
     <Compile Include="Attributes\AutoSetAttribute.cs" />
+    <Compile Include="Attributes\SingletonAttribute.cs" />
+    <Compile Include="AutofacComponentRegistions\ComponentFactory.cs" />
+    <Compile Include="AutofacComponentRegistions\FactoryComponentRegistion.cs" />
+    <Compile Include="AutofacComponentRegistions\IComponentFactory.cs" />
+    <Compile Include="AutofacComponentRegistions\MethodComponentRegistion.cs" />
     <Compile Include="AutofacExt\ComponentRegistrationActivateEventTrigger.cs" />
     <Compile Include="AutofacExt\ContainerComponentManager.cs" />
     <Compile Include="ComponentCreatedEventArgs.cs" />
@@ -171,6 +176,9 @@
     <Compile Include="Attributes\ToolAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="Reface.AppStarter.nuspec" />
   </ItemGroup>
   <ItemGroup>

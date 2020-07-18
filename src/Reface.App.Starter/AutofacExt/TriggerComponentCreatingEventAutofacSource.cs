@@ -40,10 +40,10 @@ namespace Reface.AppStarter.AutofacExt
                 return Enumerable.Empty<IComponentRegistration>();
 
             var registrations = registrationAccessor(service);
-            Debug.WriteLine("RegistrationsFor : {0}", swt.ServiceType);
+            //Debug.WriteLine("RegistrationsFor : {0}", swt.ServiceType);
             if (registrations.Any())
             {
-                Debug.WriteLine("\tRegisted : {0}", swt.ServiceType);
+                //Debug.WriteLine("\tRegisted : {0}", swt.ServiceType);
                 foreach (var registration in registrationAccessor(service))
                 {
                     var trigger = new ComponentRegistrationActivateEventTrigger(registration, swt.ServiceType);
@@ -54,7 +54,7 @@ namespace Reface.AppStarter.AutofacExt
                 return Enumerable.Empty<IComponentRegistration>();
             }
 
-            Debug.WriteLine("\tNo Registed : {0}", swt.ServiceType);
+            //Debug.WriteLine("\tNo Registed : {0}", swt.ServiceType);
             NoComponentRegistedEventArgs noComponentRegistedEventArgs = new NoComponentRegistedEventArgs(swt.ServiceType);
             this.NoComponentRegisted?.Invoke(this, noComponentRegistedEventArgs);
             if (noComponentRegistedEventArgs.ComponentProvider == null)
@@ -87,7 +87,7 @@ namespace Reface.AppStarter.AutofacExt
             Type serviceType = registration.Metadata["ServiceType"] as Type;
             ComponentCreatingEventArgs moduleComponentCreatingEventArgs =
                 new ComponentCreatingEventArgs(new ComponentContextComponentManager(e.Context), serviceType, e.Instance);
-            Debug.WriteLine($"[{registration.Id}] ComponentCreating : {moduleComponentCreatingEventArgs}");
+            //Debug.WriteLine($"[{registration.Id}] ComponentCreating : {moduleComponentCreatingEventArgs}");
             this.ComponentCreating?.Invoke(this, moduleComponentCreatingEventArgs);
             if (moduleComponentCreatingEventArgs.IsReplaced)
                 e.Instance = moduleComponentCreatingEventArgs.ReplacedObject;

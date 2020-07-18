@@ -46,6 +46,10 @@ namespace Reface.AppStarter.AppContainers
         {
             if (e.CreatedObject is IOnCreated listener)
                 listener.OnCreated(new CreateArguments(e.ComponentManager, e.RequiredType));
+            if (e.CreatedObject is IInjectPropertiesOnCreated)
+                this.InjectProperties(e.CreatedObject);
+            if (e.CreatedObject is IInjectFieldsOnCreated)
+                this.InjectFields(e.CreatedObject);
         }
 
         private void TriggerOnCreating(object sender, ComponentCreatingEventArgs e)

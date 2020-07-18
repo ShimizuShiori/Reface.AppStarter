@@ -1,11 +1,13 @@
 ﻿using Autofac;
 using Reface.AppStarter.AppContainers;
+using Reface.AppStarter.AppModules;
 using Reface.AppStarter.Attributes;
 using Reface.AppStarter.AutofacComponentRegistions;
 using Reface.AppStarter.AutofacExt;
 using Reface.AppStarter.Predicates;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace Reface.AppStarter.AppContainerBuilders
@@ -30,6 +32,8 @@ namespace Reface.AppStarter.AppContainerBuilders
         private readonly Dictionary<Type, List<IAutofacComponentRegistion>>
             serviceTypeToRegistionsMap = new Dictionary<Type, List<IAutofacComponentRegistion>>();
 
+        private readonly HashSet<string> existsRegistionKeys = new HashSet<string>();
+
         public AutofacContainerBuilder()
         {
             this.AutofacContainerBuilderInstance = new ContainerBuilder();
@@ -38,6 +42,12 @@ namespace Reface.AppStarter.AppContainerBuilders
 
         private void RegisterAutofacComponentRegistion(Type serviceType, IAutofacComponentRegistion registion)
         {
+            string key = $"{serviceType.FullName} : {registion.Key}";
+            if (existsRegistionKeys.Contains(key))
+            {
+                Debug.WriteLine($"Component [{key}] Exists");
+                return;
+            }
             List<IAutofacComponentRegistion> registions;
             if (!serviceTypeToRegistionsMap.TryGetValue(serviceType, out registions))
             {
@@ -45,6 +55,7 @@ namespace Reface.AppStarter.AppContainerBuilders
                 serviceTypeToRegistionsMap[serviceType] = registions;
             }
             registions.Add(registion);
+            existsRegistionKeys.Add(key);
         }
         private void RegisterAutofacComponentRegistion(IAutofacComponentRegistion registion)
         {
@@ -80,9 +91,9 @@ namespace Reface.AppStarter.AppContainerBuilders
             }
         }
 
-        public void Register(Type componentType, RegistionMode registionMode = RegistionMode.AsInterfaces)
+        public void Register(Type componentType, ComponentAttribute componentAttribute)
         {
-            this.RegisterAutofacComponentRegistion(new ScannedComponentRegistion(componentType, registionMode));
+            this.RegisterAutofacComponentRegistion(new ScannedComponentRegistion(componentType, componentAttribute.RegistionMode));
         }
 
         public void RegisterInstance(Object value)
@@ -90,12 +101,17 @@ namespace Reface.AppStarter.AppContainerBuilders
             this.RegisterAutofacComponentRegistion(new InstanceComponentRegistion(value));
         }
 
-        [Obsolete("请使用 RegisterByCreator(Func<IComponentManager, object> creator, Type serviceType)")]
-        public void RegisterByFunc(Type serviceType, Func<IComponentManager, object> creator)
+        public void RegisterMethodCreator(IAppModule appModule, MethodInfo method)
         {
-            this.RegisterByCreator(creator, serviceType);
+            this.RegisterAutofacComponentRegistion(new MethodComponentRegistion(appModule, method));
         }
 
+        public void RegisterComponentFactory(IComponentFactory componentFactory)
+        {
+            this.RegisterAutofacComponentRegistion(new FactoryComponentRegistion(componentFactory));
+        }
+
+        [Obsolete("请使用 RegisterComponentFactory")]
         public void RegisterByCreator(Func<IComponentManager, object> creator, Type serviceType)
         {
             this.RegisterAutofacComponentRegistion(new CreatorComponentRegistion(serviceType, creator));

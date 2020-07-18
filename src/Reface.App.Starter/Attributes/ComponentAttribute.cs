@@ -9,7 +9,9 @@ namespace Reface.AppStarter.Attributes
     public class ComponentAttribute
         : ScannableAttribute
     {
-
+        /// <summary>
+        /// 注册模式
+        /// </summary>
         public RegistionMode RegistionMode { get; private set; }
 
         public ComponentAttribute(RegistionMode registionMode = RegistionMode.AsInterfaces)

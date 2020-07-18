@@ -1,6 +1,7 @@
 ﻿using Reface.AppStarter.AppContainerBuilders;
 using Reface.AppStarter.Attributes;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -72,7 +73,7 @@ namespace Reface.AppStarter.AppModules
                 .Where(x => x.Type.IsClass && !x.Type.IsAbstract)
                 .ForEach(x =>
                 {
-                    autofacContainerBuilder.Register(x.Type, ((ComponentAttribute)x.Attribute).RegistionMode);
+                    autofacContainerBuilder.Register(x.Type, (ComponentAttribute)x.Attribute);
                 });
         }
 
