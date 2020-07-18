@@ -64,9 +64,12 @@
     <Compile Include="AutofacExt\ComponentRegistrationActivateEventTrigger.cs" />
     <Compile Include="AutofacExt\ContainerComponentManager.cs" />
     <Compile Include="ComponentCreatedEventArgs.cs" />
+    <Compile Include="ComponentLifetimeListeners\IInjectFieldsOnCreated.cs" />
+    <Compile Include="ComponentLifetimeListeners\IInjectPropertiesOnCreated.cs" />
     <Compile Include="ComponentLifetimeListeners\IOnCreated.cs" />
     <Compile Include="ComponentLifetimeListeners\IOnCreating.cs" />
     <Compile Include="ComponentLifetimeListeners\CreateArguments.cs" />
+    <Compile Include="ComponentLifetimeListeners\IOnFieldsInjected.cs" />
     <Compile Include="ComponentLifetimeListeners\IOnPropertiesInjected.cs" />
     <Compile Include="Events\AppStartingEvent.cs" />
     <Compile Include="Extensions\AppExtensions.cs" />
